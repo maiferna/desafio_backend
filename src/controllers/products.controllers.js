@@ -7,7 +7,14 @@ const {
     updateProductById
 } = require("../models/products.models");
 
-const getAllProductss = async (req, res) => {
+/**
+ * Recive todos los campos de todos los productos
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const getAllProductsController = async (req, res) => {
     try {
 
         const products = await getAllProducts();
@@ -30,8 +37,15 @@ const getAllProductss = async (req, res) => {
     }
 }
 
-const getProductoById = async (req, res) => {
-    const { id } = req.body;
+/**
+ * Recive todos los campos de un producto por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const getProductByIdController = async (req, res) => {
+    const { id } = req.params;
 
     try {
 
@@ -55,8 +69,15 @@ const getProductoById = async (req, res) => {
     }
 }
 
-const getProductosByType = async (req, res) => {
-    const { tipo } = req.body;
+/**
+ * Recive todos los campos de un producto por tipo
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const getProductsByTypeController = async (req, res) => {
+    const { tipo } = req.params;
 
     try {
 
@@ -80,7 +101,14 @@ const getProductosByType = async (req, res) => {
     }
 }
 
-const createProducto = async (req, res) => {
+/**
+ * Crea un nuevo producto
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const createProductController = async (req, res) => {
     const { nombre, descripcion, tipo, unidad } = req.body;
 
     try {
@@ -104,11 +132,20 @@ const createProducto = async (req, res) => {
     }
 }
 
-const updateProductoById = async (req, res) => {
-    const { nombre, descripcion, tipo, unidad, id } = req.body;
+/**
+ * Actualiza un producto
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const updateProductByIdController = async (req, res) => {
+    const id_producto = Number(req.params);
+
+    const { nombre, descripcion, tipo, unidad } = req.body;
 
     try {
-        const products = await updateProductById(nombre, descripcion, tipo, unidad, id);
+        const products = await updateProductById(nombre, descripcion, tipo, unidad, id_producto);
         if (!products) {
             return res.status(404).json({
                 ok: false,
@@ -128,11 +165,18 @@ const updateProductoById = async (req, res) => {
     }
 }
 
-const deleteProductoById = async (req, res) => {
-    const { id } = req.body;
+/**
+ * Elimina un producto
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const deleteProductByIdController = async (req, res) => {
+    const { id_producto } = Number(req.params);
 
     try {
-        const products = await deleteProductById(id);
+        const products = await deleteProductById(id_producto);
         if (!products) {
             return res.status(404).json({
                 ok: false,
@@ -152,10 +196,10 @@ const deleteProductoById = async (req, res) => {
 }
 
 module.exports = {
-    getAllProductss,
-    getProductoById,
-    getProductosByType,
-    createProducto,
-    updateProductoById,
-    deleteProductoById
+    getAllProductsController,
+    getProductByIdController,
+    getProductsByTypeController,
+    createProductController,
+    updateProductByIdController,
+    deleteProductByIdController
 }
