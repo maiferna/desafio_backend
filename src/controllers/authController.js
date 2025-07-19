@@ -1,7 +1,7 @@
 // IMPORTS
 const bcrypt = require("bcryptjs")
 const userModel = require("../models/userModel");
-const { generateJwt } = require("../utils/jwtGenerate");
+const { generateJwt } = require("../utils/JwtGenerate");
 
 // CONTROLLER: 1. Registro API
 const signup = async (req, res) => {
