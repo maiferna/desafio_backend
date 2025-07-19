@@ -5,21 +5,22 @@ const { generateJwt } = require("../utils/JwtGenerate")
 const validateJwt = async (req, res, next) => {
     const authorization = req.header('authorization');
     if (!authorization) {
-        return res.status(404).json({
+        return res.status(401).json({
             ok: false,
-            msg: "no contiene autorización"
+            msg: "No tiene autorización"
         });
     }
     const token = authorization.split(" ")[1];
     try {
-        const playLoad = await verifyJwt(token);
+        const payload = await verifyJwt(token);
         const renewedToken = await generateJwt({
-            uid: playLoad.uid,
-            email: playLoad.email,
-            role: playLoad.role
+            uid: payload.uid,
+            email: payload.email,
+            role: payload.role
         });
-        req.tokenEmail = playLoad.email;
-        req.role = playLoad.role;
+        req.uid = payload.uid
+        req.tokenEmail = payload.email;
+        req.role = payload.role;
         req.renewedToken = renewedToken;
         next();
 

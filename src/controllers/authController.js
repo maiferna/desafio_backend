@@ -17,7 +17,10 @@ const signup = async (req, res) => {
         // Verificar si el usuario ya existe
         const existingUser = await getUserByEmail(email);
         if (existingUser) {
-            return res.status(409).json({ error: "El usuario ya existe" });
+            return res.status(403).json({
+                ok: false,
+                error: "El usuario ya existe"
+            });
         }
 
         // Hashear la contraseña
@@ -40,6 +43,7 @@ const signup = async (req, res) => {
 
         // Respuesta con usuario y token
         res.status(201).json({
+            ok: true,
             message: "Usuario registrado con éxito",
             token,
             user: {
@@ -52,7 +56,10 @@ const signup = async (req, res) => {
 
     } catch (error) {
         console.log("Error en registro:", error);
-        return res.status(500).json({ error: "Error interno del servidor" });
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
     }
 };
 
@@ -61,23 +68,20 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email y password son obligatorios.' });
-        }
-
         const user = await getUserByEmail(email);
 
         if (!user) {
-            return res.status(401).json({ error: "Usuario o contraseña incorrecta" });
-        }
-
-        if (!user?.password_hash) {
-            return res.status(400).json({ error: "Faltan datos para comprobar la contraseña." });
+            return res.status(401).json({
+              error: "Usuario o contraseña incorrecta"
+            });
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password_hash);
         if (!passwordMatch) {
-            return res.status(401).json({ error: "Usuario o contraseña incorrecta" });
+            return res.status(401).json({
+              ok: false,
+              error: "Usuario o contraseña incorrecta"
+            });
         }
 
         const token = await generateJwt({
@@ -87,6 +91,7 @@ const login = async (req, res) => {
         });
 
         return res.status(200).json({
+            ok: true,
             message: "Login correcto",
             token,
             user: {
@@ -99,7 +104,10 @@ const login = async (req, res) => {
 
     } catch (error) {
         console.log("Error en login:", error);
-        return res.status(500).json({ error: "Error interno del servidor" });
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
     }
 };
 
@@ -125,12 +133,41 @@ const renewToken = async (req, res) => {
 
 // CONTROLLER: 4. Logout API
 const logout = (req, res) => {
-    return res.status(200).json({ message: "Logout correcto" });
+    return res.status(200).json({
+        ok: true,
+        message: "Logout correcto"
+    });
 };
+
+
+const getUser = async (req, res) => {
+    try {
+        const user = await userModel.getUserById(req.uid);
+        if (!user) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Usuario no encontrado."
+            })
+        }
+        return res.status(200).json({
+            ok: true,
+            user
+        })
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error del servidor.'
+        })
+    }
+}
+
+// EXPORTS
 
 module.exports = {
     login,
     signup,
     renewToken,
-    logout
-};
+    logout,
+    getUser
+}
+
