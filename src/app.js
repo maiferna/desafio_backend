@@ -29,6 +29,9 @@ app.use((req, res, next) => {
 // RUTAS ------------------------------------------ 
 app.use('/api/v1', allRoutes); 
 
+// Para hacer la prueba sin bbdd
+app.use('/api/v1/pruebas', require('./routes/authRoutes.js'));
+
 // INICIO DEL SERVIDOR ----------------------------
 app.listen(port,() => {
     console.log(`Server running on port: ${port}`)

@@ -1,7 +1,7 @@
 // IMPORTS
 const bcrypt = require("bcryptjs")
 const userModel = require("../models/userModel");
-const { generateJwt } = require("../utils/JwtGenerate");
+const { generateJwt } = require("../utils/jwtGenerate");
 
 // CONTROLLER: 1. Registro API
 const signup = async (req, res) => {
@@ -11,7 +11,8 @@ const signup = async (req, res) => {
         //Verificar si el usuario ya existe
         const existingUser = await userModel.getUserByEmail(email);
         if (existingUser) {
-            return res.status(409).json({ //409 CONFLICT, la solicitud no puede ser completada porque entra en conflicto con el estado actual del recurso de destino.
+            return res.status(403).json({
+                ok: false,
                 error: "El usuario ya existe"
             });
         }
@@ -34,6 +35,7 @@ const signup = async (req, res) => {
 
         // Enviar res. JSON con token y datos del usuario
         res.status(201).json({
+            ok: true,
             message: "Usuario registrado con éxito",
             token,
             user: {
@@ -46,7 +48,10 @@ const signup = async (req, res) => {
 
     } catch (error) {
         console.log("Error en registro:", error);
-        return res.status(500).json({ error: "Error interno del servidor"});
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
     }
 };
 
@@ -57,7 +62,10 @@ const login = async (req, res) => {
 
         //0. Validar que se envíe el email y password
         if (!email || !password) {
-            return res.status(400).json({ message: 'Email y password son obligatorios.' });
+            return res.status(400).json({
+                ok: false,
+                message: 'Email y password son obligatorios.'
+            });
         }
 
         //1. Buscar al usuario por email
@@ -65,24 +73,29 @@ const login = async (req, res) => {
 
         //2. Si no existe el usuario
         if (!user) {
-            return res.status(401).json({
-                error: "Usuario o contraseña incorrecta"
+            return res.status(403).json({
+                ok: false,
+                error: "El usuario no existe."
             });
         }
 
-        console.log("password recibido:", password);
-        console.log("user:", user);
-        console.log("user.password:", user?.password);
+        // console.log("password recibido:", password);
+        // console.log("user:", user);
+        // console.log("user.password:", user?.password);
 
         if (!user?.password || !password) {
-        return res.status(400).json({ error: "Faltan datos para comprobar la contraseña." });
+            return res.status(400).json({
+                ok: false,
+                error: "Faltan datos para comprobar la contraseña."
+            });
         }
-        
+
         //3. Si sí existe comparar contraseña con bcrypt
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({
-                error: "Usuario o contraseña incorrecta"
+                ok: false,
+                error: "Credenciales incorrectas."
             });
         }
 
@@ -95,6 +108,7 @@ const login = async (req, res) => {
 
         //5. Respuesta exitosa
         return res.status(200).json({
+            ok: true,
             message: "Login correcto",
             token,
             user: {
@@ -107,7 +121,10 @@ const login = async (req, res) => {
 
     } catch (error) {
         console.log("Error en login:", error);
-        return res.status(500).json({ error: "Error interno del servidor"});
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
     }
 };
 
@@ -133,13 +150,38 @@ const renewToken = async (req, res) => {
 
 // CONTROLLER: 4. Logout API (solo responde, el frontend borra LocalStorage)
 const logout = (req, res) => {
-  return res.status(200).json({ message: "Logout correcto" });
+    return res.status(200).json({
+        ok: true,
+        message: "Logout correcto"
+    });
 };
+
+const getUser = async (req, res) => {
+    try {
+        const user = await userModel.getUserById(req.uid);
+        if (!user) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Usuario no encontrado."
+            })
+        }
+        return res.status(200).json({
+            ok: true,
+            user
+        })
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error del servidor.'
+        })
+    }
+}
 
 // EXPORTS
 module.exports = {
     login,
     signup,
     renewToken,
-    logout
+    logout,
+    getUser
 }
