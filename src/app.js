@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000; //Configura el puerto
 
 // MIDDLEWARES: express.json express.URLencoded -----
 // MW:Parseo
-app.use(express.urlencoded({ extended: true})) //Parsear datos URL-encoded (formularios HTML)
+app.use(express.urlencoded({ extended: true })) //Parsear datos URL-encoded (formularios HTML)
 app.use(express.json()); //Parsear JSON en las peticiones
 
 // MW:Config de las CORS
@@ -27,9 +27,9 @@ app.use((req, res, next) => {
 });
 
 // RUTAS ------------------------------------------ 
-app.use('/api/v1', allRoutes); 
+app.use('/api/v1', allRoutes);
 
 // INICIO DEL SERVIDOR ----------------------------
-app.listen(port,() => {
+app.listen(port, () => {
     console.log(`Server running on port: ${port}`)
 })
