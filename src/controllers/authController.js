@@ -11,7 +11,7 @@ const { generateJwt } = require("../utils/JwtGenerate");
 
 // CONTROLLER: 1. Registro API
 const signup = async (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, id_cliente } = req.body;
 
     try {
         // Verificar si el usuario ya existe
@@ -31,8 +31,10 @@ const signup = async (req, res) => {
             nombre: name, // nombre real del campo en base de datos
             email,
             password_hash: hashedPassword,
-            role
+            role,
+            id_cliente: role === 'cliente' ? id_cliente : null
         });
+
 
         // Generar token JWT
         const token = await generateJwt({
@@ -72,15 +74,15 @@ const login = async (req, res) => {
 
         if (!user) {
             return res.status(401).json({
-              error: "Usuario o contraseña incorrecta"
+                error: "Usuario o contraseña incorrecta"
             });
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password_hash);
         if (!passwordMatch) {
             return res.status(401).json({
-              ok: false,
-              error: "Usuario o contraseña incorrecta"
+                ok: false,
+                error: "Usuario o contraseña incorrecta"
             });
         }
 

@@ -15,7 +15,7 @@ router.post("/signup", [
 
 // ROUTE: login
 // POST http://localhost:3000/api/v1/auth/login
-router.post("/login", [
+router.post("/", [
     check('email', 'email requerido').notEmpty().isEmail(),
     check('password', 'password requerido').notEmpty().isString(),
     validateInput
