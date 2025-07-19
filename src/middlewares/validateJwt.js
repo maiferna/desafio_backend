@@ -1,5 +1,5 @@
 const { verifyJwt } = require("../utils/JWTverify")
-const { generateJwt } = require("../utils/JWTgenerate")
+const { generateJwt } = require("../utils/JwtGenerate")
 
 // MIDDLEWARE: validar JWT (json web token)
 const validateJwt = async (req, res, next) => {
