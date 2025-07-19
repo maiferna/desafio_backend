@@ -3,52 +3,54 @@ const userQueries = {
 
     // QUERIE: 1. Crear usuario
     insertUser: `
-        INSERT INTO users (name, email, password, role, privileges)
+        INSERT INTO usuarios (id_cliente, nombre, email, password_hash, role)
         VALUES ($1, $2, $3, $4, $5)
         RETURNING *;
     `,
 
     // QUERIE: 2. Obtener todos los usuarios y sus datos
     getAllUsers: `
-        SELECT user_id, name, email, role, privileges
-        FROM users
-        ORDER BY user_id ASC;
+        SELECT id_usuario, id_cliente, nombre, email, role
+        FROM usuarios
+        ORDER BY id_usuario ASC;
     `,
 
     // QUERIE: 3. Eliminar usuario por ID
     deleteUserById: `
-        DELETE FROM users
-        WHERE user_id = $1
+        DELETE FROM usuarios
+        WHERE id_usuario = $1
         RETURNING *;
     `,
 
     // QUERIE: 4. Obtener usuario por ID
     getUserById: `
-        SELECT user_id, name, email, role, privileges
-        FROM users
-        WHERE user_id = $1;
+        SELECT id_usuario, id_cliente, nombre, email, role
+        FROM usuarios
+        WHERE id_usuario = $1;
     `,
 
     // QUERIE: 5. Editar usuario por ID
     updateUserById: `
-        UPDATE users
-        SET
-            name = COALESCE($1, name),
-            email = COALESCE($2, email),
-            password = COALESCE($3, password),
-            role = COALESCE($4, role),
-            privileges = COALESCE($5, privileges)
-        WHERE user_id = $6
-        RETURNING user_id, name, email, role, privileges;
-    `,
+    UPDATE usuarios
+    SET
+      id_cliente = COALESCE($1, id_cliente),
+      nombre = COALESCE($2, nombre),
+      email = COALESCE($3, email),
+      password_hash = COALESCE($4, password_hash),
+      role = COALESCE($5, role)
+    WHERE id_usuario = $6
+    RETURNING *;
+  `,
 
     // QUERIE: 6. Obtener usuario por email
     getUserByEmail: `
-        SELECT user_id, name, email, role, privileges, password
-        FROM users
-        WHERE email = $1;
-    `,
+    SELECT id_usuario, id_cliente, nombre, email, role, password_hash
+    FROM usuarios
+    WHERE email = $1;
+  `,
 };
 
 
-module.exports = {userQueries};
+module.exports = {
+    userQueries
+};
