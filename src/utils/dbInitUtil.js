@@ -311,29 +311,30 @@ const dbInit = async () => {
 
     // Insertar usuarios
     const usuarios = [
-      [null, 'Hermenegildo Company Gomez', 'joaquin70@samper-lledo.com', 'adminpasswordhash', 'admin'],
-      [null, 'Almudena Sandra Botella Maestre', 'bermudezpriscila@hotmail.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Lorena Macías Silva', 'fuentesmaricruz@gmail.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Emilio Piña Aliaga', 'glauco23@yahoo.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Vito Pineda Casals', 'ssanmartin@sanjuan-vazquez.es', 'techpasswordhash', 'tecnico'],
-      [null, 'Patricia Rosa Conesa', 'maricruzbarral@rivera.es', 'techpasswordhash', 'tecnico'],
-      [null, 'Candelaria Morán Solera', 'vivesmarc@carrasco-lopez.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Apolonia Losada Blázquez', 'roberto09@hotmail.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Virgilio Montaña Menendez', 'ctellez@gmail.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Ileana Vargas Hidalgo', 'segismundo63@novoa.com', 'techpasswordhash', 'tecnico'],
-      [null, 'Lucio Martín Gallart', 'saturnina21@hotmail.com', 'techpasswordhash', 'tecnico'],
-      [1, 'Emiliana Arteaga-Estévez', 'mirta52@canales-marquez.com', 'clientpasswordhash', 'cliente'],
-      [2, 'Andrés Giner', 'nereida83@fernandez.com', 'clientpasswordhash', 'cliente'],
-      [3, 'Ricarda Naranjo Carreño', 'iker83@leon.es', 'clientpasswordhash', 'cliente'],
-      [4, 'Juan Pablo Plana Ureña', 'emperatrizcapdevila@hotmail.com', 'clientpasswordhash', 'cliente'],
-      [5, 'Jesús Fabio Galán Arregui', 'martafigueras@hotmail.com', 'clientpasswordhash', 'cliente']
+      [null, 'Hermenegildo Company Gomez', 'joaquin70@samper-lledo.com', 'Admin123', 'admin'],
+      [null, 'Almudena Sandra Botella Maestre', 'bermudezpriscila@hotmail.com', 'Tecnico123', 'tecnico'],
+      [null, 'Lorena Macías Silva', 'fuentesmaricruz@gmail.com', 'Tecnico123', 'tecnico'],
+      [null, 'Emilio Piña Aliaga', 'glauco23@yahoo.com', 'Tecnico123', 'tecnico'],
+      [null, 'Vito Pineda Casals', 'ssanmartin@sanjuan-vazquez.es', 'Tecnico123', 'tecnico'],
+      [null, 'Patricia Rosa Conesa', 'maricruzbarral@rivera.es', 'Tecnico123', 'tecnico'],
+      [null, 'Candelaria Morán Solera', 'vivesmarc@carrasco-lopez.com', 'Tecnico123', 'tecnico'],
+      [null, 'Apolonia Losada Blázquez', 'roberto09@hotmail.com', 'Tecnico123', 'tecnico'],
+      [null, 'Virgilio Montaña Menendez', 'ctellez@gmail.com', 'Tecnico123', 'tecnico'],
+      [null, 'Ileana Vargas Hidalgo', 'segismundo63@novoa.com', 'Tecnico123', 'tecnico'],
+      [null, 'Lucio Martín Gallart', 'saturnina21@hotmail.com', 'Tecnico123', 'tecnico'],
+      [1, 'Emiliana Arteaga-Estévez', 'mirta52@canales-marquez.com', 'Cliente123', 'cliente'],
+      [2, 'Andrés Giner', 'nereida83@fernandez.com', 'Cliente123', 'cliente'],
+      [3, 'Ricarda Naranjo Carreño', 'iker83@leon.es', 'Cliente123', 'cliente'],
+      [4, 'Juan Pablo Plana Ureña', 'emperatrizcapdevila@hotmail.com', 'Cliente123', 'cliente'],
+      [5, 'Jesús Fabio Galán Arregui', 'martafigueras@hotmail.com', 'Cliente123', 'cliente']
     ];
 
-    for (const [id_cliente, nombre, email, password, rol] of usuarios) {
+    for (const [id_cliente, nombre, email, password, role] of usuarios) {
+      const hashedPassword = await bcrypt.hash(password, 10);
       await dbQuery(
         `INSERT INTO usuarios (id_cliente, nombre, email, password_hash, role)
-        VALUES ($1, $2, $3, $4, $5)`,
-        [id_cliente, nombre, email, password, rol]
+     VALUES ($1, $2, $3, $4, $5)`,
+        [id_cliente, nombre, email, hashedPassword, role]
       );
     }
     const direcciones = [

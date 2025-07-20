@@ -10,12 +10,12 @@ const port = process.env.PORT || 3000; //Configura el puerto
 
 // MIDDLEWARES: express.json express.URLencoded -----
 // MW:Parseo
-app.use(express.urlencoded({ extended: true})) //Parsear datos URL-encoded (formularios HTML)
+app.use(express.urlencoded({ extended: true })) //Parsear datos URL-encoded (formularios HTML)
 app.use(express.json()); //Parsear JSON en las peticiones
 
 // MW:Config de las CORS
 const frontUrlBase = process.env.FRONT_URL || "http://localhost:5173"
-const whiteList = [frontUrlBase]
+const whiteList = [frontUrlBase, 'http://localhost:3000']
 app.use(cors({
     origin: whiteList //Peticiones desde dominios de la lista
 }))
@@ -27,9 +27,12 @@ app.use((req, res, next) => {
 });
 
 // RUTAS ------------------------------------------ 
-app.use('/api/v1', allRoutes); 
+app.use('/api/v1', allRoutes);
+
+// Para hacer la prueba sin bbdd
+app.use('/api/v1/pruebas', require('./routes/authRoutes.js'));
 
 // INICIO DEL SERVIDOR ----------------------------
-app.listen(port,() => {
+app.listen(port, () => {
     console.log(`Server running on port: ${port}`)
 })

@@ -1,113 +1,115 @@
-// IMPORTS
-const bcrypt = require("bcryptjs")
-const userModel = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+const {
+    createUser,
+    getUserById,
+    getAllUsers,
+    updateUserById,
+    deleteUserById,
+    getUserByEmail
+} = require("../models/userModel");
 const { generateJwt } = require("../utils/JwtGenerate");
 
 // CONTROLLER: 1. Registro API
 const signup = async (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, id_cliente } = req.body;
 
     try {
-        //Verificar si el usuario ya existe
-        const existingUser = await userModel.getUserByEmail(email);
+        // Verificar si el usuario ya existe
+        const existingUser = await getUserByEmail(email);
         if (existingUser) {
-            return res.status(409).json({ //409 CONFLICT, la solicitud no puede ser completada porque entra en conflicto con el estado actual del recurso de destino.
+            return res.status(403).json({
+                ok: false,
                 error: "El usuario ya existe"
             });
         }
 
-        //Hashear la contraseña
+        // Hashear la contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await userModel.createUser({
-            name,
+
+        // Crear usuario con campos correctos
+        const newUser = await createUser({
+            nombre: name, // nombre real del campo en base de datos
             email,
-            password: hashedPassword,
-            role
+            password_hash: hashedPassword,
+            role,
+            id_cliente: role === 'cliente' ? id_cliente : null
         });
 
-        //Si todo coincide generar token JWT
+
+        // Generar token JWT
         const token = await generateJwt({
-            uid: newUser.user_id,
+            uid: newUser.id_usuario,
             email: newUser.email,
             role: newUser.role
         });
 
-        // Enviar res. JSON con token y datos del usuario
+        // Respuesta con usuario y token
         res.status(201).json({
+            ok: true,
             message: "Usuario registrado con éxito",
             token,
             user: {
-                id: newUser.user_id,
+                id: newUser.id_usuario,
                 role: newUser.role,
-                name: newUser.name,
+                name: newUser.nombre,
                 email: newUser.email
             }
         });
 
     } catch (error) {
         console.log("Error en registro:", error);
-        return res.status(500).json({ error: "Error interno del servidor"});
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
     }
 };
 
 // CONTROLLER: 2. Login API
 const login = async (req, res) => {
     const { email, password } = req.body;
+
     try {
+        const user = await getUserByEmail(email);
 
-        //0. Validar que se envíe el email y password
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email y password son obligatorios.' });
-        }
-
-        //1. Buscar al usuario por email
-        const user = await userModel.getUserByEmail(email);
-
-        //2. Si no existe el usuario
         if (!user) {
             return res.status(401).json({
                 error: "Usuario o contraseña incorrecta"
             });
         }
 
-        console.log("password recibido:", password);
-        console.log("user:", user);
-        console.log("user.password:", user?.password);
-
-        if (!user?.password || !password) {
-        return res.status(400).json({ error: "Faltan datos para comprobar la contraseña." });
-        }
-        
-        //3. Si sí existe comparar contraseña con bcrypt
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(password, user.password_hash);
         if (!passwordMatch) {
             return res.status(401).json({
+                ok: false,
                 error: "Usuario o contraseña incorrecta"
             });
         }
 
-        //4. Si todo coincide generar token JWT
         const token = await generateJwt({
-            uid: user.user_id,
+            uid: user.id_usuario,
             email: user.email,
             role: user.role
         });
 
-        //5. Respuesta exitosa
         return res.status(200).json({
+            ok: true,
             message: "Login correcto",
             token,
             user: {
-                id: user.user_id,
+                id: user.id_usuario,
                 role: user.role,
-                name: user.name,
+                name: user.nombre,
                 email: user.email
             }
         });
 
     } catch (error) {
         console.log("Error en login:", error);
-        return res.status(500).json({ error: "Error interno del servidor"});
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
     }
 };
 
@@ -131,15 +133,43 @@ const renewToken = async (req, res) => {
     }
 };
 
-// CONTROLLER: 4. Logout API (solo responde, el frontend borra LocalStorage)
+// CONTROLLER: 4. Logout API
 const logout = (req, res) => {
-  return res.status(200).json({ message: "Logout correcto" });
+    return res.status(200).json({
+        ok: true,
+        message: "Logout correcto"
+    });
 };
 
+
+const getUser = async (req, res) => {
+    try {
+        const user = await userModel.getUserById(req.uid);
+        if (!user) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Usuario no encontrado."
+            })
+        }
+        return res.status(200).json({
+            ok: true,
+            user
+        })
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error del servidor.'
+        })
+    }
+}
+
 // EXPORTS
+
 module.exports = {
     login,
     signup,
     renewToken,
-    logout
+    logout,
+    getUser
 }
+
