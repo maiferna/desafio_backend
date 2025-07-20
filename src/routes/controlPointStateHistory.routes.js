@@ -9,22 +9,22 @@ const {
     deleteControlPointStateHistoryController
 } = require('../controllers/controlPointStateHistoryController');
 
-// GET all state history entries
+// GET /api/v1/control-point-state-history
 router.get('/', getAllControlPointStateHistoryController);
 
-// GET by ID
+// GET /api/v1/control-point-state-history/:id
 router.get('/:id', getControlPointStateHistoryByIdController);
 
-// GET by control point
+// GET /api/v1/control-point-state-history/control-point/:controlPointId
 router.get('/control-point/:controlPointId', getControlPointStateHistoryByControlPointIdController);
 
-// CREATE
+// POST /api/v1/control-point-state-history
 router.post('/', createControlPointStateHistoryController);
 
-// UPDATE
+// PUT /api/v1/control-point-state-history/:id
 router.put('/:id', updateControlPointStateHistoryController);
 
-// DELETE
+// DELETE /api/v1/control-point-state-history/:id
 router.delete('/:id', deleteControlPointStateHistoryController);
 
 module.exports = router;
