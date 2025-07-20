@@ -45,10 +45,34 @@ const createRuta = async () => {
 
   // Puedes saltarte este paso si ya tienes estos servicios creados
   await dbQuery(`
-  INSERT INTO servicios (nombre, descripcion) VALUES
-  ('Inspección Roedores', 'Control y monitoreo de roedores'),
-  ('Inspección Insectos', 'Control y monitoreo de insectos'),
-  ('Control Legionela', 'Análisis y control de legionela');
+  INSERT INTO servicios (nombre, descripcion, datos) VALUES
+  (
+    'Inspección Roedores',
+    'Control y monitoreo de roedores',
+    '{
+      "tipo_cebadero": null,
+      "numero_cebaderos": null,
+      "actividad_detectada": null
+    }'::jsonb
+  ),
+  (
+    'Inspección Insectos',
+    'Control y monitoreo de insectos',
+    '{
+      "tipo_trampa": null,
+      "numero_trampas": null,
+      "zonas_afectadas": null
+    }'::jsonb
+  ),
+  (
+    'Control Legionela',
+    'Análisis y control de legionela',
+    '{
+      "temperatura_agua": null,
+      "cloro_libre": null,
+      "biofilm": null
+    }'::jsonb
+  );
 `);
   const servicios = await dbQuery(`
   SELECT id_servicio, nombre FROM servicios WHERE nombre IN ('Inspección Roedores', 'Inspección Insectos', 'Control Legionela');
@@ -76,23 +100,39 @@ const createRuta = async () => {
 
       const idEjecucion = ejecucionRes.rows[0].id_ejecucion_servicio;
 
-      // Insert detalles específicos según tipo
+      let detalles = {};
+
       if (servicioNombre === 'Inspección Roedores') {
-        await dbQuery(`
-        INSERT INTO detalle_roedores (id_ejecucion_servicio, tipo_cebadero, numero_cebaderos, actividad_detectada)
-        VALUES ($1, $2, $3, $4)
-      `, [idEjecucion, 'Cebo bloque', Math.floor(Math.random() * 10) + 1, Math.random() < 0.5]);
+        detalles = {
+          tipo_cebadero: 'Cebo bloque',
+          numero_cebaderos: Math.floor(Math.random() * 10) + 1,
+          actividad_detectada: Math.random() < 0.5
+        };
       } else if (servicioNombre === 'Inspección Insectos') {
-        await dbQuery(`
-        INSERT INTO detalle_insectos (id_ejecucion_servicio, tipo_trampa, numero_trampas, zonas_afectadas)
-        VALUES ($1, $2, $3, $4)
-      `, [idEjecucion, 'Trampa adhesiva', Math.floor(Math.random() * 15) + 1, 'Almacén, Cocina']);
+        detalles = {
+          tipo_trampa: 'Trampa adhesiva',
+          numero_trampas: Math.floor(Math.random() * 15) + 1,
+          zonas_afectadas: 'Almacén, Cocina'
+        };
       } else if (servicioNombre === 'Control Legionela') {
-        await dbQuery(`
-        INSERT INTO detalle_legionela (id_ejecucion_servicio, temperatura_agua, cloro_libre, biofilm)
-        VALUES ($1, $2, $3, $4)
-      `, [idEjecucion, (20 + Math.random() * 10).toFixed(2), (0.1 + Math.random() * 1).toFixed(2), Math.random() < 0.5]);
+        detalles = {
+          temperatura_agua: parseFloat((20 + Math.random() * 10).toFixed(2)),
+          cloro_libre: parseFloat((0.1 + Math.random() * 1).toFixed(2)),
+          biofilm: Math.random() < 0.5
+        };
       }
+
+      // Update la ejecución con los detalles JSON
+      await dbQuery(`
+        UPDATE ejecuciones_servicios
+        SET observaciones = $1, datos = $2
+        WHERE id_ejecucion_servicio = $3;
+      `, [
+        `Ejecución de servicio de ${servicioNombre} en la instalación ${visita.id_instalacion}`,
+        detalles,
+        idEjecucion
+      ]);
+
 
       // Insertar productos usados (aleatorio 1-3 productos)
       const productos = await dbQuery(`
@@ -125,32 +165,19 @@ const createRuta = async () => {
 
 const dbInit = async () => {
   try {
-    // 1. Borrar tablas en orden correcto
+    // 1. Borrar tablas
     await dbQuery(`
-      DROP TABLE IF EXISTS 
-        historial_estado_punto_control,
-        captura,
-        ejecucion_productos,
-        ejecuciones_servicios,
-        visitas,
-        rutas,
-        puntos_de_control,
-        detalles_servicios,
-        servicios,
-        productos,
-        usuarios,
-        instalaciones,
-        grupos_punto_control,
-        plagas,
-        estados_punto_control,
-        clientes,
-        detalle_roedores,
-        detalle_insectos,
-        detalle_legionela,
-      CASCADE;
+      DO $$
+      DECLARE
+          r RECORD;
+      BEGIN
+          FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+              EXECUTE 'DROP TABLE IF EXISTS public.' || quote_ident(r.tablename) || ' CASCADE';
+          END LOOP;
+      END $$;
     `);
 
-    // 2. Crear tablas base (sin dependencias)
+    // 2. Crear tablas
     await dbQuery(`
       CREATE TABLE clientes (
         id_cliente INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -181,8 +208,7 @@ const dbInit = async () => {
         tipo VARCHAR(50) NOT NULL,
         unidad VARCHAR(20) NOT NULL
       );
-    `);
-    await dbQuery(`
+    
       CREATE TABLE usuarios (
         id_usuario INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         id_cliente INT REFERENCES clientes(id_cliente) ON DELETE CASCADE,
@@ -201,12 +227,10 @@ const dbInit = async () => {
       CREATE TABLE servicios (
         id_servicio INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
-        descripcion TEXT
+        descripcion TEXT,
         -- otros campos comunes se pueden añadir aquí si los defines más adelante
+         datos JSONB
       );
-
-      
-
 
       CREATE TABLE puntos_de_control (
         id_punto_control INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -224,8 +248,7 @@ const dbInit = async () => {
         tecnico_asistente INT REFERENCES usuarios(id_usuario) ON DELETE SET NULL,
         fecha DATE NOT NULL
       );
-    `);
-    await dbQuery(`
+    
       CREATE TABLE visitas (
         id_visita INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         id_instalacion INT REFERENCES instalaciones(id_instalacion) ON DELETE CASCADE,
@@ -237,30 +260,8 @@ const dbInit = async () => {
         id_ejecucion_servicio INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         id_visita INT REFERENCES visitas(id_visita) ON DELETE CASCADE,
         id_servicio INT REFERENCES servicios(id_servicio) ON DELETE CASCADE,
-        observaciones TEXT
-      );
-
-
-      --SUBTABLAS SERVICIOS:
-      CREATE TABLE detalle_roedores (
-        id_ejecucion_servicio INT PRIMARY KEY REFERENCES ejecuciones_servicios(id_ejecucion_servicio) ON DELETE CASCADE,
-        tipo_cebadero TEXT,
-        numero_cebaderos INT,
-        actividad_detectada BOOLEAN
-      );
-
-      CREATE TABLE detalle_insectos (
-        id_ejecucion_servicio INT PRIMARY KEY REFERENCES ejecuciones_servicios(id_ejecucion_servicio) ON DELETE CASCADE,
-        tipo_trampa TEXT,
-        numero_trampas INT,
-        zonas_afectadas TEXT
-      );
-
-      CREATE TABLE detalle_legionela (
-        id_ejecucion_servicio INT PRIMARY KEY REFERENCES ejecuciones_servicios(id_ejecucion_servicio) ON DELETE CASCADE,
-        temperatura_agua DECIMAL,
-        cloro_libre DECIMAL,
-        biofilm BOOLEAN
+        observaciones TEXT,
+        datos JSONB
       );
 
       CREATE TABLE ejecucion_productos (
