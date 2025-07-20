@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 const {
     getAllUsers,
     getUserById,
@@ -63,12 +65,22 @@ const putUserByIdController = async (req, res) => {
             return res.status(400).json({ error: "ID inválido" });
         }
 
-        const { id_cliente, nombre, email, password_hash, role } = req.body;
+        let { id_cliente, name, email, password, role } = req.body;
+
+        let password_hash = undefined;
+        if (password) {
+            password_hash = await bcrypt.hash(password, 10);
+        }
+
+        // Si el rol no es "cliente", forzamos id_cliente a null
+        if (role !== "cliente") {
+            id_cliente = null;
+        }
 
         const updatedUser = await updateUserById({
             id_usuario,
             id_cliente,
-            nombre,
+            nombre: name,
             email,
             password_hash,
             role

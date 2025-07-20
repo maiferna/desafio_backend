@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 const dbConnection = require('../utils/dbConnectionUtil');
 const { dbQuery } = require('../utils/dbQueryUtil');
 const {
