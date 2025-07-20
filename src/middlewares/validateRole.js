@@ -6,7 +6,7 @@ const validateRole = (...roles) => {
         } else {
             return res.status(404).json({
                 ok: false,
-                msg: "incorrect roles"
+                msg: "Rol incorrecto"
             });
         }
     }
