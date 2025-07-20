@@ -10,5 +10,6 @@ router.use('/auth', authRoutes);             // login y registro
 router.use('/users', userRoutes);
 router.use("/products", productRoutes);
 
+
 // EXPORTS
 module.exports = router;
