@@ -1,19 +1,18 @@
-const express = require('express');
-const router = express.Router();
-
-// Importar subrutas
-const authRoutes = require('./authRoutes');
-const userRoutes = require('./userRoutes');
-const productRoutes = require('./products.routes')
-
-
-router.use('/auth', authRoutes);             // login y registro
-router.use('/users', userRoutes);
-router.use('/auth', authRoutes);             // login y registro
-router.use('/users', userRoutes);
-router.use("/products", productRoutes);
-
-
-
-// EXPORTS
-module.exports = router;
+module.exports = {
+    authRoutes: require("./auth.routes"),
+    captureRoutes: require("./capture.routes"),
+    clientRoutes: require("./client.routes"),
+    controlPointRoutes: require("./controlPoint.routes"),
+    controlPointGroupRoutes: require("./controlPointGroup.routes"),
+    controlPointStateRoutes: require("./controlPointState.routes"),
+    controlPointStateHistoryRoutes: require("./controlPointStateHistory.routes"),
+    installationRoutes: require("./installation.routes"),
+    plagueRoutes: require("./plague.routes"),
+    productRoutes: require("./products.routes"),
+    routeRoutes: require("./route.routes"),
+    serviceRoutes: require("./service.routes"),
+    serviceExecutionRoutes: require("./serviceExecution.routes"),
+    serviceProductExecutionRoutes: require("./serviceProductExecution.routes"),
+    userRoutes: require("./user.routes"),
+    visitRoutes: require("./visit.routes")
+}

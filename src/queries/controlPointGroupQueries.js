@@ -6,13 +6,13 @@ const controlPointGroupQueries = {
     SELECT * FROM grupos_punto_control WHERE id_grupo_punto_control = $1
   `,
     createControlPointGroup: `
-    INSERT INTO grupos_punto_control (nombre, descripcion)
+    INSERT INTO grupos_punto_control (nombre, figura)
     VALUES ($1, $2)
     RETURNING *
   `,
     updateControlPointGroup: `
     UPDATE grupos_punto_control
-    SET nombre = $1, descripcion = $2
+    SET nombre = $1, figura = $2
     WHERE id_grupo_punto_control = $3
     RETURNING *
   `,

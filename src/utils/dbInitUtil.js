@@ -271,7 +271,7 @@ const dbInit = async () => {
         cantidad NUMERIC NOT NULL
       );
 
-      CREATE TABLE captura (
+      CREATE TABLE capturas (
         id_captura INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         id_plaga INT REFERENCES plagas(id_plaga) ON DELETE SET NULL,
         id_punto_control INT REFERENCES puntos_de_control(id_punto_control) ON DELETE CASCADE,

@@ -2,7 +2,25 @@
 const express = require('express') //Importa el framework
 require('dotenv').config(); //Carga las variables de entorno
 
-const allRoutes = require('./routes/index.js');
+const {
+    authRoutes,
+    captureRoutes,
+    clientRoutes,
+    controlPointRoutes,
+    controlPointGroupRoutes,
+    controlPointStateRoutes,
+    controlPointStateHistoryRoutes,
+    installationRoutes,
+    plagueRoutes,
+    productRoutes,
+    routeRoutes,
+    serviceRoutes,
+    serviceExecutionRoutes,
+    serviceProductExecutionRoutes,
+    userRoutes,
+    visitRoutes
+} = require('./routes/index.js');
+
 const app = express() //Instancia de express
 const cors = require('cors'); //CORS (mw)
 
@@ -27,10 +45,23 @@ app.use((req, res, next) => {
 });
 
 // RUTAS ------------------------------------------ 
-app.use('/api/v1', allRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/captures', captureRoutes);
+app.use('/api/v1/clients', clientRoutes);
+app.use('/api/v1/control-points', controlPointRoutes);
+app.use('/api/v1/control-point-groups', controlPointGroupRoutes);
+app.use('/api/v1/control-point-states', controlPointStateRoutes);
+app.use('/api/v1/control-point-state-history', controlPointStateHistoryRoutes);
+app.use('/api/v1/installations', installationRoutes);
+app.use('/api/v1/plagues', plagueRoutes);
+app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/routes', routeRoutes);
+app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/service-executions', serviceExecutionRoutes);
+app.use('/api/v1/service-product-executions', serviceProductExecutionRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/visits', visitRoutes);
 
-// Para hacer la prueba sin bbdd
-app.use('/api/v1/pruebas', require('./routes/authRoutes.js'));
 
 // INICIO DEL SERVIDOR ----------------------------
 app.listen(port, () => {

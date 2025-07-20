@@ -30,6 +30,7 @@ const createControlPointGroupController = async (req, res) => {
         const newGroup = await createControlPointGroup(req.body);
         res.status(201).json(newGroup);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error creating control point group', error });
     }
 };

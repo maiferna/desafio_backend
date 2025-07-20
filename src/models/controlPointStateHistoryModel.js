@@ -1,12 +1,12 @@
 const { dbQuery } = require('../utils/dbQueryUtil');
 const { controlPointStateHistoryQueries } = require('../queries/controlPointStateHistoryQueries');
 
-const getAllControlPointStates = async () => {
+const getAllControlPointStateHistory = async () => {
     const res = await dbQuery(controlPointStateHistoryQueries.getAllControlPointStates);
     return res.rows;
 };
 
-const getControlPointStatesByControlPointId = async (controlPointId) => {
+const getControlPointStateHistoryByControlPointId = async (controlPointId) => {
     const res = await dbQuery(
         controlPointStateHistoryQueries.getControlPointStatesByControlPointId,
         [controlPointId]
@@ -14,15 +14,15 @@ const getControlPointStatesByControlPointId = async (controlPointId) => {
     return res.rows;
 };
 
-const getControlPointStatesByExecutionId = async (executionId) => {
+const getControlPointStateHistoryById = async (id) => {
     const res = await dbQuery(
-        controlPointStateHistoryQueries.getControlPointStatesByExecutionId,
-        [executionId]
+        controlPointStateHistoryQueries.getControlPointStateHistoryById,
+        [id]
     );
-    return res.rows;
+    return res.rows[0];
 };
 
-const createControlPointState = async ({
+const createControlPointStateHistory = async ({
     id_estado_punto_control,
     id_punto_control,
     id_ejecucion_servicio,
@@ -40,9 +40,38 @@ const createControlPointState = async ({
     return res.rows[0];
 };
 
+const updateControlPointStateHistory = async (id, {
+    id_estado_punto_control,
+    id_punto_control,
+    id_ejecucion_servicio,
+    observaciones,
+}) => {
+    const res = await dbQuery(
+        controlPointStateHistoryQueries.updateControlPointState,
+        [
+            id_estado_punto_control,
+            id_punto_control,
+            id_ejecucion_servicio,
+            observaciones,
+            id
+        ]
+    );
+    return res.rows[0];
+};
+
+const deleteControlPointStateHistory = async (id) => {
+    const res = await dbQuery(
+        controlPointStateHistoryQueries.deleteControlPointState,
+        [id]
+    );
+    return res.rows[0];
+};
+
 module.exports = {
-    getAllControlPointStates,
-    getControlPointStatesByControlPointId,
-    getControlPointStatesByExecutionId,
-    createControlPointState,
+    getAllControlPointStateHistory,
+    getControlPointStateHistoryByControlPointId,
+    getControlPointStateHistoryById,
+    createControlPointStateHistory,
+    updateControlPointStateHistory,
+    deleteControlPointStateHistory,
 };

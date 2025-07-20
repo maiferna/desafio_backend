@@ -1,6 +1,6 @@
 const serviceExecutionQueries = {
     getAllServiceExecutions: `SELECT * FROM ejecuciones_servicios`,
-    getServiceExecutionById: `SELECT * FROM ejecuciones_servicios WHERE id_ejecucion = $1`,
+    getServiceExecutionById: `SELECT * FROM ejecuciones_servicios WHERE id_ejecucion_servicio = $1`,
     getServiceExecutionsByVisitId: `SELECT * FROM ejecuciones_servicios WHERE id_visita = $1`,
     createServiceExecution: `
       INSERT INTO ejecuciones_servicios 
@@ -9,9 +9,9 @@ const serviceExecutionQueries = {
     updateServiceExecutionById: `
       UPDATE ejecuciones_servicios 
       SET id_visita = $1, id_servicio = $2, observaciones = $3, datos = $4 
-      WHERE id_ejecucion = $5 
+      WHERE id_ejecucion_servicio = $5 
       RETURNING *`,
-    deleteServiceExecutionById: `DELETE FROM ejecuciones_servicios WHERE id_ejecucion = $1 RETURNING *`,
+    deleteServiceExecutionById: `DELETE FROM ejecuciones_servicios WHERE id_ejecucion_servicio = $1 RETURNING *`,
 };
 
 module.exports = { serviceExecutionQueries };

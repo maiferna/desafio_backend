@@ -1,0 +1,1823 @@
+{
+	"info": {
+		"_postman_id": "27abb29e-b647-4a85-886e-15952cd809f3",
+		"name": "DESAFIO API",
+		"description": "Postman collection for testing the API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45322061",
+		"_collection_link": "https://mikel-5236639.postman.co/workspace/mikel's-Workspace~61f9858c-efd9-43b6-81c2-8ed2dbc0e1b5/collection/45322061-27abb29e-b647-4a85-886e-15952cd809f3?action=share&source=collection_link&creator=45322061"
+	},
+	"item": [
+		{
+			"name": "CLIENTS:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENTS:Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clients/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clients",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENTS:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Acme Inc.\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENTS:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Acme Renovated\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clients/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clients",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENTS:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clients/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clients",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENTS:Get Installations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clients/1/installations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clients",
+						"1",
+						"installations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINTS:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-points",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-points"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINTS:Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-points/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-points",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINTS:Get By Installation ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-points/installation/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-points",
+						"installation",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINTS:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_instalacion\": 1,\n  \"nombre\": \"CP1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-points",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-points"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINTS:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"CP Updated\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-points/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-points",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINTS:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-points/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-points",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-GROUPS:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-GROUPS:Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-groups/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-groups",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-GROUPS:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Grupo A\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-GROUPS:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Grupo B\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-groups/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-groups",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-GROUPS:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-groups/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-groups",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATES:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-states",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATES:Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-states/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-states",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATES:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Activo\",\n  \"color\": \"#00FF00\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-states",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATES:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Inactivo\",\n  \"color\": \"#00FF00\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-states/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-states",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATES:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-states/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-states",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATE-HISTORY:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-state-history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-state-history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATE-HISTORY:Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-state-history/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-state-history",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATE-HISTORY:Get By Control Point ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-state-history/control-point/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-state-history",
+						"control-point",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATE-HISTORY:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_punto_control\": 2,\n  \"id_estado\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-state-history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-state-history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATE-HISTORY:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_punto_control\": 2,\n    \"id_estado\": 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-state-history/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-state-history",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONTROL-POINT-STATE-HISTORY:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/control-point-state-history/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"control-point-state-history",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSTALLATIONS:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/installations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"installations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSTALLATIONS:Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/installations/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"installations",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSTALLATIONS:Get By Client ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/installations/client/:clientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"installations",
+						"client",
+						":clientId"
+					],
+					"variable": [
+						{
+							"key": "clientId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSTALLATIONS:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Nueva instalación\",\n  \"direccion\": \"Calle Falsa 123\",\n  \"id_cliente\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/installations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"installations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSTALLATIONS:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Instalación actualizada\",\n  \"direccion\": \"Calle Verdadera 456\",\n  \"id_cliente\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/installations/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"installations",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INSTALLATIONS:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/installations/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"installations",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAGUES:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/plagues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"plagues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAGUES:Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/plagues/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"plagues",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAGUES:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Mosquito tigre\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/plagues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"plagues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAGUES:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Cucaracha oriental\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/plagues/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"plagues",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAGUES:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/plagues/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"plagues",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROUTES:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/routes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROUTES:Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/routes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"routes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROUTES:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tecnico_responsable\": \"1\",\n  \"tecnico\": \"2\",\n  \"tecnico_asistente\": \"3\",\n  \"fecha\": \"2025-07-20\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/routes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROUTES:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tecnico_responsable\": \"2\",\n  \"tecnico\": \"2\",\n  \"tecnico_asistente\": \"3\",\n  \"fecha\": \"2025-07-21\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/routes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"routes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROUTES:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/routes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"routes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICES:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICES:Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/services/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICES:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Limpieza de filtros\",\n  \"descripcion\": \"Servicio de limpieza y mantenimiento de filtros industriales\",\n  \"datos\": {\n    \"frecuencia\": \"mensual\",\n    \"duracion\": \"2 horas\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICES:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Limpieza avanzada de filtros\",\n  \"descripcion\": \"Incluye inspección detallada y reemplazo de piezas\",\n  \"datos\": {\n    \"frecuencia\": \"bimensual\",\n    \"duracion\": \"3 horas\",\n    \"repuestos_incluidos\": true\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/services/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICES:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/services/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_EXECUTIONS:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-executions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-executions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_EXECUTIONS:Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-executions/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-executions",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_EXECUTIONS:Get by Visit ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-executions/visit/:visitId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-executions",
+						"visit",
+						":visitId"
+					],
+					"variable": [
+						{
+							"key": "visitId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_EXECUTIONS:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_visita\": 10,\n  \"id_servicio\": 3,\n  \"observaciones\": \"Servicio realizado sin incidencias.\",\n  \"datos\": {\n    \"resultado\": \"ok\",\n    \"tiempo\": \"1h 30m\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-executions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-executions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_EXECUTIONS:Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_visita\": 123,\n  \"id_servicio\": 789,\n  \"observaciones\": \"Actualización: se detectó leve falla en equipo.\",\n  \"datos\": {\n    \"resultado\": \"fallo detectado\",\n    \"acciones_tomadas\": \"ajuste y limpieza\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-executions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-executions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_EXECUTIONS:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-executions/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-executions",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Get by Installation ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits/installation/:installationId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits",
+						"installation",
+						":installationId"
+					],
+					"variable": [
+						{
+							"key": "installationId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Get by Route ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits/route/:routeId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits",
+						"route",
+						":routeId"
+					],
+					"variable": [
+						{
+							"key": "routeId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_instalacion\": 101,\n  \"id_ruta\": 202,\n  \"estado\": \"pendiente\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Update Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"estado\": \"finalizado\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits/:id/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits",
+						":id",
+						"status"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Set Route",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_ruta\": 303\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits/:id/route",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits",
+						":id",
+						"route"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VISITS:Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/visits/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visits",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE-PRODUCT-EXECUTIONS: Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-product-executions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-product-executions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE-PRODUCT-EXECUTIONS: Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-product-executions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-product-executions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE-PRODUCT-EXECUTIONS: Get By Service Execution ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-product-executions/service-execution/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-product-executions",
+						"service-execution",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE-PRODUCT-EXECUTIONS: Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_ejecucion_servicio\": 15,\n  \"id_producto\": 1,\n  \"cantidad\": 10\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-product-executions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-product-executions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE-PRODUCT-EXECUTIONS: Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_ejecucion_servicio\": 123,\n  \"id_producto\": 456,\n  \"cantidad\": 20\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-product-executions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-product-executions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE-PRODUCT-EXECUTIONS: Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/service-product-executions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"service-product-executions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

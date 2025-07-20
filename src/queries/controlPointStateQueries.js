@@ -6,13 +6,13 @@ const controlPointStateQueries = {
     SELECT * FROM estados_punto_control WHERE id_estado_punto_control = $1
   `,
     createControlPointState: `
-    INSERT INTO estados_punto_control (nombre, descripcion)
+    INSERT INTO estados_punto_control (nombre, color)
     VALUES ($1, $2)
     RETURNING *
   `,
     updateControlPointState: `
     UPDATE estados_punto_control
-    SET nombre = $1, descripcion = $2
+    SET nombre = $1, color = $2
     WHERE id_estado_punto_control = $3
     RETURNING *
   `,

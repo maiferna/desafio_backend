@@ -41,6 +41,7 @@ const updateClientHandler = async (req, res) => {
         if (!updatedClient) return res.status(404).json({ message: "Client not found" });
         res.json(updatedClient);
     } catch (err) {
+        console.log(err)
         res.status(500).json({ message: "Error updating client", error: err });
     }
 };

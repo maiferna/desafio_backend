@@ -8,24 +8,24 @@ const {
     createInstallationController,
     updateInstallationController,
     deleteInstallationController,
-} = require('../controllers/installationController');
+} = require('../controllers/installationController.js');
 
 // GET /api/v1/installations
-router.get('/', validateJwt, getAllInstallationsController);
+router.get('/', getAllInstallationsController);
 
 // GET /api/v1/installations/:id
-router.get('/:id', validateJwt, getInstallationByIdController);
+router.get('/:id', getInstallationByIdController);
 
 // GET /api/v1/installations/client/:clientId
-router.get('/client/:clientId', validateJwt, getInstallationsByClientController);
+router.get('/client/:clientId', getInstallationsByClientController);
 
 // POST /api/v1/installations
-router.post('/', [validateJwt, validateInput], createInstallationController);
+router.post('/', createInstallationController);
 
 // PUT /api/v1/installations/:id
-router.put('/:id', [validateJwt, validateInput], updateInstallationController);
+router.put('/:id', updateInstallationController);
 
 // DELETE /api/v1/installations/:id
-router.delete('/:id', validateJwt, deleteInstallationController);
+router.delete('/:id', deleteInstallationController);
 
 module.exports = router;

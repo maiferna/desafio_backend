@@ -24,6 +24,7 @@ const getServiceExecutionByIdController = async (req, res) => {
         if (!execution) return res.status(404).json({ message: 'Service execution not found' });
         res.status(200).json(execution);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error fetching service execution', error });
     }
 };
@@ -45,6 +46,7 @@ const createServiceExecutionController = async (req, res) => {
         const newExecution = await createServiceExecution({ id_visita, id_servicio, observaciones, datos });
         res.status(201).json(newExecution);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error creating service execution', error });
     }
 };
@@ -58,6 +60,7 @@ const updateServiceExecutionController = async (req, res) => {
         if (!updatedExecution) return res.status(404).json({ message: 'Service execution not found' });
         res.status(200).json(updatedExecution);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error updating service execution', error });
     }
 };

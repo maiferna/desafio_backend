@@ -11,13 +11,13 @@ const getControlPointStateById = async (id) => {
     return res.rows[0];
 };
 
-const createControlPointState = async ({ nombre, descripcion }) => {
-    const res = await dbQuery(controlPointStateQueries.createControlPointState, [nombre, descripcion]);
+const createControlPointState = async ({ nombre, color }) => {
+    const res = await dbQuery(controlPointStateQueries.createControlPointState, [nombre, color]);
     return res.rows[0];
 };
 
-const updateControlPointState = async (id, { nombre, descripcion }) => {
-    const res = await dbQuery(controlPointStateQueries.updateControlPointState, [nombre, descripcion, id]);
+const updateControlPointState = async (id, { nombre, color }) => {
+    const res = await dbQuery(controlPointStateQueries.updateControlPointState, [nombre, color, id]);
     return res.rows[0];
 };
 

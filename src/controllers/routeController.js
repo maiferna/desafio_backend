@@ -34,6 +34,7 @@ const createRouteController = async (req, res) => {
         const newRoute = await createRoute({ tecnico_responsable, tecnico, tecnico_asistente, fecha });
         res.status(201).json(newRoute);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error creating route', error });
     }
 };
@@ -47,6 +48,7 @@ const updateRouteController = async (req, res) => {
         if (!updatedRoute) return res.status(404).json({ message: 'Route not found' });
         res.status(200).json(updatedRoute);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error updating route', error });
     }
 };
