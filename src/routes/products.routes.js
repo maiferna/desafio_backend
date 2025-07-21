@@ -15,7 +15,7 @@ const { validateJwt, validateRole } = require("../middlewares/index.js");
 /**
  * Middleware: solo accesible para admins
  */
-const adminAccess = [/* validateJwt, validateRole("admin") */];
+const adminAccess = [validateJwt, validateRole("admin")];
 
 /**
  * GET /api/v1/products → obtener todos los productos
