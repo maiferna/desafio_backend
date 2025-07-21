@@ -21,9 +21,15 @@ router.get("/", adminAccess, getUsersController);
 
 // GET /api/v1/users/email/:email  obtener usuario por email
 router.get("/email/:email", [
-    ...adminAccess,
-    check("email", "Email inválido").isEmail(),
-    validateInput
+
+    check("email", "Email inválido").notEmpty()
+        .withMessage('El email no puede estar vacío')
+        .isEmail()
+        .withMessage('El formato del email no es correcto')
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Debe tener entre 3 y 100 caracteres'),
+    validateInput,
+    ...adminAccess
 ], getUserByEmailController);
 
 
