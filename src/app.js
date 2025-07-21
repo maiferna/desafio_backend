@@ -21,6 +21,7 @@ const {
     visitRoutes
 } = require('./routes/index.js');
 
+const cookieParser = require('cookie-parser');
 const app = express() //Instancia de express
 const cors = require('cors'); //CORS (mw)
 
@@ -30,13 +31,15 @@ const port = process.env.PORT || 3000; //Configura el puerto
 // MW:Parseo
 app.use(express.urlencoded({ extended: true })) //Parsear datos URL-encoded (formularios HTML)
 app.use(express.json()); //Parsear JSON en las peticiones
+app.use(cookieParser());
 
 // MW:Config de las CORS
 const frontUrlBase = process.env.FRONT_URL || "http://localhost:5173"
 const whiteList = [frontUrlBase, 'http://localhost:3000']
 app.use(cors({
-    origin: whiteList //Peticiones desde dominios de la lista
-}))
+    origin: whiteList,
+    credentials: true
+}));
 
 // MW: Logueo de peticiones entrantes
 app.use((req, res, next) => {
