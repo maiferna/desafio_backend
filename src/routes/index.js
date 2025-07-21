@@ -11,7 +11,7 @@ router.use('/auth', authRoutes);             // login y registro
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);             // login y registro
 router.use('/users', userRoutes);
-router.use("/products", productRoutes);
+router.use('/products', productRoutes);
 
 
 
