@@ -6,7 +6,7 @@ const {
     getUserByEmailController,
     putUserByIdController,
     deleteUserByIdController
-} = require("../controllers/userController");
+} = require("../controllers/userController.js");
 
 const { check } = require("express-validator");
 const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
