@@ -30,7 +30,7 @@ const getProductsByType = async (type) => {
  * @returns datos del producto
  */
 const getProductById = async (id) => {
-    const { rows } = await dbConnection.query(products.getProductById, [type]);
+    const { rows } = await dbConnection.query(products.getProductById, [id]);
     return rows[0];
 }
 
@@ -39,8 +39,9 @@ const getProductById = async (id) => {
  * @param {*} param0 Datos de insercion
  * @returns Datos insertados
  */
-const createProduct = async ({ product_name, product_description, product_type, product_cuantity_tipe, product_cuantity }) => {
-    const values = [product_name, product_description, product_type, product_cuantity_tipe, product_cuantity];
+const createProduct = async (nombre, descripcion, tipo, unidad) => {
+    const values = [nombre, descripcion, tipo, unidad];
+    console.log("model values: ", nombre, descripcion, tipo, unidad)
     const result = await dbQuery(products.insertProducts, values);
     return result.rows[0];
 };
@@ -50,8 +51,8 @@ const createProduct = async ({ product_name, product_description, product_type, 
  * @param {*} param0 datos para actualizar el producto
  * @returns datos modificados
  */
-const updateProductById = async ({ product_name, product_description, product_type, product_cuantity_tipe, product_cuantity, user_id }) => {
-    const values = [product_name, product_description, product_type, product_cuantity_tipe, product_cuantity, user_id];
+const updateProductById = async (nombre, descripcion, tipo, unidad, id_producto) => {
+    const values = [nombre, descripcion, tipo, unidad, id_producto];
     const result = await dbQuery(products.updateProductById, values);
     return result.rows[0] || null;
 };
