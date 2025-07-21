@@ -45,11 +45,11 @@ const getAllProductsController = async (req, res) => {
  * Si sale mal, un ok: false y un mensaje
  */
 const getProductByIdController = async (req, res) => {
-    const { id } = req.params;
+    const { id_producto } = req.params;
 
     try {
 
-        const product = await getProductById(id);
+        const product = await getProductById(id_producto);
         if (!product) {
             return res.status(404).json({
                 ok: false,
@@ -121,7 +121,7 @@ const createProductController = async (req, res) => {
         } else {
             return res.status(200).json({
                 ok: true,
-                error: "Productos encontrados",
+                error: "Producto creado",
                 products
             })
         }
@@ -140,7 +140,7 @@ const createProductController = async (req, res) => {
  * Si sale mal, un ok: false y un mensaje
  */
 const updateProductByIdController = async (req, res) => {
-    const id_producto = Number(req.params);
+    const id_producto = Number(req.params.id_producto);
 
     const { nombre, descripcion, tipo, unidad } = req.body;
 
@@ -173,7 +173,7 @@ const updateProductByIdController = async (req, res) => {
  * Si sale mal, un ok: false y un mensaje
  */
 const deleteProductByIdController = async (req, res) => {
-    const { id_producto } = Number(req.params);
+    const id_producto = Number(req.params.id_producto);
 
     try {
         const products = await deleteProductById(id_producto);
