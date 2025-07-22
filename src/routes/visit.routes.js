@@ -9,6 +9,7 @@ const {
     updateVisitStatusController,
     deleteVisitController,
     setVisitRouteController,
+    getVisitDetailsByIdController
 } = require('../controllers/visitController');
 
 // GET /api/v1/visits
@@ -34,5 +35,8 @@ router.put('/:id/route', setVisitRouteController);
 
 // DELETE /api/v1/visits/:id
 router.delete('/:id', deleteVisitController);
+
+//GET /api/v1/visits/details:id
+router.get('/details/:id', getVisitDetailsByIdController);
 
 module.exports = router;

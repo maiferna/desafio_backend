@@ -27,10 +27,12 @@ const getServiceByIdController = async (req, res) => {
 
 const createServiceController = async (req, res) => {
     try {
+        console.log(req.body)
         const { nombre, descripcion, datos } = req.body;
         const newService = await createService({ nombre, descripcion, datos });
         res.status(201).json(newService);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error creating service', error });
     }
 };

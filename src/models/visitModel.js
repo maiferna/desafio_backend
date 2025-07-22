@@ -44,6 +44,10 @@ const setVisitRoute = async (routeId, visitId) => {
     return res.rows[0];
 };
 
+const getVisitDetailsById = async (id) => {
+    const res = await dbQuery(visitQueries.getVisitDetailsById, [id]);
+    return res.rows;
+};
 
 module.exports = {
     getAllVisits,
@@ -53,5 +57,6 @@ module.exports = {
     createVisit,
     updateVisitStatus,
     deleteVisit,
-    setVisitRoute
+    setVisitRoute,
+    getVisitDetailsById
 };

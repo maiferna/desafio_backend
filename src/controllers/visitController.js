@@ -7,6 +7,7 @@ const {
     updateVisitStatus,
     deleteVisit,
     setVisitRoute,
+    getVisitDetailsById
 } = require('../models/visitModel');
 
 const getAllVisitsController = async (req, res) => {
@@ -47,11 +48,13 @@ const getVisitsByRouteIdController = async (req, res) => {
 };
 
 const createVisitController = async (req, res) => {
+    console.log({ req })
     try {
         const { id_instalacion, id_ruta, estado } = req.body;
         const newVisit = await createVisit({ id_instalacion, id_ruta, estado });
         res.status(201).json(newVisit);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'Error creating visit', error });
     }
 };
@@ -89,6 +92,20 @@ const deleteVisitController = async (req, res) => {
     }
 };
 
+const getVisitDetailsByIdController = async (req, res) => {
+    try {
+        const visit = await getVisitDetailsById(req.params.id);
+        if (!visit) return res.status(404).json({ message: 'Visit not found' });
+        res.status(200).json({
+            ok: true,
+            data: visit
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error fetching visit', error });
+    }
+}
+
 module.exports = {
     getAllVisitsController,
     getVisitByIdController,
@@ -98,4 +115,5 @@ module.exports = {
     updateVisitStatusController,
     deleteVisitController,
     setVisitRouteController,
+    getVisitDetailsByIdController
 };
