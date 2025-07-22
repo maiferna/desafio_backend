@@ -18,7 +18,8 @@ const {
     serviceExecutionRoutes,
     serviceProductExecutionRoutes,
     userRoutes,
-    visitRoutes
+    visitRoutes,
+    contactRoutes
 } = require('./routes/index.js');
 
 const cookieParser = require('cookie-parser');
@@ -64,6 +65,7 @@ app.use('/api/v1/service-executions', serviceExecutionRoutes);
 app.use('/api/v1/service-product-executions', serviceProductExecutionRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/visits', visitRoutes);
+app.use('/api/v1/contact', contactRoutes);
 
 
 // INICIO DEL SERVIDOR ----------------------------
