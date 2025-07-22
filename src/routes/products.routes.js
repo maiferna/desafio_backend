@@ -16,12 +16,13 @@ const { validateJwt, validateRole, validateInput } = require("../middlewares/ind
 /**
  * Middleware: solo accesible para admins
  */
-const adminAccess = [validateJwt, validateRole("admin")];
+const adminAccess = [validateJwt];
 
 /**
  * GET /api/v1/products → obtener todos los productos
  */
 router.get("/", [
+    validateRole("admin"),
     adminAccess
 ], getAllProductsController);
 
@@ -29,6 +30,7 @@ router.get("/", [
  * GET /api/v1/products/:id_producto → obtener producto por id
  */
 router.get("/:id_producto", [
+    validateRole("admin"),
     check("id_producto", "ID invalido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
@@ -41,6 +43,7 @@ router.get("/:id_producto", [
  * GET /api/v1/product/producto/:tipo → obtener productos por tipo
  */
 router.get("/producto/:tipo", [
+    validateRole("admin"),
     check("tipo", "Tipo invalido").notEmpty()
         .withMessage('El tipo no puede estar vacio'),
     validateInput,
@@ -51,6 +54,7 @@ router.get("/producto/:tipo", [
  * POST /api/v1/products → crear producto
  */
 router.post("/", [
+    validateRole("admin"),
     check("nombre", "nombre inválido")
         .notEmpty()
         .withMessage('El nombre esta vacio'),
@@ -71,6 +75,7 @@ router.post("/", [
  * PUT /api/v1/products/:id_producto → actualizar producto por ID
  */
 router.put("/:id_producto", [
+    validateRole("admin"),
     check("id_usuario", "ID inválido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
@@ -95,6 +100,7 @@ router.put("/:id_producto", [
  * DELETE /api/v1/products/:id_producto → eliminar producto por ID
  */
 router.delete("/:id_producto", [
+    validateRole("admin"),
     check("id_producto", "ID inválido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),

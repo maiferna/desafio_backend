@@ -11,56 +11,63 @@ const {
 const { check } = require("express-validator");
 const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
 
-// Middleware común solo para admins
-const adminAccess = [validateJwt, validateRole("admin")];
 
 // GET /api/v1/control-point-groups
 router.get('/', [
-    adminAccess
+    validateJwt,
+    validateRole("admin"),
 ], getAllControlPointGroupsController);
 
 // GET /api/v1/control-point-groups/:id
 router.get('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    adminAccess
 ], getControlPointGroupByIdController);
 
 // POST /api/v1/control-point-groups
 router.post('/', [
+    validateJwt,
+    validateRole("admin"),
     check("nombre", "nombre invalido")
         .notEmpty()
+        .isLength({ min: 1, max: 1000 })
         .withMessage('nombre esta vacio'),
     check("figura", "figura invalido")
         .notEmpty()
+        .isLength({ min: 1, max: 1000 })
         .withMessage('figura esta vacio'),
     validateInput,
-    adminAccess
 ], createControlPointGroupController);
 
 // PUT /api/v1/control-point-groups/:id
 router.put('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     check("nombre", "nombre invalido")
         .notEmpty()
+        .isLength({ min: 1, max: 1000 })
         .withMessage('nombre esta vacio'),
     check("figura", "figura invalido")
         .notEmpty()
+        .isLength({ min: 1, max: 1000 })
         .withMessage('figura esta vacio'),
     validateInput,
-    adminAccess
 ], updateControlPointGroupController);
 
 // DELETE /api/v1/control-point-groups/:id
 router.delete('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    adminAccess
 ], deleteControlPointGroupController);
 
 module.exports = router;

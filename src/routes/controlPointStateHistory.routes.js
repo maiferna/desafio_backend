@@ -12,78 +12,84 @@ const {
 const { check } = require("express-validator");
 const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
 
-// Middleware común solo para admins
-const adminAccess = [validateJwt, validateRole("admin")];
 
 // GET /api/v1/control-point-state-history
 router.get('/', [
-    adminAccess
+    validateJwt,
+    validateRole("admin"),
 ], getAllControlPointStateHistoryController);
 
 // GET /api/v1/control-point-state-history/:id
 router.get('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    ...adminAccess
 ], getControlPointStateHistoryByIdController);
 
 // GET /api/v1/control-point-state-history/control-point/:controlPointId
 router.get('/control-point/:controlPointId', [
+    validateJwt,
+    validateRole("admin"),
     check("controlPointId", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    ...adminAccess
 ], getControlPointStateHistoryByControlPointIdController);
 
 // POST /api/v1/control-point-state-history
 router.post('/', [
-    check("id_estado_punto_control", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+    validateJwt,
+    validateRole("admin"),
+    check("id_estado_punto_control", "ID de estado de punto de control invalido").notEmpty()
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("id_punto_control", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+    check("id_punto_control", "ID punto de control invalido").notEmpty()
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("id_ejecucion_servicio", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+    check("id_ejecucion_servicio", "ID de ejecucion de servicio invalido").notEmpty()
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     check("observaciones", "observaciones invalido")
         .notEmpty()
+        .isLength({ min: 1, max: 10000 })
         .withMessage('observaciones esta vacio'),
     validateInput,
-    ...adminAccess
 ], createControlPointStateHistoryController);
 
 // PUT /api/v1/control-point-state-history/:id
 router.put('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("id_estado_punto_control", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+    check("id_estado_punto_control", "ID de estado de punto de control invalido").notEmpty()
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("id_punto_control", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+    check("id_punto_control", "ID de punto de control invalido").notEmpty()
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("id_ejecucion_servicio", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+    check("id_ejecucion_servicio", "ID de ejecucion del servicio invalido").notEmpty()
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     check("observaciones", "observaciones invalido")
         .notEmpty()
+        .isLength({ min: 1, max: 10000 })
         .withMessage('observaciones esta vacio'),
     validateInput,
-    ...adminAccess
 ], updateControlPointStateHistoryController);
 
 // DELETE /api/v1/control-point-state-history/:id
 router.delete('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
+        .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    ...adminAccess
 ], deleteControlPointStateHistoryController);
 
 module.exports = router;

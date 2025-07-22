@@ -11,25 +11,27 @@ const {
 const { check } = require("express-validator");
 const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
 
-// Middleware común solo para admins
-const adminAccess = [validateJwt, validateRole("admin")];
 
 // GET /api/v1/captures
 router.get('/', [
-    adminAccess
+    validateJwt,
+    validateRole("admin"),
 ], getAllCapturesController);
 
 // GET /api/v1/captures/:id
 router.get('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id", "ID invalido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    ...adminAccess
 ], getCaptureByIdController);
 
 // POST /api/v1/captures
 router.post('/', [
+    validateJwt,
+    validateRole("admin"),
     check("id_plaga", "ID de plaga inválido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
@@ -40,18 +42,20 @@ router.post('/', [
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     check("cantidad", "cantidad inválido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
+        .isInt({ min: 1, max: 150 })
+        .withMessage('La id debe ser un numero entero como minimo 1 y maximo 150'),
     check("observaciones", "tipo invalido")
         .notEmpty()
-        .withMessage('Observaciones esta vacio'),
+        .isLength({ min: 1, max: 1000 })
+        .withMessage('El campo debe tener por lo menos 1 caracter y maximo 10000'),
     validateInput,
-    ...adminAccess
 ], createCaptureController);
 
 
 // PUT /api/v1/captures/:id
 router.put('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id_captura", "ID de captura inválido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
@@ -65,22 +69,23 @@ router.put('/:id', [
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     check("cantidad", "cantidad inválido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
+        .isInt({ min: 1, max: 150 })
+        .withMessage('La id debe ser un numero entero como minimo 1 y maximo 150'),
     check("observaciones", "tipo invalido")
         .notEmpty()
-        .withMessage('Observaciones esta vacio'),
+        .isLength({ min: 1, max: 10000 })
+        .withMessage('El campo debe tener por lo menos 1 caracter y maximo 10000'),
     validateInput,
-    ...adminAccess
 ], updateCaptureController);
 
 // DELETE /api/v1/captures/:id
 router.delete('/:id', [
+    validateJwt,
+    validateRole("admin"),
     check("id_producto", "ID inválido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    ...adminAccess
 ], deleteCaptureController);
 
 module.exports = router;
