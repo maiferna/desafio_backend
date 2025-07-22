@@ -22,7 +22,7 @@ const adminAccess = [validateJwt, validateRole("admin")];
  * GET /api/v1/products → obtener todos los productos
  */
 router.get("/", [
-    //adminAccess
+    adminAccess
 ], getAllProductsController);
 
 /**
@@ -33,7 +33,7 @@ router.get("/:id_producto", [
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    //...adminAccess
+    ...adminAccess
 ], getProductByIdController);
 
 
@@ -44,7 +44,7 @@ router.get("/producto/:tipo", [
     check("tipo", "Tipo invalido").notEmpty()
         .withMessage('El tipo no puede estar vacio'),
     validateInput,
-    //...adminAccess
+    ...adminAccess
 ], getProductsByTypeController);
 
 /**
@@ -64,7 +64,7 @@ router.post("/", [
         .notEmpty()
         .withMessage('Unidad esta vacia'),
     validateInput,
-    //...adminAccess
+    ...adminAccess
 ], createProductController);
 
 /**
@@ -87,7 +87,7 @@ router.put("/:id_producto", [
         .notEmpty()
         .withMessage('Unidad esta vacia'),
     validateInput,
-    //...adminAccess
+    ...adminAccess
 ], updateProductByIdController);
 
 
@@ -99,7 +99,7 @@ router.delete("/:id_producto", [
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
-    //...adminAccess
+    ...adminAccess
 ], deleteProductByIdController);
 
 module.exports = router;
