@@ -8,8 +8,9 @@ const {
     deleteUserByIdController
 } = require("../controllers/userController.js");
 
-const { check } = require("express-validator");
+
 const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
+const { check } = require("express-validator");
 
 // Middleware común solo para admins
 const adminAccess = [validateJwt, validateRole("admin")];
@@ -23,25 +24,26 @@ router.get("/", [
 
 // GET /api/v1/users/email/:email  obtener usuario por email
 router.get("/email/:email", [
-
+    ...adminAccess,
     check("email", "Email inválido").notEmpty()
         .withMessage('El email no puede estar vacío')
         .isLength({ min: 3, max: 100 })
         .withMessage('Debe tener entre 3 y 100 caracteres')
         .isEmail()
         .withMessage('El formato del email no es correcto'),
-    validateInput,
-    ...adminAccess
+    validateInput
+
 ], getUserByEmailController);
 
 
 // GET /api/v1/users/:id_usuario → obtener usuario por ID
 router.get("/:id_usuario", [
+    ...adminAccess,
     check("id_usuario", "ID inválido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    validateInput,
-    ...adminAccess
+    validateInput
+
 ], getUserByIdController);
 
 
@@ -83,7 +85,9 @@ router.put("/:id_usuario", [
 // DELETE /api/v1/users/:id_usuario  eliminar usuario por ID
 router.delete("/:id_usuario", [
     ...adminAccess,
-    check("id_usuario", "ID inválido").isInt({ min: 1 }),
+    check("id_usuario", "ID inválido").notEmpty()
+        .isInt({ min: 1 })
+        .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput
 ], deleteUserByIdController);
 
