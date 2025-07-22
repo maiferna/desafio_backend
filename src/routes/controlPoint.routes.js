@@ -35,15 +35,6 @@ router.get('/installation/:installationId', [
     check("installationId", "ID invalido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("installationId", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("installationId", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("installationId", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
     validateInput,
     adminAccess
 ], getControlPointsByInstallationIdController);

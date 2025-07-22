@@ -11,21 +11,21 @@ const {
 } = require('../controllers/installationController.js');
 
 // GET /api/v1/installations
-router.get('/', getAllInstallationsController);
+router.get('/', [], getAllInstallationsController);
 
 // GET /api/v1/installations/:id
-router.get('/:id', getInstallationByIdController);
+router.get('/:id', [], getInstallationByIdController);
 
 // GET /api/v1/installations/client/:clientId
-router.get('/client/:clientId', getInstallationsByClientController);
+router.get('/client/:clientId', [], getInstallationsByClientController);
 
 // POST /api/v1/installations
-router.post('/', createInstallationController);
+router.post('/', [], createInstallationController);
 
 // PUT /api/v1/installations/:id
-router.put('/:id', updateInstallationController);
+router.put('/:id', [], updateInstallationController);
 
 // DELETE /api/v1/installations/:id
-router.delete('/:id', deleteInstallationController);
+router.delete('/:id', [], deleteInstallationController);
 
 module.exports = router;
