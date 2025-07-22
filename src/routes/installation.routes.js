@@ -13,6 +13,7 @@ const { validateInput, validateJwt, validateRole } = require('../middlewares/ind
 const { check } = require('express-validator');
 
 // GET /api/v1/installations
+
 router.get('/', [
     validateJwt,
     validateRole("admin"),
@@ -88,5 +89,6 @@ router.delete('/:id', [
     //     .withMessage('La id debe ser un numero entero como minimo 1'),
     //validateInput
 ], deleteInstallationController);
+
 
 module.exports = router;
