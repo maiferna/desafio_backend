@@ -23,8 +23,8 @@ router.get('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //  .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], getServiceExecutionByIdController);
 
@@ -33,8 +33,8 @@ router.get('/visit/:visitId', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //   .isInt({ min: 1, max: 50 })
+    //         .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], getServiceExecutionsByVisitIdController);
 
@@ -55,8 +55,8 @@ router.post('/', [
     //     .isLength({ min: 1, max: 150 })
     //     .withMessage('Los datos debe tener entre 1 y 150 caracteres.'),
     // check("cantindad", "Cantidad inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La cantidad debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50})
+    //     .withMessage('La cantidad debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], createServiceExecutionController);
 
@@ -64,6 +64,9 @@ router.post('/', [
 router.put('/:id', [
     // validateJwt,
     // validateRole("admin"),
+    // check("id", "ID inválido").notEmpty()
+    //  .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // check("productos.nombre", "Producto inválido").notEmpty()
     //     .isString()
     //     .isLength({ min: 1, max: 150 })
@@ -77,8 +80,8 @@ router.put('/:id', [
     //     .isLength({ min: 1, max: 150 })
     //     .withMessage('Los datos debe tener entre 1 y 150 caracteres.'),
     // check("cantindad", "Cantidad inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La cantidad debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50})
+    //     .withMessage('La cantidad debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], updateServiceExecutionController);
 
@@ -87,8 +90,8 @@ router.delete('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //  .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], deleteServiceExecutionController);
 

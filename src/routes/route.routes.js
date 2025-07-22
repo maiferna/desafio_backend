@@ -23,9 +23,9 @@ router.get('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
-    // validateInput
+    //     .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    // validateInput,
 ], getRouteByIdController);
 
 // POST /api/v1/routes
@@ -33,8 +33,8 @@ router.post('/', [
     // validateJwt,
     // validateRole("admin"),
     // check("tecnico", "tecnico inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La tecnico debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1, max: 150 })
+    //     .withMessage('El tecnico debe ser un numero entero tener entre 1 y 150 caracteres.'),
     // check("rutas.fecha", "Fecha inválida").isDate()
     //     .withMessage('El formato de fecha no es correcto'),
     // validateInput
@@ -45,11 +45,11 @@ router.put('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //  .isInt({ min: 1, max: 50 })
+    // .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // check("tecnico", "tecnico inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La tecnico debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1, max: 150 })
+    //     .withMessage('El tecnico debe ser un numero entero tener entre 1 y 150 caracteres.'),
     // check("rutas.fecha", "Fecha inválida").isDate()
     //     .withMessage('El formato de fecha no es correcto'),
     // validateInput
@@ -60,8 +60,8 @@ router.delete('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //  .isInt({ min: 1, max: 50 })
+    // .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], deleteRouteController);
 

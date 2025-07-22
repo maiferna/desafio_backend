@@ -21,8 +21,8 @@ router.get('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // .isInt({ min: 1, max: 50 })
+    // .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], getServiceByIdController);
 
@@ -36,12 +36,12 @@ router.post('/', [
     //     .withMessage('El producto debe tener entre 1 y 150 caracteres.'),
     // check("descripcion", "Descripcion inválido").notEmpty()
     //     .isString()
-    //     .isLength({ min: 1, max: 150 })
-    //     .withMessage('La observacion debe tener entre 1 y 150 caracteres.'),
+    //     .isLength({ min: 1, max: 500 })
+    //     .withMessage('La observacion debe tener entre 1 y 500 caracteres.'),
     // check("datos", "Datos inválido").notEmpty()
     //     .isString()
-    //     .isLength({ min: 1, max: 150 })
-    //     .withMessage('Los datos debe tener entre 1 y 150 caracteres.'),
+    //     .isLength({ min: 1, max: 200 })
+    //     .withMessage('Los datos debe tener entre 1 y 200 caracteres.'),
     // validateInput
 ], createServiceController);
 
@@ -50,16 +50,16 @@ router.put('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // check("nombre", "Nombre inválido").notEmpty()
     //     .isString()
-    //     .isLength({ min: 1, max: 150 })
-    //     .withMessage('El producto debe tener entre 1 y 150 caracteres.'),
+    //     .isLength({ min: 1, max: 500 })
+    //     .withMessage('El producto debe tener entre 1 y 500 caracteres.'),
     // check("descripcion", "Descripcion inválido").notEmpty()
     //     .isString()
-    //     .isLength({ min: 1, max: 150 })
-    //     .withMessage('La observacion debe tener entre 1 y 150 caracteres.'),
+    //     .isLength({ min: 1, max: 200 })
+    //     .withMessage('La observacion debe tener entre 1 y 200 caracteres.'),
     // check("datos", "Datos inválido").notEmpty()
     //     .isString()
     //     .isLength({ min: 1, max: 150 })
@@ -72,8 +72,8 @@ router.delete('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], deleteServiceController);
 

@@ -24,8 +24,8 @@ router.get('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     //validateInput
 ], getInstallationByIdController);
 
@@ -34,8 +34,8 @@ router.get('/client/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // check("cliente.nombre", "Nombre inválido").notEmpty()
     //     .isString()
     //     .isLength({ min: 1, max: 150 })
@@ -67,8 +67,8 @@ router.put('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // check("cliente.nombre", "Nombre inválido").notEmpty()
     //     .isString()
     //     .isLength({ min: 1, max: 150 })
@@ -85,8 +85,8 @@ router.delete('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     //validateInput
 ], deleteInstallationController);
 

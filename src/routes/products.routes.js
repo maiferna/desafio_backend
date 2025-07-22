@@ -16,24 +16,26 @@ const { validateJwt, validateRole, validateInput } = require("../middlewares/ind
 /**
  * Middleware: solo accesible para admins
  */
-const adminAccess = [validateJwt, validateRole("admin")];
+
 
 /**
  * GET /api/v1/products → obtener todos los productos
  */
 router.get("/", [
-    adminAccess
+    validateJwt,
+    validateRole("admin"),
 ], getAllProductsController);
 
 /**
  * GET /api/v1/products/:id_producto → obtener producto por id
  */
-router.get("/:id_producto", [
-    check("id_producto", "ID invalido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
-    validateInput,
-    ...adminAccess
+router.get("/:id", [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("id", "ID inválido").notEmpty()
+    //     .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    // validateInput,
 ], getProductByIdController);
 
 
@@ -41,65 +43,78 @@ router.get("/:id_producto", [
  * GET /api/v1/product/producto/:tipo → obtener productos por tipo
  */
 router.get("/producto/:tipo", [
-    check("tipo", "Tipo invalido").notEmpty()
-        .withMessage('El tipo no puede estar vacio'),
-    validateInput,
-    ...adminAccess
+    // validateJwt,
+    // validateRole("admin"),
+    // check("tipo", "Tipo invalido").notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El tipo debe tener entre 1 y 150 caracteres.'),
+    // validateInput,
 ], getProductsByTypeController);
 
 /**
  * POST /api/v1/products → crear producto
  */
 router.post("/", [
-    check("nombre", "nombre inválido")
-        .notEmpty()
-        .withMessage('El nombre esta vacio'),
-    check("descripcion", "descripción invalida")
-        .notEmpty()
-        .withMessage('La descripción esta vacia'),
-    check("tipo", "tipo invalido")
-        .notEmpty()
-        .withMessage('Tipo esta vacio'),
-    check('unidad', 'unidad invalida')
-        .notEmpty()
-        .withMessage('Unidad esta vacia'),
-    validateInput,
-    ...adminAccess
+    // validateJwt,
+    // validateRole("admin"),
+    // check("nombre", "nombre inválido")
+    //     .notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El nombre debe tener entre 1 y 150 caracteres.'),
+    // check("descripcion", "descripción invalida")
+    //     .notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('La descripcion debe tener entre 1 y 150 caracteres.'),
+    // check("tipo", "tipo invalido")
+    //     .notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El tipo debe tener entre 1 y 150 caracteres.'),
+    // check('unidad', 'unidad invalida')
+    //     .notEmpty()
+    //     .isInt({ min: 1, max: 50 })
+    //     .withMessage('La unidad debe ser un numero entero entre 1 y 50'),
+    // validateInput,
 ], createProductController);
 
 /**
  * PUT /api/v1/products/:id_producto → actualizar producto por ID
  */
-router.put("/:id_producto", [
-    check("id_usuario", "ID inválido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
-    check("nombre", "nombre inválido")
-        .notEmpty()
-        .withMessage('El nombre esta vacio'),
-    check("descripcion", "descripción invalida")
-        .notEmpty()
-        .withMessage('La descripción esta vacia'),
-    check("tipo", "tipo invalido")
-        .notEmpty()
-        .withMessage('Tipo esta vacio'),
-    check('unidad', 'unidad invalida')
-        .notEmpty()
-        .withMessage('Unidad esta vacia'),
-    validateInput,
-    ...adminAccess
+router.put("/:id", [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("id", "ID inválido").notEmpty()
+    //     .isInt({ min: 1, max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    // check("nombre", "nombre inválido")
+    //     .notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El nombre debe tener entre 1 y 150 caracteres.'),
+    // check("descripcion", "descripción invalida")
+    //     .notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('La descripcion debe tener entre 1 y 150 caracteres.'),
+    // check("tipo", "tipo invalido")
+    //     .notEmpty()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El tipo debe tener entre 1 y 150 caracteres.'),
+    // check('unidad', 'unidad invalida')
+    //     .notEmpty()
+    //     .isInt({ min: 1, max: 50 })
+    //     .withMessage('La unidad debe ser un numero entero entre 1 y 50'),
+    // validateInput,
 ], updateProductByIdController);
 
 
 /**
  * DELETE /api/v1/products/:id_producto → eliminar producto por ID
  */
-router.delete("/:id_producto", [
-    check("id_producto", "ID inválido").notEmpty()
-        .isInt({ min: 1 })
-        .withMessage('La id debe ser un numero entero como minimo 1'),
+router.delete("/:id", [
+    validateJwt,
+    validateRole("admin"),
+    check("id", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
     validateInput,
-    ...adminAccess
 ], deleteProductByIdController);
 
 module.exports = router;

@@ -22,8 +22,8 @@ router.get('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], getPlagueByIdController);
 
@@ -43,8 +43,8 @@ router.put('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // check("nombre", "Nombre inválido").notEmpty()
     //     .isString()
     //     .isLength({ min: 1, max: 150 })
@@ -57,8 +57,8 @@ router.delete('/:id', [
     // validateJwt,
     // validateRole("admin"),
     // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 })
-    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    //     .isInt({ min: 1 , max: 50 })
+    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
     // validateInput
 ], deletePlagueController);
 
