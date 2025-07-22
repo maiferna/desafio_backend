@@ -1,6 +1,7 @@
 // IMPORTS
 const express = require('express') //Importa el framework
 require('dotenv').config(); //Carga las variables de entorno
+const path = require('path');
 
 const {
     authRoutes,
@@ -26,7 +27,9 @@ const cors = require('cors'); //CORS (mw)
 
 const port = process.env.PORT || 3000; //Configura el puerto
 
-// MIDDLEWARES: express.json express.URLencoded -----
+// MIDDLEWARES: express.json express.URLencoded express.static -----
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
 // MW:Parseo
 app.use(express.urlencoded({ extended: true })) //Parsear datos URL-encoded (formularios HTML)
 app.use(express.json()); //Parsear JSON en las peticiones

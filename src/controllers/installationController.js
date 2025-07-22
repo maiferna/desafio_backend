@@ -24,14 +24,59 @@ const getInstallationsByClientController = async (req, res) => {
 };
 
 const createInstallationController = async (req, res) => {
-    const newInstallation = await createInstallation(req.body);
-    res.status(201).json(newInstallation);
+    console.log('BODY:', req.body);
+    console.log('FILE:', req.file);
+    const { id, adress, name, locality, checkpoints } = req.body;
+    const image = req.file.filename;
+
+    try {
+        const newInstallation = await createInstallation({
+            id_cliente: id,
+            direccion: adress,
+            nombre: name,
+            localidad: locality,
+            puntos_control: checkpoints,
+            image
+        });
+        console.log('DATA INSTALACION', newInstallation)
+        return res.status(201).json({
+            ok: true,
+            newInstallation
+        });
+    } catch (error) {
+        console.log('Error al crear la instalación', error);
+        return res.status(500).json({
+            ok: false,
+            msg: "Contacte con el administrador"
+        });
+    }
 };
 
 const updateInstallationController = async (req, res) => {
-    const updated = await updateInstallation(req.params.id, req.body);
-    if (!updated) return res.status(404).json({ message: 'Installation not found' });
-    res.json(updated);
+    const { adress, name, locality, checkpoints } = req.body;
+    const image = req.file.filename;
+    const id = req.params.id;
+    try {
+        const updated = await updateInstallation(id, {
+            id_cliente: id,
+            direccion: adress,
+            nombre: name,
+            localidad: locality,
+            puntos_control: checkpoints,
+            image,
+        });
+        if (!updated) return res.status(404).json({ message: 'Installation not found' });
+        return res.status(200).json({
+            ok: true,
+            updated
+        });
+    } catch (error) {
+        console.log('Error al actualizar la instalación', error);
+        return res.status(500).json({
+            ok: false,
+            msg: "Contacte con el administrador"
+        });
+    }
 };
 
 const deleteInstallationController = async (req, res) => {

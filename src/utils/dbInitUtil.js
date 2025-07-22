@@ -225,7 +225,11 @@ const dbInit = async () => {
       CREATE TABLE instalaciones (
         id_instalacion INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         id_cliente INT REFERENCES clientes(id_cliente) ON DELETE CASCADE,
-        direccion VARCHAR(255) NOT NULL
+        nombre VARCHAR(100) NOT NULL,
+        direccion VARCHAR(255) NOT NULL,
+        localidad VARCHAR(50) NOT NULL,
+        puntos_control VARCHAR(100) NOT NULL,
+        image VARCHAR(255)
       );
 
       CREATE TABLE servicios (

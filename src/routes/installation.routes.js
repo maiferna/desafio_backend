@@ -9,6 +9,7 @@ const {
     updateInstallationController,
     deleteInstallationController,
 } = require('../controllers/installationController.js');
+const upload = require('../middlewares/multer.js');
 
 // GET /api/v1/installations
 router.get('/', getAllInstallationsController);
@@ -20,10 +21,14 @@ router.get('/:id', getInstallationByIdController);
 router.get('/client/:clientId', getInstallationsByClientController);
 
 // POST /api/v1/installations
-router.post('/', createInstallationController);
+router.post('/', [
+    upload.single("image")
+], createInstallationController);
 
 // PUT /api/v1/installations/:id
-router.put('/:id', updateInstallationController);
+router.put('/:id', [
+    upload.single("image")
+], updateInstallationController);
 
 // DELETE /api/v1/installations/:id
 router.delete('/:id', deleteInstallationController);
