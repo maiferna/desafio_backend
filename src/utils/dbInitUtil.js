@@ -181,7 +181,11 @@ const dbInit = async () => {
     await dbQuery(`
       CREATE TABLE clientes (
         id_cliente INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-        nombre VARCHAR(100) NOT NULL
+        nombre VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        tel VARCHAR(20) NOT NULL,
+        direccion VARCHAR(100) NOT NULL,
+        sector VARCHAR(50) NOT NULL
       );
 
       CREATE TABLE estados_punto_control (

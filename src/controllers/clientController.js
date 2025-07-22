@@ -20,15 +20,22 @@ const getClientByIdHandler = async (req, res) => {
     try {
         const client = await getClientById(req.params.id);
         if (!client) return res.status(404).json({ message: "Client not found" });
-        res.json(client);
+        return res.json(client);
     } catch (err) {
         res.status(500).json({ message: "Error retrieving client", error: err });
     }
 };
 
 const createClientHandler = async (req, res) => {
+    const { name, email, tel, adress, workType } = req.body;
     try {
-        const newClient = await createClient(req.body);
+        const newClient = await createClient({
+            nombre: name,
+            email,
+            tel,
+            direccion: adress,
+            sector: workType
+        });
         res.status(201).json(newClient);
     } catch (err) {
         res.status(500).json({ message: "Error creating client", error: err });
@@ -36,8 +43,17 @@ const createClientHandler = async (req, res) => {
 };
 
 const updateClientHandler = async (req, res) => {
+    const { name, email, tel, adress, workType } = req.body;
+    const id = req.params.id;
     try {
-        const updatedClient = await updateClient(req.params.id, req.body);
+        const updatedClient = await updateClient(id, {
+            nombre: name,
+            email,
+            tel,
+            direccion: adress,
+            sector: workType
+        });
+        console.log('UPDATED CLIENT', updatedClient)
         if (!updatedClient) return res.status(404).json({ message: "Client not found" });
         res.json(updatedClient);
     } catch (err) {
