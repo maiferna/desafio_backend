@@ -25,28 +25,44 @@ router.get("/", adminAccess, getAllProductsController);
 /**
  * GET /api/v1/products/:id_producto → obtener producto por id
  */
-router.get("/:id_producto", adminAccess, getProductByIdController);
+router.get("/:id_producto", [adminAccess,
+    // check("id", "ID inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // validateInput
+], getProductByIdController);
 
 
 /**
  * GET /api/v1/product/producto/:tipo → obtener productos por tipo
  */
-router.get("/producto/:tipo", adminAccess, getProductsByTypeController);
+router.get("/producto/:tipo", [
+    adminAccess
+], getProductsByTypeController);
 
 /**
  * POST /api/v1/products → crear producto
  */
-router.post("/", adminAccess, createProductController);
+router.post("/", [
+    adminAccess
+], createProductController);
 
 /**
  * PUT /api/v1/products/:id_producto → actualizar producto por ID
  */
-router.put("/:id_producto", adminAccess, updateProductByIdController);
+router.put("/:id_producto", [
+    adminAccess
+], updateProductByIdController);
 
 
 /**
  * DELETE /api/v1/products/:id_producto → eliminar producto por ID
  */
-router.delete("/:id_producto", adminAccess, deleteProductByIdController);
+router.delete("/:id_producto", [adminAccess,
+    // check("id", "ID inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // validateInput
+], deleteProductByIdController);
 
 module.exports = router;

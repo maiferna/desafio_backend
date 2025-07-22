@@ -8,23 +8,91 @@ const {
     updateServiceProductExecutionController,
     deleteServiceProductExecutionController
 } = require('../controllers/serviceProductExecutionController');
+const { validateJwt, validateRole, validateInput } = require('../middlewares');
+
+
 
 // GET /api/v1/service-product-executions
-router.get('/', getAllServiceProductExecutionsController);
+router.get('/', [
+    validateJwt,
+    validateRole("admin"),
+], getAllServiceProductExecutionsController);
 
 // GET /api/v1/service-product-executions/:id
-router.get('/:id', getServiceProductExecutionByIdController);
+router.get('/:id_ejecucion_producto', [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("id_ejecucion_producto", "ID inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // validateInput
+], getServiceProductExecutionByIdController);
 
 // GET /api/v1/service-product-executions/service-execution/:serviceExecutionId
-router.get('/service-execution/:serviceExecutionId', getServiceProductExecutionsByServiceExecutionIdController);
+router.get('/service-execution/:id_ejecucion_servicio', [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("id_ejecucion_servicio", "ID inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // validateInput
+], getServiceProductExecutionsByServiceExecutionIdController);
 
 // POST /api/v1/service-product-executions
-router.post('/', createServiceProductExecutionController);
+router.post('/', [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("productos.nombre", "Producto inválido").notEmpty()
+    //     .isString()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El producto debe tener entre 1 y 150 caracteres.'),
+    // check("ejecu_servi.observaciones", "Observaciones inválido").notEmpty()
+    //     .isString()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('La observacion debe tener entre 1 y 150 caracteres.'),
+    // check("ejecu_servi.datos", "Datos inválido").notEmpty()
+    //     .isString()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('Los datos debe tener entre 1 y 150 caracteres.'),
+    // check("cantindad", "Cantidad inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La cantidad debe ser un numero entero como minimo 1'),
+    // validateInput
+], createServiceProductExecutionController);
 
 // PUT /api/v1/service-product-executions/:id
-router.put('/:id', updateServiceProductExecutionController);
+router.put('/:id', [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("id", "ID inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // check("productos.nombre", "Producto inválido").notEmpty()
+    //     .isString()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('El producto debe tener entre 1 y 150 caracteres.'),
+    // check("ejecu_servi.observaciones", "Observaciones inválido").notEmpty()
+    //     .isString()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('La observacion debe tener entre 1 y 150 caracteres.'),
+    // check("ejecu_servi.datos", "Datos inválido").notEmpty()
+    //     .isString()
+    //     .isLength({ min: 1, max: 150 })
+    //     .withMessage('Los datos debe tener entre 1 y 150 caracteres.'),
+    // check("cantindad", "Cantidad inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La cantidad debe ser un numero entero como minimo 1'),
+    // validateInput
+], updateServiceProductExecutionController);
 
 // DELETE /api/v1/service-product-executions/:id
-router.delete('/:id', deleteServiceProductExecutionController);
+router.delete('/:id', [
+    // validateJwt,
+    // validateRole("admin"),
+    // check("id_ejecucion_producto", "ID inválido").notEmpty()
+    //     .isInt({ min: 1 })
+    //     .withMessage('La id debe ser un numero entero como minimo 1'),
+    // validateInput
+], deleteServiceProductExecutionController);
 
 module.exports = router;
