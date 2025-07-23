@@ -32,7 +32,11 @@ const createRouteController = async (req, res) => {
     try {
         const { tecnico_responsable, tecnico, tecnico_asistente, fecha } = req.body;
         const newRoute = await createRoute({ tecnico_responsable, tecnico, tecnico_asistente, fecha });
-        res.status(201).json(newRoute);
+        res.status(201).json({
+            ok: true,
+            message: 'Ruta creada',
+            newRoute
+        });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error creating route', error });
@@ -46,7 +50,11 @@ const updateRouteController = async (req, res) => {
         const { tecnico_responsable, tecnico, tecnico_asistente, fecha } = req.body;
         const updatedRoute = await updateRoute(id, { tecnico_responsable, tecnico, tecnico_asistente, fecha });
         if (!updatedRoute) return res.status(404).json({ message: 'Route not found' });
-        res.status(200).json(updatedRoute);
+        res.status(200).json({
+            ok: true,
+            message: 'Ruta editada',
+            updatedRoute
+        });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error updating route', error });
@@ -59,7 +67,11 @@ const deleteRouteController = async (req, res) => {
         const id = req.params.id;
         const deletedRoute = await deleteRoute(id);
         if (!deletedRoute) return res.status(404).json({ message: 'Route not found' });
-        res.status(200).json({ message: 'Route deleted', deletedRoute });
+        res.status(200).json({
+            ok: true,
+            message: 'Ruta eliminada',
+            deletedRoute
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting route', error });
     }

@@ -28,7 +28,11 @@ const getPlagueByIdController = async (req, res) => {
 const createPlagueController = async (req, res) => {
     try {
         const newPlague = await createPlague(req.body);
-        res.status(201).json(newPlague);
+        res.status(201).json({
+            ok: true,
+            message: 'Plaga creada',
+            newPlague
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error creating plague', error });
     }
@@ -38,7 +42,11 @@ const updatePlagueController = async (req, res) => {
     try {
         const updatedPlague = await updatePlague(req.params.id, req.body);
         if (!updatedPlague) return res.status(404).json({ message: 'Plague not found' });
-        res.status(200).json(updatedPlague);
+        res.status(200).json({
+            ok: true,
+            message: 'Plaga editada',
+            updatedPlague
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error updating plague', error });
     }
@@ -48,7 +56,11 @@ const deletePlagueController = async (req, res) => {
     try {
         const deletedPlague = await deletePlague(req.params.id);
         if (!deletedPlague) return res.status(404).json({ message: 'Plague not found' });
-        res.status(200).json(deletedPlague);
+        res.status(200).json({
+            ok: true,
+            message: 'Plaga borrada',
+            deletedPlague
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting plague', error });
     }

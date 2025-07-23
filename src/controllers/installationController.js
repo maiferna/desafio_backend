@@ -19,25 +19,39 @@ const getInstallationByIdController = async (req, res) => {
 };
 
 const getInstallationsByClientController = async (req, res) => {
-    const data = await getInstallationsByClientId(req.params.clientId);
+    const data = await getInstallationsByClientId(req.params.id_cliente);
     res.json(data);
 };
 
 const createInstallationController = async (req, res) => {
     const newInstallation = await createInstallation(req.body);
-    res.status(201).json(newInstallation);
+    res.status(201).json({
+        ok: true,
+        message: 'Instalacion creada',
+        newInstallation
+    });
 };
 
 const updateInstallationController = async (req, res) => {
     const updated = await updateInstallation(req.params.id, req.body);
-    if (!updated) return res.status(404).json({ message: 'Installation not found' });
-    res.json(updated);
+    if (!updated) return res.status(404).json({
+        message: 'Installation not found',
+    });
+    res.json({
+        ok: true,
+        message: 'Instalacion editada',
+        updated
+    });
 };
 
 const deleteInstallationController = async (req, res) => {
     const deleted = await deleteInstallation(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Installation not found' });
-    res.json(deleted);
+    res.json({
+        ok: true,
+        message: 'Instalacion eliminada',
+        deleted
+    });
 };
 
 module.exports = {

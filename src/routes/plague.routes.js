@@ -19,47 +19,47 @@ router.get('/', [
 
 // GET /api/v1/plagues/:id
 router.get('/:id', [
-    // validateJwt,
-    // validateRole("admin"),
-    // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 , max: 50 })
-    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
-    // validateInput
+    validateJwt,
+    validateRole("admin"),
+    check("id", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    validateInput
 ], getPlagueByIdController);
 
 // POST /api/v1/plagues
 router.post('/', [
-    // validateJwt,
-    // validateRole("admin"),
-    // check("nombre", "Nombre inválido").notEmpty()
-    //     .isString()
-    //     .isLength({ min: 1, max: 150 })
-    //     .withMessage('El producto debe tener entre 1 y 150 caracteres.'),
-    // validateInput
+    validateJwt,
+    validateRole("admin"),
+    check("nombre", "Nombre inválido").notEmpty()
+        .isString()
+        .isLength({ min: 2, max: 150 })
+        .withMessage('El nombre debe tener entre 2 y 150 caracteres.'),
+    validateInput
 ], createPlagueController);
 
 // PUT /api/v1/plagues/:id
 router.put('/:id', [
-    // validateJwt,
-    // validateRole("admin"),
-    // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 , max: 50 })
-    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
-    // check("nombre", "Nombre inválido").notEmpty()
-    //     .isString()
-    //     .isLength({ min: 1, max: 150 })
-    //     .withMessage('El producto debe tener entre 1 y 150 caracteres.'),
-    // validateInput
+    validateJwt,
+    validateRole("admin"),
+    check("id", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    check("nombre", "Nombre inválido").notEmpty()
+        .isString()
+        .isLength({ min: 2, max: 150 })
+        .withMessage('El nombre debe tener entre 2 y 150 caracteres.'),
+    validateInput
 ], updatePlagueController);
 
 // DELETE /api/v1/plagues/:id
 router.delete('/:id', [
-    // validateJwt,
-    // validateRole("admin"),
-    // check("id", "ID inválido").notEmpty()
-    //     .isInt({ min: 1 , max: 50 })
-    //     .withMessage('La id debe ser un numero entero entre 1 y 50'),
-    // validateInput
+    validateJwt,
+    validateRole("admin"),
+    check("id", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    validateInput
 ], deletePlagueController);
 
 module.exports = router;
