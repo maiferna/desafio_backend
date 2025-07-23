@@ -7,7 +7,9 @@ const {
     updateVisitStatus,
     deleteVisit,
     setVisitRoute,
-    getVisitDetailsById
+    getVisitDetailsById,
+    getVisitServiceExecutionsById,
+    editVisitById
 } = require('../models/visitModel');
 
 const getAllVisitsController = async (req, res) => {
@@ -44,6 +46,18 @@ const getVisitsByRouteIdController = async (req, res) => {
         res.status(200).json(visits);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching visits by route', error });
+    }
+};
+
+const editVisitByIdController = async (req, res) => {
+    try {
+        const { id_instalacion, id_ruta, estado } = req.body;
+        const visit = await editVisitById(id_instalacion, id_ruta, estado, req.params.id);
+        if (!visit) return res.status(404).json({ message: 'Visit not found' });
+        res.status(200).json(visit);
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error fetching visit', error });
     }
 };
 
@@ -96,6 +110,22 @@ const getVisitDetailsByIdController = async (req, res) => {
     try {
         const visit = await getVisitDetailsById(req.params.id);
         if (!visit) return res.status(404).json({ message: 'Visit not found' });
+        console.log(visit)
+        res.status(200).json({
+            ok: true,
+            data: visit
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error fetching visit', error });
+    }
+}
+
+
+const getVisitServiceExecutionByIdController = async (req, res) => {
+    try {
+        const visit = await getVisitServiceExecutionsById(req.params.id);
+        if (visit) return res.status(404).json({ message: 'Service executions not found' });
         res.status(200).json({
             ok: true,
             data: visit
@@ -115,5 +145,7 @@ module.exports = {
     updateVisitStatusController,
     deleteVisitController,
     setVisitRouteController,
-    getVisitDetailsByIdController
+    getVisitDetailsByIdController,
+    getVisitServiceExecutionByIdController,
+    editVisitByIdController
 };

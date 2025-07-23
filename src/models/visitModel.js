@@ -20,7 +20,10 @@ const getVisitsByRouteId = async (routeId) => {
     const res = await dbQuery(visitQueries.getVisitsByRouteId, [routeId]);
     return res.rows;
 };
-
+const editVisitById = async (id_instalacion, id_ruta, estado, id) => {
+    const res = await dbQuery(visitQueries.editVisitById, [id_instalacion, id_ruta, estado, id]);
+    return res.rows[0];
+};
 const createVisit = async ({ id_instalacion, id_ruta, estado }) => {
     const res = await dbQuery(visitQueries.createVisit, [
         id_instalacion,
@@ -49,6 +52,10 @@ const getVisitDetailsById = async (id) => {
     return res.rows;
 };
 
+const getVisitServiceExecutionsById = async (id) => {
+    const res = await dbQuery(visitQueries.getVisitServiceExecutionById, [id]);
+    return res.rows;
+};
 module.exports = {
     getAllVisits,
     getVisitById,
@@ -58,5 +65,7 @@ module.exports = {
     updateVisitStatus,
     deleteVisit,
     setVisitRoute,
-    getVisitDetailsById
+    getVisitDetailsById,
+    getVisitServiceExecutionsById,
+    editVisitById
 };
