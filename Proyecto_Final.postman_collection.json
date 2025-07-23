@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "27abb29e-b647-4a85-886e-15952cd809f3",
+		"_postman_id": "66ec4fd3-2b1d-4542-a2e0-387000567b08",
 		"name": "DESAFIO API",
 		"description": "Postman collection for testing the API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "45322061",
-		"_collection_link": "https://mikel-5236639.postman.co/workspace/mikel's-Workspace~61f9858c-efd9-43b6-81c2-8ed2dbc0e1b5/collection/45322061-27abb29e-b647-4a85-886e-15952cd809f3?action=share&source=collection_link&creator=45322061"
+		"_exporter_id": "45322007",
+		"_collection_link": "https://markel-2203296.postman.co/workspace/Markel's-Workspace~a90d53e8-9c88-43e2-83a8-9ce0304f9e06/collection/45322007-66ec4fd3-2b1d-4542-a2e0-387000567b08?action=share&source=collection_link&creator=45322007"
 	},
 	"item": [
 		{
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Acme Inc.\"\n}"
+					"raw": "{\n  \"nombre\": \"Acmeee Inc.\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/api/v1/clients",
@@ -520,7 +520,7 @@
 					"raw": "{\n  \"nombre\": \"Inactivo\",\n  \"color\": \"#00FF00\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/control-point-states/9",
+					"raw": "http://localhost:3000/api/v1/control-point-states/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -530,7 +530,7 @@
 						"api",
 						"v1",
 						"control-point-states",
-						"9"
+						"1"
 					]
 				}
 			},
@@ -1814,6 +1814,519 @@
 						"v1",
 						"service-product-executions",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Sebasti\\u00e1n Prueba\",\n  \"email\": \"sebastian1@email.com\",\n  \"password\": \"123456\",\n  \"role\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const data = pm.response.json();",
+							"pm.environment.set(\"jwt_token\", data.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"sebastian@email.com\",\n  \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Get All",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE4LCJlbWFpbCI6InNlYmFzdGlhbjFAZW1haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTI1OTk3LCJleHAiOjE3NTI5MzMxOTd9.xxb_P_sMCoBD-TNOZ5vBbajQCtuyxjhf3y_XV4vCoc4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Get by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE4LCJlbWFpbCI6InNlYmFzdGlhbjFAZW1haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTI1OTk3LCJleHAiOjE3NTI5MzMxOTd9.xxb_P_sMCoBD-TNOZ5vBbajQCtuyxjhf3y_XV4vCoc4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Delete by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE4LCJlbWFpbCI6InNlYmFzdGlhbjFAZW1haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTI1OTk3LCJleHAiOjE3NTI5MzMxOTd9.xxb_P_sMCoBD-TNOZ5vBbajQCtuyxjhf3y_XV4vCoc4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Update by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Sebas Actualizado\",\n  \"email\": \"sebasnuevo@email.com\",\n  \"role\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/users/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Get by Email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE4LCJlbWFpbCI6InNlYmFzdGlhbjFAZW1haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTI1OTk3LCJleHAiOjE3NTI5MzMxOTd9.xxb_P_sMCoBD-TNOZ5vBbajQCtuyxjhf3y_XV4vCoc4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/email/sebasnuevo@email.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"email",
+						"sebasnuevo@email.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS: All products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS: Products by Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/:id_producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						":id_producto"
+					],
+					"variable": [
+						{
+							"key": "id_producto",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS: Products by Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6MSwiaWF0IjoxNzUxNDY1NDAzLCJleHAiOjE3NTE0NzI2MDN9.m5bCgai8aU7gOrJDXRQ0Yjcw2As6y3lL6A58bLzT_g8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/producto/:tipo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"producto",
+						":tipo"
+					],
+					"variable": [
+						{
+							"key": "tipo",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS: Create product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6MSwiaWF0IjoxNzUxNDY1NDAzLCJleHAiOjE3NTE0NzI2MDN9.m5bCgai8aU7gOrJDXRQ0Yjcw2As6y3lL6A58bLzT_g8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS: Update product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6MSwiaWF0IjoxNzUxNDY1NDAzLCJleHAiOjE3NTE0NzI2MDN9.m5bCgai8aU7gOrJDXRQ0Yjcw2As6y3lL6A58bLzT_g8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"aaa\",\r\n    \"descripcion\": \"bbb\",\r\n    \"tipo\": \"ccc\",\r\n    \"unidad\": \"ddd\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS: Delete product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6MSwiaWF0IjoxNzUxNDY1NDAzLCJleHAiOjE3NTE0NzI2MDN9.m5bCgai8aU7gOrJDXRQ0Yjcw2As6y3lL6A58bLzT_g8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/:id_producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						":id_producto"
+					],
+					"variable": [
+						{
+							"key": "id_producto",
+							"value": ""
+						}
 					]
 				}
 			},
