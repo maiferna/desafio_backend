@@ -26,7 +26,7 @@ const getInstallationsByClientController = async (req, res) => {
 const createInstallationController = async (req, res) => {
     console.log('BODY:', req.body);
     console.log('FILE:', req.file);
-    const { id, adress, name, locality, checkpoints } = req.body;
+    const { id, adress, name, latitude, longitude, checkpoints } = req.body;
     const image = req.file.filename;
 
     try {
@@ -34,7 +34,8 @@ const createInstallationController = async (req, res) => {
             id_cliente: id,
             direccion: adress,
             nombre: name,
-            localidad: locality,
+            latitud: latitude,
+            longitud: longitude,
             puntos_control: checkpoints,
             image
         });
@@ -53,8 +54,13 @@ const createInstallationController = async (req, res) => {
 };
 
 const updateInstallationController = async (req, res) => {
-    const { adress, name, locality, checkpoints } = req.body;
-    const image = req.file.filename;
+    const { adress, name, locality, checkpoints, imageUrl } = req.body;
+    let image;
+    if (req.file) {
+       image = req.file.filename;
+    } else {
+        image = imageUrl;
+    }
     const id = req.params.id;
     try {
         const updated = await updateInstallation(id, {
@@ -65,6 +71,7 @@ const updateInstallationController = async (req, res) => {
             puntos_control: checkpoints,
             image,
         });
+        console.log('DATA PARA EL EDIT', updated)
         if (!updated) return res.status(404).json({ message: 'Installation not found' });
         return res.status(200).json({
             ok: true,

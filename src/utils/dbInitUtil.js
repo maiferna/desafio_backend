@@ -227,7 +227,8 @@ const dbInit = async () => {
         id_cliente INT REFERENCES clientes(id_cliente) ON DELETE CASCADE,
         nombre VARCHAR(100) NOT NULL,
         direccion VARCHAR(255) NOT NULL,
-        localidad VARCHAR(50) NOT NULL,
+        latitud VARCHAR(20) NOT NULL,
+        longitud VARCHAR(20) NOT NULL,
         puntos_control VARCHAR(100) NOT NULL,
         image VARCHAR(255)
       );
