@@ -14,14 +14,14 @@ const { validateJwt, validateRole, validateInput } = require("../middlewares/ind
 
 // GET /api/v1/control-point-groups
 router.get('/', [
-    validateJwt,
-    validateRole("admin"),
+    //validateJwt,
+    //validateRole("admin"),
 ], getAllControlPointGroupsController);
 
 // GET /api/v1/control-point-groups/:id
 router.get('/:id', [
-    validateJwt,
-    validateRole("admin"),
+    //validateJwt,
+    //validateRole("admin"),
     check("id", "ID invalido").notEmpty()
         .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
@@ -30,8 +30,8 @@ router.get('/:id', [
 
 // POST /api/v1/control-point-groups
 router.post('/', [
-    validateJwt,
-    validateRole("admin"),
+    //validateJwt,
+    //validateRole("admin"),
     check("nombre", "nombre invalido")
         .notEmpty()
         .isLength({ min: 1, max: 1000 })
@@ -45,8 +45,8 @@ router.post('/', [
 
 // PUT /api/v1/control-point-groups/:id
 router.put('/:id', [
-    validateJwt,
-    validateRole("admin"),
+    //validateJwt,
+    //validateRole("admin"),
     check("id", "ID invalido").notEmpty()
         .isInt({ min: 1, max: 1000 })
         .withMessage('La id debe ser un numero entero como minimo 1'),
@@ -63,8 +63,8 @@ router.put('/:id', [
 
 // DELETE /api/v1/control-point-groups/:id
 router.delete('/:id', [
-    validateJwt,
-    validateRole("admin"),
+    //validateJwt,
+    //validateRole("admin"),
     check("id", "ID invalido").notEmpty()
         .isInt({ min: 1 })
         .withMessage('La id debe ser un numero entero como minimo 1'),

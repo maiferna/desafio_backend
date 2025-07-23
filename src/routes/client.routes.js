@@ -12,9 +12,6 @@ const {
 const { check } = require("express-validator");
 const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
 
-// Middleware común solo para admins
-const adminAccess = [validateJwt];
-
 // GET /api/v1/clients
 router.get("/", [
     validateJwt,

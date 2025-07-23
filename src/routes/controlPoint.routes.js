@@ -19,7 +19,7 @@ router.get('/', [
     validateRole("admin"),
 ], getAllControlPointsController);
 
-// GET control point by ID
+// GET control point by ID 
 router.get('/:id', [
     validateJwt,
     validateRole("admin"),
