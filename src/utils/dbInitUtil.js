@@ -181,7 +181,11 @@ const dbInit = async () => {
     await dbQuery(`
       CREATE TABLE clientes (
         id_cliente INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-        nombre VARCHAR(100) NOT NULL
+        nombre VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        tel VARCHAR(20) NOT NULL,
+        direccion VARCHAR(100) NOT NULL,
+        sector VARCHAR(50) NOT NULL
       );
 
       CREATE TABLE estados_punto_control (
@@ -221,7 +225,12 @@ const dbInit = async () => {
       CREATE TABLE instalaciones (
         id_instalacion INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         id_cliente INT REFERENCES clientes(id_cliente) ON DELETE CASCADE,
-        direccion VARCHAR(255) NOT NULL
+        nombre VARCHAR(100) NOT NULL,
+        direccion VARCHAR(255) NOT NULL,
+        latitud VARCHAR(20) NOT NULL,
+        longitud VARCHAR(20) NOT NULL,
+        puntos_control VARCHAR(100) NOT NULL,
+        image VARCHAR(255)
       );
 
       CREATE TABLE servicios (

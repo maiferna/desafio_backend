@@ -11,13 +11,14 @@ const getClientById = async (id) => {
     return res.rows[0];
 };
 
-const createClient = async ({ nombre }) => {
-    const res = await dbQuery(clientQueries.createClient, [nombre]);
+const createClient = async ({ nombre, email, tel, direccion, sector }) => {
+    const res = await dbQuery(clientQueries.createClient, [nombre, email, tel, direccion, sector]);
     return res.rows[0];
 };
 
-const updateClient = async (id, { nombre }) => {
-    const res = await dbQuery(clientQueries.updateClient, [nombre, id]);
+const updateClient = async (id, { nombre, email, tel, direccion, sector  }) => {
+    const res = await dbQuery(clientQueries.updateClient, [nombre, email, tel, direccion, sector, id]);
+    console.log('UPDATE CLIENT BACK MODEL', res)
     return res.rows[0];
 };
 
