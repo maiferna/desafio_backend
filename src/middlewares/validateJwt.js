@@ -1,4 +1,4 @@
-const { verifyJwt } = require("../utils/JWTverify")
+const { verifyJwt } = require("../utils/JwtVerify.js")
 const { generateJwt } = require("../utils/JwtGenerate")
 
 // MIDDLEWARE: validar JWT (desde cookie httpOnly)
