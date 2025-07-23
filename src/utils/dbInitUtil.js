@@ -299,24 +299,57 @@ const dbInit = async () => {
     `);
 
     // 3. Insertar datos ficticios en tablas independientes
-    await dbQuery(`
-        INSERT INTO clientes (nombre) VALUES
+    /*await dbQuery( `
+        INSERT INTO clientes (nombre, email, tel, direccion, sector) VALUES
         ('Viñas, Cuevas and Ponce'),
         ('Arco PLC'),
         ('Ferrero, Gomez and Cervantes'),
         ('Simó-Arrieta'),
         ('Carnero, Carrión and Santamaría');
-        `)
+        ` )*/
     const clientes = [
-      'Viñas, Cuevas and Ponce',
-      'Arco PLC',
-      'Ferrero, Gomez and Cervantes',
-      'Simó-Arrieta',
-      'Carnero, Carrión and Santamaría'
+      {
+        nombre: 'Viñas, Cuevas and Ponce',
+        email: 'contacto@vinascuevasponce.com',
+        tel: '809-555-1001',
+        direccion: 'Av. Independencia 123, Santo Domingo',
+        sector: 'Zona Colonial'
+      },
+      {
+        nombre: 'Arco PLC',
+        email: 'info@arcoplc.com',
+        tel: '809-555-1002',
+        direccion: 'Calle El Sol 45, Santiago',
+        sector: 'Centro'
+      },
+      {
+        nombre: 'Ferrero, Gomez and Cervantes',
+        email: 'servicio@fgc.com',
+        tel: '809-555-1003',
+        direccion: 'Carr. Duarte km 5, La Vega',
+        sector: 'La Primavera'
+      },
+      {
+        nombre: 'Simó-Arrieta',
+        email: 'contacto@simoarrieta.com',
+        tel: '809-555-1004',
+        direccion: 'Av. 27 de Febrero 789, Santo Domingo',
+        sector: 'Evaristo Morales'
+      },
+      {
+        nombre: 'Carnero, Carrión and Santamaría',
+        email: 'admin@ccs.com',
+        tel: '809-555-1005',
+        direccion: 'Calle Las Palmas 12, San Cristóbal',
+        sector: 'Centro Histórico'
+      }
     ];
 
-    for (const nombre of clientes) {
-      await dbQuery('INSERT INTO clientes (nombre) VALUES ($1)', [nombre]);
+    for (const cliente of clientes) {
+      await dbQuery(`
+    INSERT INTO clientes (nombre, email, tel, direccion, sector)
+    VALUES ($1, $2, $3, $4, $5)
+  `, [cliente.nombre, cliente.email, cliente.tel, cliente.direccion, cliente.sector]);
     }
 
     // Insertar usuarios
@@ -347,7 +380,7 @@ const dbInit = async () => {
         [id_cliente, nombre, email, hashedPassword, role]
       );
     }
-    const direcciones = [
+    /* const direcciones = [
       // La Rioja
       'Calle Laurel 12, Logroño, La Rioja',
       'Avenida de la Paz 45, Calahorra, La Rioja',
@@ -381,6 +414,57 @@ const dbInit = async () => {
           `INSERT INTO instalaciones (id_cliente, direccion) VALUES ($1, $2)`,
           [id_cliente, direccion]
         );
+        instalationIndex++;
+      }
+    } */
+
+    const direcciones = [
+      // La Rioja
+      { direccion: 'Calle Laurel 12, Logroño', provincia: 'La Rioja', latitud: '42.4667', longitud: '-2.45' },
+      { direccion: 'Avenida de la Paz 45, Calahorra', provincia: 'La Rioja', latitud: '42.3050', longitud: '-1.9650' },
+      { direccion: 'Plaza del Ayuntamiento 3, Haro', provincia: 'La Rioja', latitud: '42.5750', longitud: '-2.8469' },
+      { direccion: 'Calle Mayor 18, Alfaro', provincia: 'La Rioja', latitud: '42.1800', longitud: '-1.7500' },
+      { direccion: 'Camino de los Picos 22, Nájera', provincia: 'La Rioja', latitud: '42.4172', longitud: '-2.7333' },
+      // Castilla y León
+      { direccion: 'Calle Santiago 14, Burgos', provincia: 'Castilla y León', latitud: '42.3439', longitud: '-3.6969' },
+      { direccion: 'Plaza Mayor 1, Valladolid', provincia: 'Castilla y León', latitud: '41.6529', longitud: '-4.7286' },
+      { direccion: 'Calle Real 33, León', provincia: 'Castilla y León', latitud: '42.5987', longitud: '-5.5671' },
+      { direccion: 'Av. Reyes Católicos 21, Salamanca', provincia: 'Castilla y León', latitud: '40.9701', longitud: '-5.6635' },
+      { direccion: 'Polígono Montalvo III, Nave 8, Carbajosa', provincia: 'Castilla y León', latitud: '40.9478', longitud: '-5.6550' },
+      // País Vasco
+      { direccion: 'Gran Vía 50, Bilbao', provincia: 'País Vasco', latitud: '43.2630', longitud: '-2.9350' },
+      { direccion: 'Calle Dato 11, Vitoria-Gasteiz', provincia: 'País Vasco', latitud: '42.8467', longitud: '-2.6728' },
+      { direccion: 'Paseo de la Zurriola 22, San Sebastián', provincia: 'País Vasco', latitud: '43.3261', longitud: '-1.9787' },
+      { direccion: 'Polígono Ugaldeguren III, Zamudio', provincia: 'País Vasco', latitud: '43.3050', longitud: '-2.8800' },
+      { direccion: 'Av. Navarra 30, Irun', provincia: 'País Vasco', latitud: '43.3396', longitud: '-1.7899' }
+    ];
+
+    const puntosPosibles = ['Control A', 'Control B', 'Control C', 'Control D', 'Control E'];
+    let instalationIndex = 0;
+
+    for (let id_cliente = 1; id_cliente <= 5; id_cliente++) {
+      const numInstalaciones = Math.floor(Math.random() * 5) + 1;
+
+      for (let i = 0; i < numInstalaciones; i++) {
+        const { direccion, latitud, longitud } = direcciones[instalationIndex % direcciones.length];
+
+        const nombre = `Instalación ${id_cliente}-${i + 1}`;
+        const puntos_control = puntosPosibles[Math.floor(Math.random() * puntosPosibles.length)];
+        const image = null; // Puedes poner una URL de prueba si lo deseas
+
+        await dbQuery(`
+      INSERT INTO instalaciones (id_cliente, nombre, direccion, latitud, longitud, puntos_control, image)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+    `, [
+          id_cliente,
+          nombre,
+          direccion,
+          latitud,
+          longitud,
+          puntos_control,
+          image
+        ]);
+
         instalationIndex++;
       }
     }
