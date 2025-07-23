@@ -1,19 +1,19 @@
 const serviceProductExecutionQueries = {
-    getAllServiceProductExecutions: `
+  getAllServiceProductExecutions: `
     SELECT * FROM ejecucion_productos
   `,
-    getServiceProductExecutionById: `
+  getServiceProductExecutionById: `
     SELECT * FROM ejecucion_productos WHERE id_ejecucion_producto = $1
   `,
-    getServiceProductExecutionsByServiceExecutionId: `
+  getServiceProductExecutionsByServiceExecutionId: `
     SELECT * FROM ejecucion_productos WHERE id_ejecucion_servicio = $1
   `,
-    createServiceProductExecution: `
+  createServiceProductExecution: `
     INSERT INTO ejecucion_productos (id_ejecucion_servicio, id_producto, cantidad)
     VALUES ($1, $2, $3)
     RETURNING *
   `,
-    updateServiceProductExecution: `
+  updateServiceProductExecution: `
     UPDATE ejecucion_productos
     SET id_ejecucion_servicio = $1,
         id_producto = $2,
@@ -21,7 +21,7 @@ const serviceProductExecutionQueries = {
     WHERE id_ejecucion_producto = $4
     RETURNING *
   `,
-    deleteServiceProductExecution: `
+  deleteServiceProductExecution: `
     DELETE FROM ejecucion_productos
     WHERE id_ejecucion_producto = $1
     RETURNING *

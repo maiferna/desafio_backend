@@ -9,24 +9,45 @@ const { login, signup, renewToken, logout, getUser } = require("../controllers/a
 router.post("/signup", [
     validateJwt,
     validateRole("admin"),
-    check('name', 'El nombre es obligatorio').notEmpty().isString().isLength({ min: 2, max: 100 }),
-    check('email', 'Email inválido').notEmpty().isEmail(),
-    check("password", "La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número")
+    check('name', 'El nombre es obligatorio')
+        .notEmpty().isString().withMessage('El formato del nombre no es correcto')
+        .isLength({ min: 2, max: 100 })
+        .withMessage('El nombre debe tener entre 2 y 100 caracteres.'),
+    check('email', 'Email inválido').notEmpty()
+        .isLength({ min: 2, max: 100 })
+        .withMessage('El email debe tener entre 2 y 100 caracteres.')
+        .isEmail().withMessage('El formato del email no es correcto'),
+    check("password", "Password inválido")
         .isStrongPassword({
             minLength: 8,
+            maxLength: 50,
             minUppercase: 1,
             minNumbers: 1,
             minSymbols: 0
-        }),
+        })
+        .withMessage('La contraseña entre 8 y 50 caracteres, una mayúscula y un número'),
     check('role', 'Rol inválido').isIn(['admin', 'tecnico', 'cliente']),
-    check('id_cliente').optional().isInt().withMessage('id_cliente debe ser un número'),
+    check('id_cliente').optional().isInt()
+        .isLength({ min: 1, max: 50 })
+        .withMessage('La id debe ser un número entero entre 1 y 50 caracteres'),
     validateInput
 ], signup);
 
 // RUTA: login
 router.post("/", [
-    check('email', 'Email requerido').notEmpty().isEmail(),
-    check('password', 'Password requerido').notEmpty(),
+    check('email', 'Email requerido').notEmpty()
+        .isLength({ min: 2, max: 100 })
+        .withMessage('El email debe tener entre 2 y 100 caracteres.')
+        .isEmail().withMessage('El formato del email no es correcto'),
+    check('password', 'Password requerido').notEmpty()
+        .isStrongPassword({
+            minLength: 8,
+            maxLength: 50,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 0
+        })
+        .withMessage('La contraseña entre 8 y 50 caracteres, una mayúscula y un número'),
     validateInput
 ], login);
 

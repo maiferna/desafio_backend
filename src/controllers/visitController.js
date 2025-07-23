@@ -30,7 +30,7 @@ const getVisitByIdController = async (req, res) => {
 
 const getVisitsByInstallationIdController = async (req, res) => {
     try {
-        const visits = await getVisitsByInstallationId(req.params.installationId);
+        const visits = await getVisitsByInstallationId(req.params.id_instalacion);
         res.status(200).json(visits);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching visits by installation', error });
@@ -38,8 +38,9 @@ const getVisitsByInstallationIdController = async (req, res) => {
 };
 
 const getVisitsByRouteIdController = async (req, res) => {
+    console.log("id", req)
     try {
-        const visits = await getVisitsByRouteId(req.params.routeId);
+        const visits = await getVisitsByRouteId(req.params.id_ruta);
         res.status(200).json(visits);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching visits by route', error });
@@ -61,7 +62,11 @@ const updateVisitStatusController = async (req, res) => {
         const { estado } = req.body;
         const updatedVisit = await updateVisitStatus(estado, req.params.id);
         if (!updatedVisit) return res.status(404).json({ message: 'Visit not found' });
-        res.status(200).json(updatedVisit);
+        res.status(200).json({
+            ok: true,
+            msg: 'Estado actualizada',
+            updatedVisit
+        })
     } catch (error) {
         res.status(500).json({ message: 'Error updating visit status', error });
     }
@@ -70,20 +75,29 @@ const updateVisitStatusController = async (req, res) => {
 const setVisitRouteController = async (req, res) => {
     try {
         const { id } = req.params;
-        const { routeId } = req.body;
-        const updatedVisit = await setVisitRoute(routeId, id);
+        const { id_ruta } = req.body;
+        const updatedVisit = await setVisitRoute(id_ruta, id);
         if (!updatedVisit) return res.status(404).json({ message: 'Visit not found' });
-        res.status(200).json(updatedVisit);
+        res.status(200).json({
+            ok: true,
+            msg: 'Ruta actualizada',
+            updatedVisit
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error setting visit route', error });
     }
 };
 
 const deleteVisitController = async (req, res) => {
+    console.log("id", req.params)
     try {
-        const deletedVisit = await deleteVisit(req.params.id);
+        const deletedVisit = await deleteVisit(req.params.id_visita);
         if (!deletedVisit) return res.status(404).json({ message: 'Visit not found' });
-        res.status(200).json(deletedVisit);
+        res.status(200).json({
+            ok: true,
+            msg: 'Visita eliminada',
+            deletedVisit
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting visit', error });
     }

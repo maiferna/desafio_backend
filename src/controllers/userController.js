@@ -61,6 +61,7 @@ const getUserByIdController = async (req, res) => {
 const putUserByIdController = async (req, res) => {
     try {
         const id_usuario = Number(req.params.id_usuario);
+
         if (isNaN(id_usuario)) {
             return res.status(400).json({ error: "ID inválido" });
         }
@@ -91,6 +92,7 @@ const putUserByIdController = async (req, res) => {
         }
 
         res.status(200).json({
+            ok: true,
             message: "Usuario actualizado",
             data: updatedUser
         });
