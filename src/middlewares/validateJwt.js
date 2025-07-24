@@ -26,9 +26,9 @@ const validateJwt = async (req, res, next) => {
         // 3. Guardar nueva cookie (igual que al hacer login)
         res.cookie("token", renewedToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // true en despliegue
-            sameSite: "Lax",
-            maxAge: 1000 * 60 * 60, // 1h
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge: 1000 * 60 * 60, // 1 hora
         });
 
         // 4. Guardar datos en la request para el resto del backend

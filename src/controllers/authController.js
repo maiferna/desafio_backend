@@ -2,9 +2,6 @@ const bcrypt = require("bcryptjs");
 const {
     createUser,
     getUserById,
-    getAllUsers,
-    updateUserById,
-    deleteUserById,
     getUserByEmail
 } = require("../models/userModel");
 const { generateJwt } = require("../utils/JwtGenerate");
@@ -86,9 +83,9 @@ const login = async (req, res) => {
         // Guardar token en cookie httpOnly
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // usa HTTPS en producción
-            sameSite: "Lax", // o "None" si el front y back están en dominios distintos y usas HTTPS
-            maxAge: 1000 * 60 * 60 * 24 // 1 día
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge: 1000 * 60 * 60, // 1 hora
         });
 
         return res.status(200).json({

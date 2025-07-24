@@ -39,7 +39,7 @@ app.use(cookieParser());
 
 // MW:Config de las CORS
 const frontUrlBase = process.env.FRONT_URL || "http://localhost:5173"
-const whiteList = [frontUrlBase, 'http://localhost:3000', 'https://desafio-frontend-c9dj.onrender.com']
+const whiteList = [frontUrlBase, 'http://localhost:3000', 'https://desafio-frontend-c9dj.onrender.com', 'https://desafio-backend-tv2a.onrender.com/api/v1/']
 app.use(cors({
     origin: whiteList,
     credentials: true
