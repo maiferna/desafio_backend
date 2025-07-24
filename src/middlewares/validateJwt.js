@@ -27,7 +27,7 @@ const validateJwt = async (req, res, next) => {
         res.cookie("token", renewedToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // true en despliegue
-            sameSite: "Lax",
+            sameSite: "None",
             maxAge: 1000 * 60 * 60, // 1h
         });
 
