@@ -8,6 +8,7 @@ const {
     deleteClientHandler,
     getClientInstallationsHandler,
 } = require("../controllers/clientController");
+const { validateJwt, validateRole } = require("../middlewares");
 
 // GET /api/v1/clients
 router.get("/", getAllClientsHandler);
@@ -16,7 +17,8 @@ router.get("/", getAllClientsHandler);
 router.get("/:id", getClientByIdHandler);
 
 // POST /api/v1/clients
-router.post("/", createClientHandler);
+router.post("/", validateJwt,
+    validateRole("admin"), createClientHandler);
 
 // PUT /api/v1/clients/:id
 router.put("/:id", updateClientHandler);
