@@ -35,8 +35,20 @@ app.use(express.json()); //Parsear JSON en las peticiones
 const frontUrlBase = process.env.FRONT_URL || "http://localhost:5173"
 const whiteList = [frontUrlBase, 'http://localhost:3000']
 app.use(cors({
-    origin: whiteList //Peticiones desde dominios de la lista
-}))
+    origin: (origin, callback) => {
+        const whiteList = [
+            process.env.FRONT_URL || 'http://localhost:5173',
+            'http://localhost:3000'
+        ];
+        if (!origin || whiteList.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
+
 
 // MW: Logueo de peticiones entrantes
 app.use((req, res, next) => {
