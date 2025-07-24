@@ -298,15 +298,6 @@ const dbInit = async () => {
       );
     `);
 
-    // 3. Insertar datos ficticios en tablas independientes
-    /*await dbQuery( `
-        INSERT INTO clientes (nombre, email, tel, direccion, sector) VALUES
-        ('Viñas, Cuevas and Ponce'),
-        ('Arco PLC'),
-        ('Ferrero, Gomez and Cervantes'),
-        ('Simó-Arrieta'),
-        ('Carnero, Carrión and Santamaría');
-        ` )*/
     const clientes = [
       {
         nombre: 'Viñas, Cuevas and Ponce',
@@ -380,43 +371,6 @@ const dbInit = async () => {
         [id_cliente, nombre, email, hashedPassword, role]
       );
     }
-    /* const direcciones = [
-      // La Rioja
-      'Calle Laurel 12, Logroño, La Rioja',
-      'Avenida de la Paz 45, Calahorra, La Rioja',
-      'Plaza del Ayuntamiento 3, Haro, La Rioja',
-      'Calle Mayor 18, Alfaro, La Rioja',
-      'Camino de los Picos 22, Nájera, La Rioja',
-      // Castilla y León
-      'Calle Santiago 14, Burgos, Castilla y León',
-      'Plaza Mayor 1, Valladolid, Castilla y León',
-      'Calle Real 33, León, Castilla y León',
-      'Avenida de los Reyes Católicos 21, Salamanca, Castilla y León',
-      'Polígono El Montalvo III, Nave 8, Carbajosa de la Sagrada, Castilla y León',
-      // País Vasco
-      'Gran Vía 50, Bilbao, País Vasco',
-      'Calle Dato 11, Vitoria-Gasteiz, País Vasco',
-      'Paseo de la Zurriola 22, San Sebastián, País Vasco',
-      'Polígono Ugaldeguren III, Nave 15, Zamudio, País Vasco',
-      'Avenida Navarra 30, Irun, País Vasco'
-    ];
-
-    // Insertar entre 1 y 5 instalaciones por cliente
-
-    let instalationIndex = 0;
-
-    for (let id_cliente = 1; id_cliente <= 10; id_cliente++) {
-      const numInstalaciones = Math.floor(Math.random() * 5) + 1;
-
-      for (let i = 0; i < numInstalaciones; i++) {
-        const direccion = direcciones[instalationIndex % direcciones.length];
-        await dbQuery(
-          `INSERT INTO instalaciones (id_cliente, direccion) VALUES ($1, $2)`,
-          [id_cliente, direccion]
-        );
-        instalationIndex++;
-      }
-    } */
 
     const direcciones = [
       // La Rioja
