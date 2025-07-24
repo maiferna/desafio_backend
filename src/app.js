@@ -45,6 +45,7 @@ app.use(cors({
     credentials: true
 }));
 
+
 // MW: Logueo de peticiones entrantes
 app.use((req, res, next) => {
     console.log(`➡️ ${req.method} ${req.originalUrl}`);

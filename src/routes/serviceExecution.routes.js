@@ -13,11 +13,11 @@ const {
 // GET /api/v1/service-executions
 router.get('/', getAllServiceExecutionsController);
 
-// GET /api/v1/service-executions/:id
-router.get('/:id', getServiceExecutionByIdController);
-
 // GET /api/v1/service-executions/visit/:visitId
 router.get('/visit/:visitId', getServiceExecutionsByVisitIdController);
+
+// GET /api/v1/service-executions/:id
+router.get('/:id', getServiceExecutionByIdController);
 
 // POST /api/v1/service-executions
 router.post('/', createServiceExecutionController);
