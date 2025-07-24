@@ -14,5 +14,6 @@ module.exports = {
     serviceExecutionRoutes: require("./serviceExecution.routes"),
     serviceProductExecutionRoutes: require("./serviceProductExecution.routes"),
     userRoutes: require("./user.routes"),
-    visitRoutes: require("./visit.routes")
+    visitRoutes: require("./visit.routes"),
+    contactRoutes: require("./contact.routes.js")
 }

@@ -36,7 +36,7 @@ router.get("/renewToken", [
 ], renewToken);
 
 // RUTA: logout
-router.get("/logout", logout);
+router.post("/logout", logout);
 
 // RUTA: obtener perfil
 router.get("/user", [

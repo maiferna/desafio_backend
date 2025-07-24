@@ -1,6 +1,7 @@
 // IMPORTS
 const express = require('express') //Importa el framework
 require('dotenv').config(); //Carga las variables de entorno
+const path = require('path');
 
 const {
     authRoutes,
@@ -18,34 +19,29 @@ const {
     serviceExecutionRoutes,
     serviceProductExecutionRoutes,
     userRoutes,
-    visitRoutes
+    visitRoutes,
+    contactRoutes
 } = require('./routes/index.js');
 
+const cookieParser = require('cookie-parser');
 const app = express() //Instancia de express
 const cors = require('cors'); //CORS (mw)
 
 const port = process.env.PORT || 3000; //Configura el puerto
 
-// MIDDLEWARES: express.json express.URLencoded -----
+// MIDDLEWARES: express.json express.URLencoded express.static -----
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
 // MW:Parseo
 app.use(express.urlencoded({ extended: true })) //Parsear datos URL-encoded (formularios HTML)
 app.use(express.json()); //Parsear JSON en las peticiones
+app.use(cookieParser());
 
 // MW:Config de las CORS
 const frontUrlBase = process.env.FRONT_URL || "http://localhost:5173"
-const whiteList = [frontUrlBase, 'http://localhost:3000']
+const whiteList = [frontUrlBase, 'http://localhost:3000', 'https://desafio-frontend-c9dj.onrender.com']
 app.use(cors({
-    origin: (origin, callback) => {
-        const whiteList = [
-            process.env.FRONT_URL || 'http://localhost:5173',
-            'http://localhost:3000'
-        ];
-        if (!origin || whiteList.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: whiteList,
     credentials: true
 }));
 
@@ -73,6 +69,7 @@ app.use('/api/v1/service-executions', serviceExecutionRoutes);
 app.use('/api/v1/service-product-executions', serviceProductExecutionRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/visits', visitRoutes);
+app.use('/api/v1/contact', contactRoutes);
 
 
 // INICIO DEL SERVIDOR ----------------------------

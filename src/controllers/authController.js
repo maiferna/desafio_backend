@@ -35,19 +35,10 @@ const signup = async (req, res) => {
             id_cliente: role === 'cliente' ? id_cliente : null
         });
 
-
-        // Generar token JWT
-        const token = await generateJwt({
-            uid: newUser.id_usuario,
-            email: newUser.email,
-            role: newUser.role
-        });
-
         // Respuesta con usuario y token
         res.status(201).json({
             ok: true,
             message: "Usuario registrado con éxito",
-            token,
             user: {
                 id: newUser.id_usuario,
                 role: newUser.role,
@@ -92,10 +83,17 @@ const login = async (req, res) => {
             role: user.role
         });
 
+        // Guardar token en cookie httpOnly
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // usa HTTPS en producción
+            sameSite: "Lax", // o "None" si el front y back están en dominios distintos y usas HTTPS
+            maxAge: 1000 * 60 * 60 * 24 // 1 día
+        });
+
         return res.status(200).json({
             ok: true,
             message: "Login correcto",
-            token,
             user: {
                 id: user.id_usuario,
                 role: user.role,
@@ -135,16 +133,14 @@ const renewToken = async (req, res) => {
 
 // CONTROLLER: 4. Logout API
 const logout = (req, res) => {
-    return res.status(200).json({
-        ok: true,
-        message: "Logout correcto"
-    });
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Sesión cerrada con éxito" });
 };
 
 
 const getUser = async (req, res) => {
     try {
-        const user = await userModel.getUserById(req.uid);
+        const user = await getUserById(req.uid);
         if (!user) {
             return res.status(404).json({
                 ok: false,
@@ -153,8 +149,13 @@ const getUser = async (req, res) => {
         }
         return res.status(200).json({
             ok: true,
-            user
-        })
+            user: {
+                id: user.id_usuario,
+                name: user.nombre,
+                role: user.role,
+                email: user.email
+            }
+        });
     } catch (error) {
         return res.status(500).json({
             ok: false,
@@ -172,4 +173,3 @@ module.exports = {
     logout,
     getUser
 }
-
