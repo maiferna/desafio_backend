@@ -30,7 +30,11 @@ const createServiceController = async (req, res) => {
         console.log(req.body)
         const { nombre, descripcion, datos } = req.body;
         const newService = await createService({ nombre, descripcion, datos });
-        res.status(201).json(newService);
+        res.status(201).json({
+            ok: true,
+            message: 'Servicio creado',
+            newService
+        });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error creating service', error });
@@ -43,7 +47,11 @@ const updateServiceController = async (req, res) => {
         const id = req.params.id;
         const updatedService = await updateServiceById(id, { nombre, descripcion, datos });
         if (!updatedService) return res.status(404).json({ message: 'Service not found' });
-        res.status(200).json(updatedService);
+        res.status(200).json({
+            ok: true,
+            message: 'Servicio editado',
+            updatedService
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error updating service', error });
     }
@@ -54,7 +62,11 @@ const deleteServiceController = async (req, res) => {
         const id = req.params.id;
         const deletedService = await deleteServiceById(id);
         if (!deletedService) return res.status(404).json({ message: 'Service not found' });
-        res.status(200).json({ message: 'Service deleted', deletedService });
+        res.status(200).json({
+            ok: true,
+            message: 'Servicio eliminado',
+            deletedService
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting service', error });
     }

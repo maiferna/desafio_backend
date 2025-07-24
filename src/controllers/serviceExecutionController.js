@@ -32,7 +32,8 @@ const getServiceExecutionByIdController = async (req, res) => {
 // GET /api/v1/service-executions/visit/:visitId
 const getServiceExecutionsByVisitIdController = async (req, res) => {
     try {
-        const executions = await getServiceExecutionsByVisitId(req.params.visitId);
+        const executions = await getServiceExecutionsByVisitId(req.params.id_visita);
+        if (!executions) return res.status(404).json({ message: 'Visit id not found' });
         res.status(200).json(executions);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching service executions by visit', error });
@@ -44,7 +45,11 @@ const createServiceExecutionController = async (req, res) => {
     try {
         const { id_visita, id_servicio, observaciones, datos } = req.body;
         const newExecution = await createServiceExecution({ id_visita, id_servicio, observaciones, datos });
-        res.status(201).json(newExecution);
+        res.status(201).json({
+            ok: true,
+            message: 'Ejecucion de servicio creado',
+            newExecution
+        });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error creating service execution', error });
@@ -58,7 +63,11 @@ const updateServiceExecutionController = async (req, res) => {
         const { id_visita, id_servicio, observaciones, datos } = req.body;
         const updatedExecution = await updateServiceExecutionById(id, { id_visita, id_servicio, observaciones, datos });
         if (!updatedExecution) return res.status(404).json({ message: 'Service execution not found' });
-        res.status(200).json(updatedExecution);
+        res.status(200).json({
+            ok: true,
+            message: 'Ejecucion de servicio editado',
+            updatedExecution
+        });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error updating service execution', error });
@@ -71,7 +80,11 @@ const deleteServiceExecutionController = async (req, res) => {
         const id = req.params.id;
         const deletedExecution = await deleteServiceExecutionById(id);
         if (!deletedExecution) return res.status(404).json({ message: 'Service execution not found' });
-        res.status(200).json({ message: 'Service execution deleted', deletedExecution });
+        res.status(200).json({
+            ok: true,
+            message: 'Ejecucion de servicios eliminado',
+            deletedExecution
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting service execution', error });
     }

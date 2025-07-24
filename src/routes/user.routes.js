@@ -8,50 +8,69 @@ const {
     deleteUserByIdController
 } = require("../controllers/userController.js");
 
-const { check } = require("express-validator");
-const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
 
-// Middleware común solo para admins
-const adminAccess = [validateJwt, validateRole("admin")];
+const { validateJwt, validateRole, validateInput } = require("../middlewares/index.js");
+const { check } = require("express-validator");
+
+
 
 
 // GET /api/v1/users  obtener todos los usuarios
-router.get("/", adminAccess, getUsersController);
+router.get("/", [
+    validateJwt,
+    validateRole("admin"),
+], getUsersController);
 
 
 // GET /api/v1/users/email/:email  obtener usuario por email
 router.get("/email/:email", [
-    ...adminAccess,
-    check("email", "Email inválido").isEmail(),
+    validateJwt,
+    validateRole("admin"),
+    check("email", "Email inválido").notEmpty()
+        .isLength({ min: 2, max: 100 })
+        .withMessage('El email debe tener entre 2 y 100 caracteres')
+        .isEmail()
+        .withMessage('El formato del email no es correcto'),
     validateInput
 ], getUserByEmailController);
 
 
 // GET /api/v1/users/:id_usuario → obtener usuario por ID
 router.get("/:id_usuario", [
-    ...adminAccess,
-    check("id_usuario", "ID inválido").isInt({ min: 1 }),
+    validateJwt,
+    validateRole("admin"),
+    check("id_usuario", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
     validateInput
 ], getUserByIdController);
 
 
 // PUT /api/v1/users/:id_usuario  actualizar usuario por ID
 router.put("/:id_usuario", [
-    ...adminAccess,
-    check("id_usuario", "ID inválido").isInt({ min: 1 }),
-    check("name", "Nombre requerido y debe ser una cadena").optional().isString().isLength({ min: 3, max: 100 }),
-    check("email", "Email inválido").optional().isEmail(),
-    check("password", "La contraseña debe tener mínimo 6 caracteres, una mayúscula y un número")
+    validateJwt,
+    validateRole("admin"),
+    check("id_usuario", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
+    check("name", "Nombre requerido y debe ser una cadena").optional()
+        .isString().isLength({ min: 3, max: 100 })
+        .withMessage('El name debe tener entre 3 y 100 caracteres'),
+    check("email", "Email inválido").optional()
+        .isEmail().withMessage('El formato del email no es correcto'),
+    check("password", "Password inválido")
         .optional()
         .isStrongPassword({
-            minLength: 6,
+            minLength: 8,
+            maxLength: 50,
             minUppercase: 1,
             minNumbers: 1,
             minSymbols: 0
-        }),
-    check("role", "El rol debe ser admin, tecnico o cliente").optional().isIn(["admin", "tecnico", "cliente"]),
-
-    // Validación cruzada personalizada
+        })
+        .withMessage('La contraseña entre 8 y 50 caracteres, una mayúscula y un número'),
+    check("role", "Rol inválido").optional().isIn(["admin", "tecnico", "cliente"])
+        .withMessage('El rol debe ser admin, tecnico o cliente'),
+    // // Validación cruzada personalizada
     check("id_cliente").custom((id_cliente, { req }) => {
         if (req.body.role === "cliente") {
             if (!id_cliente) {
@@ -63,15 +82,17 @@ router.put("/:id_usuario", [
         }
         return true;
     }),
-
     validateInput
 ], putUserByIdController);
 
 
 // DELETE /api/v1/users/:id_usuario  eliminar usuario por ID
 router.delete("/:id_usuario", [
-    ...adminAccess,
-    check("id_usuario", "ID inválido").isInt({ min: 1 }),
+    validateJwt,
+    validateRole("admin"),
+    check("id_usuario", "ID inválido").notEmpty()
+        .isInt({ min: 1, max: 50 })
+        .withMessage('La id debe ser un numero entero entre 1 y 50'),
     validateInput
 ], deleteUserByIdController);
 

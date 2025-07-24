@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "27abb29e-b647-4a85-886e-15952cd809f3",
+		"_postman_id": "66ec4fd3-2b1d-4542-a2e0-387000567b08",
 		"name": "DESAFIO API",
 		"description": "Postman collection for testing the API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "45322061",
-		"_collection_link": "https://mikel-5236639.postman.co/workspace/mikel's-Workspace~61f9858c-efd9-43b6-81c2-8ed2dbc0e1b5/collection/45322061-27abb29e-b647-4a85-886e-15952cd809f3?action=share&source=collection_link&creator=45322061"
+		"_exporter_id": "45322007",
+		"_collection_link": "https://markel-2203296.postman.co/workspace/Markel's-Workspace~a90d53e8-9c88-43e2-83a8-9ce0304f9e06/collection/45322007-66ec4fd3-2b1d-4542-a2e0-387000567b08?action=share&source=collection_link&creator=45322007"
 	},
 	"item": [
 		{
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Acme Inc.\"\n}"
+					"raw": "{\n  \"nombre\": \"Acmeee Inc.\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/api/v1/clients",
@@ -520,7 +520,7 @@
 					"raw": "{\n  \"nombre\": \"Inactivo\",\n  \"color\": \"#00FF00\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/control-point-states/9",
+					"raw": "http://localhost:3000/api/v1/control-point-states/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -530,7 +530,7 @@
 						"api",
 						"v1",
 						"control-point-states",
-						"9"
+						"1"
 					]
 				}
 			},

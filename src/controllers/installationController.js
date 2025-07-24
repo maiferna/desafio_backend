@@ -19,7 +19,7 @@ const getInstallationByIdController = async (req, res) => {
 };
 
 const getInstallationsByClientController = async (req, res) => {
-    const data = await getInstallationsByClientId(req.params.clientId);
+    const data = await getInstallationsByClientId(req.params.id_cliente);
     res.json(data);
 };
 
@@ -42,6 +42,7 @@ const createInstallationController = async (req, res) => {
         console.log('DATA INSTALACION', newInstallation)
         return res.status(201).json({
             ok: true,
+            message: 'Instalacion creada',
             newInstallation
         });
     } catch (error) {
@@ -57,7 +58,7 @@ const updateInstallationController = async (req, res) => {
     const { adress, name, locality, checkpoints, imageUrl } = req.body;
     let image;
     if (req.file) {
-       image = req.file.filename;
+        image = req.file.filename;
     } else {
         image = imageUrl;
     }
@@ -75,6 +76,7 @@ const updateInstallationController = async (req, res) => {
         if (!updated) return res.status(404).json({ message: 'Installation not found' });
         return res.status(200).json({
             ok: true,
+            message: 'Instalacion editada',
             updated
         });
     } catch (error) {
@@ -89,7 +91,11 @@ const updateInstallationController = async (req, res) => {
 const deleteInstallationController = async (req, res) => {
     const deleted = await deleteInstallation(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Installation not found' });
-    res.json(deleted);
+    res.json({
+        ok: true,
+        message: 'Instalacion eliminada',
+        deleted
+    });
 };
 
 module.exports = {
