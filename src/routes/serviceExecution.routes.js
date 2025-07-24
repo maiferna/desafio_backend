@@ -18,6 +18,7 @@ router.get('/', [
     validateRole("admin"),
 ], getAllServiceExecutionsController);
 
+
 // GET /api/v1/service-executions/:id
 router.get('/:id', [
     validateJwt,
@@ -37,6 +38,9 @@ router.get('/visit/:id_visita', [
         .withMessage('La id debe ser un numero entero entre 1 y 50'),
     validateInput
 ], getServiceExecutionsByVisitIdController);
+
+// GET /api/v1/service-executions/:id
+router.get('/:id', getServiceExecutionByIdController);
 
 // POST /api/v1/service-executions
 router.post('/', [

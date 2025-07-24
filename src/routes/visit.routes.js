@@ -9,6 +9,9 @@ const {
     updateVisitStatusController,
     deleteVisitController,
     setVisitRouteController,
+    getVisitDetailsByIdController,
+    getVisitServiceExecutionByIdController,
+    editVisitByIdController
 } = require('../controllers/visitController');
 
 const { validateRole, validateJwt, validateInput } = require('../middlewares');
@@ -80,7 +83,7 @@ router.put('/:id', [
         .isLength({ min: 1, max: 50 })
         .withMessage('La direccion debe tener entre 1 y 50 caracteres.'),
     validateInput
-], updateVisitStatusController);
+], editVisitByIdController);
 
 // PUT /api/v1/visits/:id_visita
 router.put('/editroute/:id', [
@@ -104,5 +107,11 @@ router.delete('/:id_visita', [
         .withMessage('La id debe ser un numero entero entre 1 y 50'),
     validateInput
 ], deleteVisitController);
+
+//GET /api/v1/visits/details:id
+router.get('/details/:id', getVisitDetailsByIdController);
+
+//GET /api/v1/visits/service-executions/:id
+router.get('/service-executions/:id', getVisitServiceExecutionByIdController);
 
 module.exports = router;
