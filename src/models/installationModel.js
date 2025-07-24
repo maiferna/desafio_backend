@@ -16,16 +16,20 @@ const getInstallationsByClientId = async (clientId) => {
     return res.rows;
 };
 
-const createInstallation = async ({ id_cliente, direccion }) => {
-    const res = await dbQuery(installationQueries.createInstallation, [id_cliente, direccion]);
+const createInstallation = async ({ id_cliente, direccion, nombre, latitud, longitud, puntos_control, image}) => {
+    const res = await dbQuery(installationQueries.createInstallation, [id_cliente, direccion, nombre, latitud, longitud, puntos_control, image]);
     return res.rows[0];
 };
 
-const updateInstallation = async (id, { id_cliente, direccion }) => {
+const updateInstallation = async (id, { id_cliente, direccion, nombre, localidad, puntos_control, image }) => {
     const res = await dbQuery(installationQueries.updateInstallation, [
         id_cliente,
         direccion,
         id,
+        nombre,
+        localidad,
+        puntos_control,
+        image
     ]);
     return res.rows[0];
 };

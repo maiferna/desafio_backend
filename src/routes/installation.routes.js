@@ -8,6 +8,7 @@ const {
     updateInstallationController,
     deleteInstallationController,
 } = require('../controllers/installationController.js');
+const upload = require('../middlewares/multer.js');
 
 const { validateInput, validateJwt, validateRole } = require('../middlewares/index.js');
 const { check } = require('express-validator');
@@ -41,6 +42,7 @@ router.get('/client/:id_cliente', [
 
 // POST /api/v1/installations  
 router.post('/', [
+    upload.single("image"),
     validateJwt,
     validateRole("admin"),
     check("id_cliente", "Id inválido").notEmpty()
@@ -55,6 +57,7 @@ router.post('/', [
 
 // PUT /api/v1/installations/:id
 router.put('/:id', [
+    upload.single("image"),
     validateJwt,
     validateRole("admin"),
     check("id", "ID inválido").notEmpty()
