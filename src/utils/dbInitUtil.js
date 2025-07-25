@@ -345,6 +345,8 @@ const dbInit = async () => {
 
     // Insertar usuarios
     const usuarios = [
+      [null, 'Jefe', 'admin@email.com', 'Admin123', 'admin'],
+      [null, 'Técnico', 'tecnico@email.com', 'Tecnico123', 'tecnico'],
       [null, 'Hermenegildo Company Gomez', 'joaquin70@samper-lledo.com', 'Admin123', 'admin'],
       [null, 'Almudena Sandra Botella Maestre', 'bermudezpriscila@hotmail.com', 'Tecnico123', 'tecnico'],
       [null, 'Lorena Macías Silva', 'fuentesmaricruz@gmail.com', 'Tecnico123', 'tecnico'],
@@ -360,7 +362,8 @@ const dbInit = async () => {
       [2, 'Andrés Giner', 'nereida83@fernandez.com', 'Cliente123', 'cliente'],
       [3, 'Ricarda Naranjo Carreño', 'iker83@leon.es', 'Cliente123', 'cliente'],
       [4, 'Juan Pablo Plana Ureña', 'emperatrizcapdevila@hotmail.com', 'Cliente123', 'cliente'],
-      [5, 'Jesús Fabio Galán Arregui', 'martafigueras@hotmail.com', 'Cliente123', 'cliente']
+      [5, 'Jesús Fabio Galán Arregui', 'martafigueras@hotmail.com', 'Cliente123', 'cliente'],
+      [6, 'Cliente', 'cliente@email.com', 'Cliente123', 'cliente'],
     ];
 
     for (const [id_cliente, nombre, email, password, role] of usuarios) {
