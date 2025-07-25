@@ -484,19 +484,19 @@ const dbInit = async () => {
     const grupos = [
       {
         nombre: 'Control de Roedores',
-        figura: 'https://example.com/img/grupos/roedores.png',
+        figura: 'icons/rat.svg',
       },
       {
         nombre: 'Control de Insectos',
-        figura: 'https://example.com/img/grupos/insectos.png',
+        figura: 'icons/insect.svg',
       },
       {
         nombre: 'Control de Palomas',
-        figura: 'https://example.com/img/grupos/aves.png',
+        figura: 'pidgeon.svg',
       },
       {
         nombre: 'Control de Legionela',
-        figura: 'https://example.com/img/grupos/legionela.png',
+        figura: 'water.svg',
       },
       {
         nombre: 'Control de Termitas',

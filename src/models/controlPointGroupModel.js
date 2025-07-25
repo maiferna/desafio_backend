@@ -11,13 +11,13 @@ const getControlPointGroupById = async (id) => {
     return res.rows[0];
 };
 
-const createControlPointGroup = async ({ nombre, descripcion }) => {
-    const res = await dbQuery(controlPointGroupQueries.createControlPointGroup, [nombre, descripcion]);
+const createControlPointGroup = async ({ nombre, figura }) => {
+    const res = await dbQuery(controlPointGroupQueries.createControlPointGroup, [nombre, figura]);
     return res.rows[0];
 };
 
-const updateControlPointGroup = async (id, { nombre, descripcion }) => {
-    const res = await dbQuery(controlPointGroupQueries.updateControlPointGroup, [nombre, descripcion, id]);
+const updateControlPointGroup = async (id, { nombre, figura }) => {
+    const res = await dbQuery(controlPointGroupQueries.updateControlPointGroup, [nombre, figura, id]);
     return res.rows[0];
 };
 

@@ -9,7 +9,10 @@ const {
 const getAllControlPointGroupsController = async (req, res) => {
     try {
         const groups = await getAllControlPointGroups();
-        res.status(200).json(groups);
+        res.status(200).json({
+            ok: true,
+            data: groups
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching control point groups', error });
     }

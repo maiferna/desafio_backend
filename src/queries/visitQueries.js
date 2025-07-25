@@ -30,7 +30,8 @@ const visitQueries = {
         s.nombre AS servicio,
         s.id_servicio AS id_servicio,
         i.direccion AS direccion_instalacion,
-        c.nombre AS cliente
+        c.nombre AS cliente,
+        i.id_instalacion AS id_instalacion
         FROM visitas v
         JOIN instalaciones i ON v.id_instalacion = i.id_instalacion
         JOIN clientes c ON i.id_cliente = c.id_cliente
