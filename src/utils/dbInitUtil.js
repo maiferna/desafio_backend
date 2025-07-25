@@ -363,7 +363,7 @@ const dbInit = async () => {
       [3, 'Ricarda Naranjo Carreño', 'iker83@leon.es', 'Cliente123', 'cliente'],
       [4, 'Juan Pablo Plana Ureña', 'emperatrizcapdevila@hotmail.com', 'Cliente123', 'cliente'],
       [5, 'Jesús Fabio Galán Arregui', 'martafigueras@hotmail.com', 'Cliente123', 'cliente'],
-      [6, 'Cliente', 'cliente@email.com', 'Cliente123', 'cliente'],
+      [5, 'Cliente', 'cliente@email.com', 'Cliente123', 'cliente'],
     ];
 
     for (const [id_cliente, nombre, email, password, role] of usuarios) {
