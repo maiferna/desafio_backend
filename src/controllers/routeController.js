@@ -4,6 +4,7 @@ const {
     createRoute,
     updateRoute,
     deleteRoute,
+    unassignVisitsFromRoute
 } = require('../models/routeModel');
 
 // GET /api/v1/routes
@@ -57,9 +58,15 @@ const updateRouteController = async (req, res) => {
 const deleteRouteController = async (req, res) => {
     try {
         const id = req.params.id;
+
+        // Desasignar visitas de la ruta
+        await unassignVisitsFromRoute(id);
+
+        // Eliminar la ruta
         const deletedRoute = await deleteRoute(id);
         if (!deletedRoute) return res.status(404).json({ message: 'Route not found' });
-        res.status(200).json({ message: 'Route deleted', deletedRoute });
+
+        res.status(200).json({ message: 'Route deleted and visits unassigned', deletedRoute });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting route', error });
     }

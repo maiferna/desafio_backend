@@ -42,7 +42,12 @@ const visitQueries = {
     SELECT *
     FROM ejecuciones_servicios
     WHERE id_visita = $1;
-    `
+    `,
+    unassignVisitsFromRoute: `
+  UPDATE visitas
+  SET id_ruta = NULL
+  WHERE id_ruta = $1
+`
 };
 
 module.exports = { visitQueries };

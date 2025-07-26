@@ -1,11 +1,11 @@
 const routeQueries = {
-    getAllRoutes: `
+  getAllRoutes: `
     SELECT * FROM rutas
   `,
-    getRouteById: `
+  getRouteById: `
     SELECT * FROM rutas WHERE id_ruta = $1
   `,
-    createRoute: `
+  createRoute: `
     INSERT INTO rutas (
       tecnico_responsable,
       tecnico,
@@ -15,7 +15,7 @@ const routeQueries = {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `,
-    updateRoute: `
+  updateRoute: `
     UPDATE rutas
     SET
       tecnico_responsable = $1,
@@ -25,7 +25,7 @@ const routeQueries = {
     WHERE id_ruta = $5
     RETURNING *
   `,
-    deleteRoute: `
+  deleteRoute: `
     DELETE FROM rutas
     WHERE id_ruta = $1
     RETURNING *
