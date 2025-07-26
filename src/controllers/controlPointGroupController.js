@@ -6,6 +6,13 @@ const {
     deleteControlPointGroup,
 } = require('../models/controlPointGroupModel');
 
+/**
+ * Recive todos los grupos de puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllControlPointGroupsController = async (req, res) => {
     try {
         const groups = await getAllControlPointGroups();
@@ -15,6 +22,13 @@ const getAllControlPointGroupsController = async (req, res) => {
     }
 };
 
+/**
+ * Recive un grupo de puntos de control por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getControlPointGroupByIdController = async (req, res) => {
     try {
         const group = await getControlPointGroupById(req.params.id);
@@ -25,6 +39,13 @@ const getControlPointGroupByIdController = async (req, res) => {
     }
 };
 
+/**
+ * Crea un nuevo grupo de puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createControlPointGroupController = async (req, res) => {
     try {
         const newGroup = await createControlPointGroup(req.body);
@@ -35,6 +56,13 @@ const createControlPointGroupController = async (req, res) => {
     }
 };
 
+/**
+ * Actualiza un grupo de puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateControlPointGroupController = async (req, res) => {
     try {
         const updatedGroup = await updateControlPointGroup(req.params.id, req.body);
@@ -45,6 +73,13 @@ const updateControlPointGroupController = async (req, res) => {
     }
 };
 
+/**
+ * Elimina un grupo de puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteControlPointGroupController = async (req, res) => {
     try {
         const deletedGroup = await deleteControlPointGroup(req.params.id);

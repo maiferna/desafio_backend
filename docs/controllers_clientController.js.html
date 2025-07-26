@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/clientController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/clientController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const {
+    getAllClients,
+    getClientById,
+    createClient,
+    updateClient,
+    deleteClient,
+    getClientInstallations,
+} = require("../models/clientModel");
+
+/**
+ * Recive todos los clientes
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const getAllClientsHandler = async (req, res) => {
+    try {
+        const clients = await getAllClients();
+        res.json(clients);
+    } catch (err) {
+        res.status(500).json({ message: "Error retrieving clients", error: err });
+    }
+};
+
+/**
+ * Recive el cliente por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const getClientByIdHandler = async (req, res) => {
+    try {
+        const client = await getClientById(req.params.id);
+        if (!client) return res.status(404).json({ message: "Client not found" });
+        return res.json(client);
+    } catch (err) {
+        res.status(500).json({ message: "Error retrieving client", error: err });
+    }
+};
+
+/**
+ * Crear un nuevo cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const createClientHandler = async (req, res) => {
+    const { name, email, tel, adress, workType } = req.body;
+    try {
+        const newClient = await createClient({
+            nombre: name,
+            email,
+            tel,
+            direccion: adress,
+            sector: workType
+        });
+        res.status(201).json(newClient);
+    } catch (err) {
+        res.status(500).json({ message: "Error creating client", error: err });
+    }
+};
+
+/**
+ * Actualiza a un cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const updateClientHandler = async (req, res) => {
+    const { name, email, tel, adress, workType } = req.body;
+    const id = req.params.id;
+    try {
+        const updatedClient = await updateClient(id, {
+            nombre: name,
+            email,
+            tel,
+            direccion: adress,
+            sector: workType
+        });
+        console.log('UPDATED CLIENT', updatedClient)
+        if (!updatedClient) return res.status(404).json({ message: "Client not found" });
+        res.json(updatedClient);
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: "Error updating client", error: err });
+    }
+};
+
+/**
+ * Elimina a un cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const deleteClientHandler = async (req, res) => {
+    try {
+        const deleted = await deleteClient(req.params.id);
+        if (!deleted) return res.status(404).json({ message: "Client not found" });
+        res.json(deleted);
+    } catch (err) {
+        res.status(500).json({ message: "Error deleting client", error: err });
+    }
+};
+
+/**
+ * Recive las instalaciones de un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
+const getClientInstallationsHandler = async (req, res) => {
+    try {
+        const installations = await getClientInstallations(req.params.id);
+        res.json(installations);
+    } catch (err) {
+        res.status(500).json({ message: "Error retrieving installations", error: err });
+    }
+};
+
+module.exports = {
+    getAllClientsHandler,
+    getClientByIdHandler,
+    createClientHandler,
+    updateClientHandler,
+    deleteClientHandler,
+    getClientInstallationsHandler,
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adminAccess">adminAccess</a></li><li><a href="global.html#createCapture">createCapture</a></li><li><a href="global.html#createCaptureController">createCaptureController</a></li><li><a href="global.html#createClient">createClient</a></li><li><a href="global.html#createClientHandler">createClientHandler</a></li><li><a href="global.html#createControlPoint">createControlPoint</a></li><li><a href="global.html#createControlPointController">createControlPointController</a></li><li><a href="global.html#createControlPointGroup">createControlPointGroup</a></li><li><a href="global.html#createControlPointGroupController">createControlPointGroupController</a></li><li><a href="global.html#createControlPointState">createControlPointState</a></li><li><a href="global.html#createControlPointStateController">createControlPointStateController</a></li><li><a href="global.html#createControlPointStateHistory">createControlPointStateHistory</a></li><li><a href="global.html#createControlPointStateHistoryController">createControlPointStateHistoryController</a></li><li><a href="global.html#createInstallation">createInstallation</a></li><li><a href="global.html#createInstallationController">createInstallationController</a></li><li><a href="global.html#createPlague">createPlague</a></li><li><a href="global.html#createPlagueController">createPlagueController</a></li><li><a href="global.html#createProduct">createProduct</a></li><li><a href="global.html#createProductController">createProductController</a></li><li><a href="global.html#createRoute">createRoute</a></li><li><a href="global.html#createRouteController">createRouteController</a></li><li><a href="global.html#createService">createService</a></li><li><a href="global.html#createServiceController">createServiceController</a></li><li><a href="global.html#createServiceExecution">createServiceExecution</a></li><li><a href="global.html#createServiceExecutionController">createServiceExecutionController</a></li><li><a href="global.html#createServiceProductExecution">createServiceProductExecution</a></li><li><a href="global.html#createServiceProductExecutionController">createServiceProductExecutionController</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#createVisitController">createVisitController</a></li><li><a href="global.html#deleteCapture">deleteCapture</a></li><li><a href="global.html#deleteCaptureController">deleteCaptureController</a></li><li><a href="global.html#deleteClient">deleteClient</a></li><li><a href="global.html#deleteClientHandler">deleteClientHandler</a></li><li><a href="global.html#deleteControlPoint">deleteControlPoint</a></li><li><a href="global.html#deleteControlPointController">deleteControlPointController</a></li><li><a href="global.html#deleteControlPointGroup">deleteControlPointGroup</a></li><li><a href="global.html#deleteControlPointGroupController">deleteControlPointGroupController</a></li><li><a href="global.html#deleteControlPointState">deleteControlPointState</a></li><li><a href="global.html#deleteControlPointStateController">deleteControlPointStateController</a></li><li><a href="global.html#deleteControlPointStateHistory">deleteControlPointStateHistory</a></li><li><a href="global.html#deleteControlPointStateHistoryController">deleteControlPointStateHistoryController</a></li><li><a href="global.html#deleteInstallation">deleteInstallation</a></li><li><a href="global.html#deleteInstallationController">deleteInstallationController</a></li><li><a href="global.html#deletePlague">deletePlague</a></li><li><a href="global.html#deletePlagueController">deletePlagueController</a></li><li><a href="global.html#deleteProductById">deleteProductById</a></li><li><a href="global.html#deleteProductByIdController">deleteProductByIdController</a></li><li><a href="global.html#deleteRoute">deleteRoute</a></li><li><a href="global.html#deleteRouteController">deleteRouteController</a></li><li><a href="global.html#deleteServiceById">deleteServiceById</a></li><li><a href="global.html#deleteServiceController">deleteServiceController</a></li><li><a href="global.html#deleteServiceExecutionById">deleteServiceExecutionById</a></li><li><a href="global.html#deleteServiceExecutionController">deleteServiceExecutionController</a></li><li><a href="global.html#deleteServiceProductExecution">deleteServiceProductExecution</a></li><li><a href="global.html#deleteServiceProductExecutionController">deleteServiceProductExecutionController</a></li><li><a href="global.html#deleteUserById">deleteUserById</a></li><li><a href="global.html#deleteUserByIdController">deleteUserByIdController</a></li><li><a href="global.html#deleteVisit">deleteVisit</a></li><li><a href="global.html#deleteVisitController">deleteVisitController</a></li><li><a href="global.html#editVisitById">editVisitById</a></li><li><a href="global.html#editVisitByIdController">editVisitByIdController</a></li><li><a href="global.html#getAllCaptures">getAllCaptures</a></li><li><a href="global.html#getAllCapturesController">getAllCapturesController</a></li><li><a href="global.html#getAllClients">getAllClients</a></li><li><a href="global.html#getAllClientsHandler">getAllClientsHandler</a></li><li><a href="global.html#getAllControlPointGroups">getAllControlPointGroups</a></li><li><a href="global.html#getAllControlPointGroupsController">getAllControlPointGroupsController</a></li><li><a href="global.html#getAllControlPointStateHistory">getAllControlPointStateHistory</a></li><li><a href="global.html#getAllControlPointStateHistoryController">getAllControlPointStateHistoryController</a></li><li><a href="global.html#getAllControlPointStates">getAllControlPointStates</a></li><li><a href="global.html#getAllControlPointStatesController">getAllControlPointStatesController</a></li><li><a href="global.html#getAllControlPoints">getAllControlPoints</a></li><li><a href="global.html#getAllControlPointsController">getAllControlPointsController</a></li><li><a href="global.html#getAllInstallations">getAllInstallations</a></li><li><a href="global.html#getAllInstallationsController">getAllInstallationsController</a></li><li><a href="global.html#getAllPlagues">getAllPlagues</a></li><li><a href="global.html#getAllPlaguesController">getAllPlaguesController</a></li><li><a href="global.html#getAllProducts">getAllProducts</a></li><li><a href="global.html#getAllProductsController">getAllProductsController</a></li><li><a href="global.html#getAllRoutes">getAllRoutes</a></li><li><a href="global.html#getAllRoutesController">getAllRoutesController</a></li><li><a href="global.html#getAllServiceExecutions">getAllServiceExecutions</a></li><li><a href="global.html#getAllServiceExecutionsController">getAllServiceExecutionsController</a></li><li><a href="global.html#getAllServiceProductExecutions">getAllServiceProductExecutions</a></li><li><a href="global.html#getAllServiceProductExecutionsController">getAllServiceProductExecutionsController</a></li><li><a href="global.html#getAllServices">getAllServices</a></li><li><a href="global.html#getAllServicesController">getAllServicesController</a></li><li><a href="global.html#getAllUsers">getAllUsers</a></li><li><a href="global.html#getAllVisits">getAllVisits</a></li><li><a href="global.html#getAllVisitsController">getAllVisitsController</a></li><li><a href="global.html#getCaptureById">getCaptureById</a></li><li><a href="global.html#getCaptureByIdController">getCaptureByIdController</a></li><li><a href="global.html#getCapturesByExecutionId">getCapturesByExecutionId</a></li><li><a href="global.html#getCapturesByPointId">getCapturesByPointId</a></li><li><a href="global.html#getClientById">getClientById</a></li><li><a href="global.html#getClientByIdHandler">getClientByIdHandler</a></li><li><a href="global.html#getClientInstallations">getClientInstallations</a></li><li><a href="global.html#getClientInstallationsHandler">getClientInstallationsHandler</a></li><li><a href="global.html#getControlPointById">getControlPointById</a></li><li><a href="global.html#getControlPointByIdController">getControlPointByIdController</a></li><li><a href="global.html#getControlPointGroupById">getControlPointGroupById</a></li><li><a href="global.html#getControlPointGroupByIdController">getControlPointGroupByIdController</a></li><li><a href="global.html#getControlPointStateById">getControlPointStateById</a></li><li><a href="global.html#getControlPointStateByIdController">getControlPointStateByIdController</a></li><li><a href="global.html#getControlPointStateHistoryByControlPointId">getControlPointStateHistoryByControlPointId</a></li><li><a href="global.html#getControlPointStateHistoryByControlPointIdController">getControlPointStateHistoryByControlPointIdController</a></li><li><a href="global.html#getControlPointStateHistoryById">getControlPointStateHistoryById</a></li><li><a href="global.html#getControlPointStateHistoryByIdController">getControlPointStateHistoryByIdController</a></li><li><a href="global.html#getControlPointsByInstallationId">getControlPointsByInstallationId</a></li><li><a href="global.html#getControlPointsByInstallationIdController">getControlPointsByInstallationIdController</a></li><li><a href="global.html#getInstallationById">getInstallationById</a></li><li><a href="global.html#getInstallationByIdController">getInstallationByIdController</a></li><li><a href="global.html#getInstallationsByClientController">getInstallationsByClientController</a></li><li><a href="global.html#getInstallationsByClientId">getInstallationsByClientId</a></li><li><a href="global.html#getPlagueById">getPlagueById</a></li><li><a href="global.html#getPlagueByIdController">getPlagueByIdController</a></li><li><a href="global.html#getProductById">getProductById</a></li><li><a href="global.html#getProductByIdController">getProductByIdController</a></li><li><a href="global.html#getProductsByType">getProductsByType</a></li><li><a href="global.html#getProductsByTypeController">getProductsByTypeController</a></li><li><a href="global.html#getRouteById">getRouteById</a></li><li><a href="global.html#getRouteByIdController">getRouteByIdController</a></li><li><a href="global.html#getServiceById">getServiceById</a></li><li><a href="global.html#getServiceByIdController">getServiceByIdController</a></li><li><a href="global.html#getServiceExecutionById">getServiceExecutionById</a></li><li><a href="global.html#getServiceExecutionByIdController">getServiceExecutionByIdController</a></li><li><a href="global.html#getServiceExecutionsByVisitId">getServiceExecutionsByVisitId</a></li><li><a href="global.html#getServiceExecutionsByVisitIdController">getServiceExecutionsByVisitIdController</a></li><li><a href="global.html#getServiceProductExecutionById">getServiceProductExecutionById</a></li><li><a href="global.html#getServiceProductExecutionByIdController">getServiceProductExecutionByIdController</a></li><li><a href="global.html#getServiceProductExecutionsByServiceExecutionId">getServiceProductExecutionsByServiceExecutionId</a></li><li><a href="global.html#getServiceProductExecutionsByServiceExecutionIdController">getServiceProductExecutionsByServiceExecutionIdController</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUserByEmail">getUserByEmail</a></li><li><a href="global.html#getUserByEmailController">getUserByEmailController</a></li><li><a href="global.html#getUserById">getUserById</a></li><li><a href="global.html#getUserByIdController">getUserByIdController</a></li><li><a href="global.html#getUsersController">getUsersController</a></li><li><a href="global.html#getVisitById">getVisitById</a></li><li><a href="global.html#getVisitByIdController">getVisitByIdController</a></li><li><a href="global.html#getVisitDetailsById">getVisitDetailsById</a></li><li><a href="global.html#getVisitDetailsByIdController">getVisitDetailsByIdController</a></li><li><a href="global.html#getVisitServiceExecutionByIdController">getVisitServiceExecutionByIdController</a></li><li><a href="global.html#getVisitServiceExecutionsById">getVisitServiceExecutionsById</a></li><li><a href="global.html#getVisitsByInstallationId">getVisitsByInstallationId</a></li><li><a href="global.html#getVisitsByInstallationIdController">getVisitsByInstallationIdController</a></li><li><a href="global.html#getVisitsByRouteId">getVisitsByRouteId</a></li><li><a href="global.html#getVisitsByRouteIdController">getVisitsByRouteIdController</a></li><li><a href="global.html#handleContactForm">handleContactForm</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#putUserByIdController">putUserByIdController</a></li><li><a href="global.html#renewToken">renewToken</a></li><li><a href="global.html#setVisitRoute">setVisitRoute</a></li><li><a href="global.html#setVisitRouteController">setVisitRouteController</a></li><li><a href="global.html#signup">signup</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#unassignVisitsFromRoute">unassignVisitsFromRoute</a></li><li><a href="global.html#updateCapture">updateCapture</a></li><li><a href="global.html#updateCaptureController">updateCaptureController</a></li><li><a href="global.html#updateClient">updateClient</a></li><li><a href="global.html#updateClientHandler">updateClientHandler</a></li><li><a href="global.html#updateControlPoint">updateControlPoint</a></li><li><a href="global.html#updateControlPointController">updateControlPointController</a></li><li><a href="global.html#updateControlPointGroup">updateControlPointGroup</a></li><li><a href="global.html#updateControlPointGroupController">updateControlPointGroupController</a></li><li><a href="global.html#updateControlPointState">updateControlPointState</a></li><li><a href="global.html#updateControlPointStateController">updateControlPointStateController</a></li><li><a href="global.html#updateControlPointStateHistory">updateControlPointStateHistory</a></li><li><a href="global.html#updateControlPointStateHistoryController">updateControlPointStateHistoryController</a></li><li><a href="global.html#updateInstallation">updateInstallation</a></li><li><a href="global.html#updateInstallationController">updateInstallationController</a></li><li><a href="global.html#updatePlague">updatePlague</a></li><li><a href="global.html#updatePlagueController">updatePlagueController</a></li><li><a href="global.html#updateProductById">updateProductById</a></li><li><a href="global.html#updateProductByIdController">updateProductByIdController</a></li><li><a href="global.html#updateRoute">updateRoute</a></li><li><a href="global.html#updateRouteController">updateRouteController</a></li><li><a href="global.html#updateServiceById">updateServiceById</a></li><li><a href="global.html#updateServiceController">updateServiceController</a></li><li><a href="global.html#updateServiceExecutionController">updateServiceExecutionController</a></li><li><a href="global.html#updateServiceProductExecution">updateServiceProductExecution</a></li><li><a href="global.html#updateServiceProductExecutionController">updateServiceProductExecutionController</a></li><li><a href="global.html#updateUserById">updateUserById</a></li><li><a href="global.html#updateVisitStatus">updateVisitStatus</a></li><li><a href="global.html#updateVisitStatusController">updateVisitStatusController</a></li><li><a href="global.html#validateInput">validateInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jul 27 2025 01:10:41 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

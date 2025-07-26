@@ -9,6 +9,13 @@ const {
 } = require("../models/userModel");
 
 // 1. Ver todos los usuarios
+/**
+ * Recive todos los usuarios
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getUsersController = async (req, res) => {
     try {
         const users = await getAllUsers();
@@ -20,6 +27,13 @@ const getUsersController = async (req, res) => {
 };
 
 // 2. Eliminar un usuario por ID
+/**
+ * Elimina un usuarios por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteUserByIdController = async (req, res) => {
     try {
         const { id_usuario } = req.params;
@@ -40,6 +54,13 @@ const deleteUserByIdController = async (req, res) => {
 };
 
 // 3. Obtener usuario por ID
+/**
+ * Recive un usuario por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getUserByIdController = async (req, res) => {
     try {
         const { id_usuario } = req.params;
@@ -58,6 +79,13 @@ const getUserByIdController = async (req, res) => {
 };
 
 // 4. Editar un usuario por ID
+/**
+ * Editar un usuario por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const putUserByIdController = async (req, res) => {
     try {
         const id_usuario = Number(req.params.id_usuario);
@@ -102,6 +130,13 @@ const putUserByIdController = async (req, res) => {
 };
 
 // 5. Obtener usuario por Email
+/**
+ * Recivir un usuario por email
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getUserByEmailController = async (req, res) => {
     try {
         const { email } = req.params;

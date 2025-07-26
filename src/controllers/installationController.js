@@ -7,22 +7,50 @@ const {
     deleteInstallation,
 } = require('../models/installationModel');
 
+/**
+ * Recive todas las instalaciones
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllInstallationsController = async (req, res) => {
     const data = await getAllInstallations();
     res.json(data);
 };
 
+/**
+ * Recive una instalacion por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getInstallationByIdController = async (req, res) => {
     const data = await getInstallationById(req.params.id);
     if (!data) return res.status(404).json({ message: 'Installation not found' });
     res.json(data);
 };
 
+/**
+ * Recive todas las instalaciones por cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getInstallationsByClientController = async (req, res) => {
     const data = await getInstallationsByClientId(req.params.clientId);
     res.json(data);
 };
 
+/**
+ * Crea una nueva instalaciones
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createInstallationController = async (req, res) => {
     console.log('BODY:', req.body);
     console.log('FILE:', req.file);
@@ -53,11 +81,18 @@ const createInstallationController = async (req, res) => {
     }
 };
 
+/**
+ * Actualiza una instalacion
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateInstallationController = async (req, res) => {
     const { adress, name, locality, checkpoints, imageUrl } = req.body;
     let image;
     if (req.file) {
-       image = req.file.filename;
+        image = req.file.filename;
     } else {
         image = imageUrl;
     }
@@ -86,6 +121,13 @@ const updateInstallationController = async (req, res) => {
     }
 };
 
+/**
+ * Elimina una instalacion
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteInstallationController = async (req, res) => {
     const deleted = await deleteInstallation(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Installation not found' });

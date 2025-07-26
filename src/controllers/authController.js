@@ -7,6 +7,13 @@ const {
 const { generateJwt } = require("../utils/JwtGenerate");
 
 // CONTROLLER: 1. Registro API
+/**
+ * Registra a un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje y datos del usuario.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const signup = async (req, res) => {
     const { name, email, password, role, id_cliente } = req.body;
 
@@ -54,6 +61,13 @@ const signup = async (req, res) => {
 };
 
 // CONTROLLER: 2. Login API
+/**
+ * Logea a un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos del usuario y el token JWT.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -109,6 +123,13 @@ const login = async (req, res) => {
 };
 
 // CONTROLLER: 3. Renovar token
+/**
+ * Renueva el JWT a un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true y un nuevo token JWT.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const renewToken = async (req, res) => {
     try {
         const token = await generateJwt({
@@ -129,12 +150,25 @@ const renewToken = async (req, res) => {
 };
 
 // CONTROLLER: 4. Logout API
+/**
+ * Deslogear un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true y elimina el token.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const logout = (req, res) => {
     res.clearCookie("token");
     return res.status(200).json({ message: "Sesión cerrada con éxito" });
 };
 
-
+/**
+ * Recoge a un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true y muestra el usuario.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getUser = async (req, res) => {
     try {
         const user = await getUserById(req.uid);
