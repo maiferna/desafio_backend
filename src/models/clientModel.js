@@ -38,7 +38,6 @@ const createClient = async ({ nombre, email, tel, direccion, sector }) => {
  */
 const updateClient = async (id, { nombre, email, tel, direccion, sector }) => {
     const res = await dbQuery(clientQueries.updateClient, [nombre, email, tel, direccion, sector, id]);
-    console.log('UPDATE CLIENT BACK MODEL', res)
     return res.rows[0];
 };
 

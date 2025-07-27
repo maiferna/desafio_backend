@@ -81,7 +81,6 @@ const updateClientHandler = async (req, res) => {
             direccion: adress,
             sector: workType
         });
-        console.log('UPDATED CLIENT', updatedClient)
         if (!updatedClient) return res.status(404).json({ message: "Client not found" });
         res.json(updatedClient);
     } catch (err) {

@@ -35,8 +35,8 @@ const getInstallationsByClientId = async (clientId) => {
  * @param {*} param0 campos para crear la instalacion
  * @returns la instalacion creada
  */
-const createInstallation = async ({ id_cliente, direccion, nombre, latitud, longitud, puntos_control, image }) => {
-    const res = await dbQuery(installationQueries.createInstallation, [id_cliente, direccion, nombre, latitud, longitud, puntos_control, image]);
+const createInstallation = async ({ id_cliente, direccion, nombre, latitud, longitud, puntos_control, image, localidad}) => {
+    const res = await dbQuery(installationQueries.createInstallation, [id_cliente, direccion, nombre, latitud, longitud, puntos_control, image, localidad]);
     return res.rows[0];
 };
 

@@ -111,6 +111,12 @@ const getVisitServiceExecutionsById = async (id) => {
     const res = await dbQuery(visitQueries.getVisitServiceExecutionById, [id]);
     return res.rows;
 };
+
+const getVisitsByWorkerId = async (workerId) => {
+    const res = await dbQuery(visitQueries.getVisitsByWorkerId, [workerId]);
+    return res.rows;
+};
+
 module.exports = {
     getAllVisits,
     getVisitById,
@@ -122,5 +128,6 @@ module.exports = {
     setVisitRoute,
     getVisitDetailsById,
     getVisitServiceExecutionsById,
-    editVisitById
+    editVisitById,
+    getVisitsByWorkerId
 };

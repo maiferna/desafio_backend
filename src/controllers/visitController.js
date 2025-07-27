@@ -9,7 +9,8 @@ const {
     setVisitRoute,
     getVisitDetailsById,
     getVisitServiceExecutionsById,
-    editVisitById
+    editVisitById,
+    getVisitsByWorkerId
 } = require('../models/visitModel');
 
 /**
@@ -211,6 +212,17 @@ const getVisitServiceExecutionByIdController = async (req, res) => {
     }
 }
 
+const getMyVisitsController = async (req, res) => {
+    try {
+        const userId = req.uid;
+        const visits = await getVisitsByWorkerId(userId);
+        res.status(200).json({ ok: true, data: visits });
+    } catch (error) {
+        console.error("Error en getMyVisitsController", error);
+        res.status(500).json({ ok: false, msg: "Error al obtener visitas del operario" });
+    }
+};
+
 module.exports = {
     getAllVisitsController,
     getVisitByIdController,
@@ -222,5 +234,6 @@ module.exports = {
     setVisitRouteController,
     getVisitDetailsByIdController,
     getVisitServiceExecutionByIdController,
-    editVisitByIdController
+    editVisitByIdController,
+    getMyVisitsController
 };
