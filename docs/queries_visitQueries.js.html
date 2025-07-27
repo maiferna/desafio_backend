@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/visitModel.js</title>
+    <title>JSDoc: Source: queries/visitQueries.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/visitModel.js</h1>
+    <h1 class="page-title">Source: queries/visitQueries.js</h1>
 
     
 
@@ -26,132 +26,62 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const { dbQuery } = require('../utils/dbQueryUtil');
-const { visitQueries } = require('../queries/visitQueries');
-
-/**
- * Recive todas las visitas
- * @returns todas las visitas
+            <pre class="prettyprint source linenums"><code>/**
+ * Queries de visitas
  */
-const getAllVisits = async () => {
-    const res = await dbQuery(visitQueries.getAllVisits);
-    return res.rows;
-};
-
-/**
- * Recive la visita por id
- * @param {Number} id id de la visita
- * @returns la visita por id
- */
-const getVisitById = async (id) => {
-    const res = await dbQuery(visitQueries.getVisitById, [id]);
-    return res.rows[0];
-};
-
-/**
- * Recive la visita por id de instalacion
- * @param {Number} installationId id de la instalación
- * @returns la visita por id de instalacion
- */
-const getVisitsByInstallationId = async (installationId) => {
-    const res = await dbQuery(visitQueries.getVisitsByInstallationId, [installationId]);
-    return res.rows;
-};
-
-/**
- * Recive la visita por id de ruta
- * @param {Number} routeId id de la ruta
- * @returns la visita por el id de la ruta
- */
-const getVisitsByRouteId = async (routeId) => {
-    const res = await dbQuery(visitQueries.getVisitsByRouteId, [routeId]);
-    return res.rows;
-};
-/**
- * Actualizar la visita
- * @param {Number} id_instalacion id de la instalacion
- * @param {Number} id_ruta id de la ruta
- * @param {String} estado el estado de la visita
- * @param {Number} id id de la visita
- * @returns la visita actualizada
- */
-const editVisitById = async (id_instalacion, id_ruta, estado, id) => {
-    const res = await dbQuery(visitQueries.editVisitById, [id_instalacion, id_ruta, estado, id]);
-    return res.rows[0];
-};
-const createVisit = async ({ id_instalacion, id_ruta, estado }) => {
-    const res = await dbQuery(visitQueries.createVisit, [
-        id_instalacion,
-        id_ruta,
-        estado,
-    ]);
-    return res.rows[0];
+const visitQueries = {
+    getAllVisits: `SELECT * FROM visitas`,
+    getVisitById: `SELECT * FROM visitas WHERE id_visita = $1`,
+    getVisitsByInstallationId: `SELECT * FROM visitas WHERE id_instalacion = $1`,
+    getVisitsByRouteId: `SELECT * FROM visitas WHERE id_ruta = $1`,
+    editVisitById: `
+        UPDATE visitas
+        SET
+        id_instalacion = $1,
+        id_ruta = $2,
+        estado = $3
+        WHERE id_visita = $4
+        RETURNING *;`,
+    createVisit: `
+        INSERT INTO visitas (id_instalacion, id_ruta, estado)
+        VALUES ($1, $2, $3)
+        RETURNING *`,
+    updateVisitStatus: `
+        UPDATE visitas
+        SET estado = $1
+        WHERE id_visita = $2
+        RETURNING *`,
+    deleteVisit: `DELETE FROM visitas WHERE id_visita = $1 RETURNING *`,
+    setVisitRoute: `
+    UPDATE visitas
+    SET id_ruta = $1
+    WHERE id_visita = $2
+    RETURNING *`,
+    getVisitDetailsById: `SELECT
+        s.nombre AS servicio,
+        s.id_servicio AS id_servicio,
+        i.direccion AS direccion_instalacion,
+        c.nombre AS cliente
+        FROM visitas v
+        JOIN instalaciones i ON v.id_instalacion = i.id_instalacion
+        JOIN clientes c ON i.id_cliente = c.id_cliente
+        JOIN ejecuciones_servicios es ON es.id_visita = v.id_visita
+        JOIN servicios s ON s.id_servicio = es.id_servicio
+        WHERE v.id_visita = $1;
+        `,
+    getVisitServiceExecutionById: `
+    SELECT *
+    FROM ejecuciones_servicios
+    WHERE id_visita = $1;
+    `,
+    unassignVisitsFromRoute: `
+  UPDATE visitas
+  SET id_ruta = NULL
+  WHERE id_ruta = $1
+`
 };
 
-/**
- * Cambiar el estado de una visita
- * @param {String} estado estado de una visita
- * @param {Number} id_visita id de una visita
- * @returns la visita con el estado cambiado
- */
-const updateVisitStatus = async (estado, id_visita) => {
-    const res = await dbQuery(visitQueries.updateVisitStatus, [estado, id_visita]);
-    return res.rows[0];
-};
-
-/**
- * Elimina una visita
- * @param {Number} id id de la visita
- * @returns la visita eliminada
- */
-const deleteVisit = async (id) => {
-    const res = await dbQuery(visitQueries.deleteVisit, [id]);
-    return res.rows[0];
-};
-
-/**
- * Cambia la ruta de una visita
- * @param {Number} routeId id de la ruta
- * @param {Number} visitId id de la visita
- * @returns la ruta de la visita cambiada
- */
-const setVisitRoute = async (routeId, visitId) => {
-    const res = await dbQuery(visitQueries.setVisitRoute, [routeId, visitId]);
-    return res.rows[0];
-};
-
-/**
- * Recive los detalles de la visita por id
- * @param {Number} id id de la visita
- * @returns el los detalles de la visita
- */
-const getVisitDetailsById = async (id) => {
-    const res = await dbQuery(visitQueries.getVisitDetailsById, [id]);
-    return res.rows;
-};
-
-/**
- * Recive las visitas de servicio de ejecucion por id
- * @param {Number} id de visita
- * @returns las visitas de servicio de ejecucion
- */
-const getVisitServiceExecutionsById = async (id) => {
-    const res = await dbQuery(visitQueries.getVisitServiceExecutionById, [id]);
-    return res.rows;
-};
-module.exports = {
-    getAllVisits,
-    getVisitById,
-    getVisitsByInstallationId,
-    getVisitsByRouteId,
-    createVisit,
-    updateVisitStatus,
-    deleteVisit,
-    setVisitRoute,
-    getVisitDetailsById,
-    getVisitServiceExecutionsById,
-    editVisitById
-};</code></pre>
+module.exports = { visitQueries };</code></pre>
         </article>
     </section>
 

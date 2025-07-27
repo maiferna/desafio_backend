@@ -1,3 +1,6 @@
+/**
+ * Queries de rutas
+ */
 const routeQueries = {
   getAllRoutes: `
     SELECT * FROM rutas

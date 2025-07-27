@@ -1,0 +1,2738 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API NodeJS API Final",
+    "version": "1.0.0",
+    "title": "Proyecto de tripulantes",
+    "contact": {
+      "email": ""
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "localhost:3000",
+  "tags": [
+    {
+      "name": "client",
+      "description": "Endpoints de clientes"
+    },
+    {
+      "name": "auth",
+      "description": "Endpoints de autenticacion"
+    },
+    {
+      "name": "plague",
+      "description": "Endpoints de plagas"
+    },
+    {
+      "name": "controlPoint",
+      "description": "Endpoints de control de puntos"
+    },
+    {
+      "name": "instalation",
+      "description": "Endpoints de instalacion"
+    },
+    {
+      "name": "products",
+      "description": "Endpoints de productos"
+    },
+    {
+      "name": "user",
+      "description": "Endpoints de usuarios"
+    },
+    {
+      "name": "route",
+      "description": "Endpoints de rutas"
+    }
+  ],
+  "paths": {
+    "/auth/singup": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Crea a un usuario",
+        "description": "Comprueba que el usuario con el correo y la contraseña introducida no existe, para despues crear al nuevo usuario",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "name",
+            "description": "nombre",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "email",
+            "description": "email",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "description": "Contraseña",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "role",
+            "description": "rol",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "id_cliente",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario creado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "El usuario ya existe",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logea a un usuario",
+        "description": "Comprueba que el correo introducido exista para crear un JWT y enviarselo al cliente",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "description": "email para logear",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "description": "contraseña para logear",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuario logeado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al logearse",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/renewJWToken": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Renueva el JWT",
+        "description": "Envia un JWT nuevo al cliente",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "JWT renovada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "IError al renovar JWT",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Renueva el JWT",
+        "description": "Envia un JWT nuevo al cliente",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "logout correcto",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error en el logout",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/auth/getUser": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Renueva el JWT",
+        "description": "Envia un JWT nuevo al cliente",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del usuario",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario recivido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No existe el usuario",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients/": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Recoge todas los clientes",
+        "description": "Envia al cliente todas los clientes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Clientes recividos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se han encontrado clientes",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients/:id": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Mostrar todos los detalles de un cliente",
+        "description": "Mediante el id del cliente se muestran todos los datos",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente recivido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se han encontrado clientes",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients/": {
+      "post": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Crear un cliente",
+        "description": "Pasados los datos creamos un nuevo cliente",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "name",
+            "description": "nombre",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "email",
+            "description": "email",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tel",
+            "description": "Telefono",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "adress",
+            "description": "Direccion",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "workTipe",
+            "description": "Tipo de trabajo",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Noticias recividas",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se han encontrado noticias",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients/:id": {
+      "put": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Actualiza un cliente",
+        "description": "Actualiza con los datos introducidos un cliente",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Noticia creado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se ha podido crear el post",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients/:id": {
+      "delete": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Elimina una noticia",
+        "description": "Elimina una noticia",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Noticia eliminada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se ha podido eliminar el post",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients/:id/instalations/": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Recoge todas las instalaciones de los clientes",
+        "description": "Recoge todas las instalaciones de los clientes",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id_post",
+            "description": "id de la noticia",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Noticia actualizada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se ha podido actualizar el post",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/plagues/": {
+      "get": {
+        "tags": [
+          "plague"
+        ],
+        "summary": "Recoge todas las plagas",
+        "description": "Envia al cliente todas las plagas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Plagas recibidas",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar a todas las plagas",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/plagues/:id": {
+      "get": {
+        "tags": [
+          "plague"
+        ],
+        "summary": "Recoge la plaga del id",
+        "description": "Envia al cliente la plaga que tenga el id pasado por los parametros",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id de la plaga",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plaga recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la plaga",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/plagues/": {
+      "post": {
+        "tags": [
+          "plague"
+        ],
+        "summary": "Crear una nueva plaga",
+        "description": "Crea con los datos introducidos una nueva plaga",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "nombre",
+            "description": "nombre de la plaga",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuario creado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se ha podido crear el usuario",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/plagues/:id": {
+      "put": {
+        "tags": [
+          "plague"
+        ],
+        "summary": "Actualiza una plaga",
+        "description": "Actualiza una plaga",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la plaga",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "nombre",
+            "description": "nombre de la plaga",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Plaga actualizada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se ha podido actualizar la plaga",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/plagues/:id": {
+      "delete": {
+        "tags": [
+          "plague"
+        ],
+        "summary": "Eliminar una plaga",
+        "description": "Eliminar una plaga",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id de la plaga",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Plaga eliminada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se ha podido eliminar la plaga",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/control-points/": {
+      "get": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Recoge todos los puntos de control",
+        "description": "Envia al cliente todos los puntos de control",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Puntos de control recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar a todos los puntos de control",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/control-points/:id": {
+      "get": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Recoge el punto de control del id",
+        "description": "Envia al cliente el punto de control que tenga el id pasado por los parametros",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del punto de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control recibido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el punto de control",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/control-points/installation/:installationId": {
+      "get": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Recive un puntos de control por id de instalación",
+        "description": "Envia al cliente el punto de control por id de instalación por los parametros",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "installacionId",
+            "description": "id de instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control por instalacion recibido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el punto de control por instalacion",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/control-points/": {
+      "post": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Crea un nuevo punto de control",
+        "description": "Crea un nuevo punto de control",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id_producto",
+            "description": "id del producto",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "id_instalacion",
+            "description": "id de instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "id_grupo_punto_control",
+            "description": "id del grupo de punto de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "localizacion",
+            "description": "localizacion",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "coordenadas",
+            "description": "Coordenadas",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control creado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al crear el punto de control",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/control-points/:id": {
+      "put": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Actualiza un punto de control",
+        "description": "Actualiza un punto de control",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id_producto",
+            "description": "id del producto",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "id_instalacion",
+            "description": "id de instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "id_grupo_punto_control",
+            "description": "id del grupo de punto de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "localizacion",
+            "description": "localizacion",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "coordenadas",
+            "description": "Coordenadas",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "params",
+            "name": "id_punto_control",
+            "description": "id del punto de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control actualizado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al actualizar el punto de control",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/control-points/:id": {
+      "delete": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Elimina un punto de control",
+        "description": "Elimina un punto de control",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_punto_control",
+            "description": "id del punto de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control eliminado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al eliminar el punto de control",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/installations/": {
+      "get": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Recoge todas las instalaciones",
+        "description": "Envia al cliente todas las instalaciones",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Instalaciones recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar todas las instalaciones",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/installations/:id": {
+      "get": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Recoge una instalacion",
+        "description": "Envia al cliente una instalacion por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalacion recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la instalacion",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/installations/client/:clientId": {
+      "get": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Recoge instalaciones por cliente",
+        "description": "Envia al cliente unas instalaciones por el id del cliente",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "clientId",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalaciones del cliente recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la instalaciones del cliente",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/installations/": {
+      "post": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Crear una instalacion",
+        "description": "Crea una instalacion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id_cliente",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "direccion",
+            "description": "Direccion",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "nombre",
+            "description": "nombre",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "latitud",
+            "description": "Latitud",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "longitud",
+            "description": "Longitud",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "puntos-control",
+            "description": "Puntos de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalaciones del cliente creada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al crear la instalaciones del cliente",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/installations/:id": {
+      "put": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Actualizar una instalacion",
+        "description": "Actualizar una instalacion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "",
+            "name": "id_cliente",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "direccion",
+            "description": "Direccion",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "nombre",
+            "description": "nombre",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "latitud",
+            "description": "Latitud",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "longitud",
+            "description": "Longitud",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "puntos-control",
+            "description": "Puntos de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalacion del cliente actualizada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al actualizar la instalacion del cliente",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/installations/:id": {
+      "delete": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Elimina una instalacion",
+        "description": "Elimina una instalacion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalacion del cliente eliminada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al eliminar la instalacion del cliente",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Recoge todos los productos",
+        "description": "Envia al cliente todos los productos",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Productos recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar todos los productos",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/:id_producto": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Recoge el producto por id",
+        "description": "Envia al cliente un producto por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_producto",
+            "description": "id del producto",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el producto",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/producto/:tipo": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Recoge los producto por tipo de producto",
+        "description": "Envia al cliente un producto por id de producto",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "tipo",
+            "description": "tipo de producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Productos por tipo recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar los productos por tipo",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/": {
+      "post": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Crea un producto",
+        "description": "Crea un producto",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "nombre",
+            "description": "nombre",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "descripcion",
+            "description": "descripcion del producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tipo",
+            "description": "tipo de producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "unidad",
+            "description": "unidad del producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto creado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al crear el producto",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/:id_producto": {
+      "put": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Actualiza un producto",
+        "description": "Actualiza un producto",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_producto",
+            "description": "id del producto",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "nombre",
+            "description": "nombre del producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "descripcion",
+            "description": "descripcion del producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tipo",
+            "description": "tipo de producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "unidad",
+            "description": "unidad del producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto actualizado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al actualizar el producto",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/:id_producto": {
+      "delete": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Elimina un producto",
+        "description": "Elimina un producto",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_producto",
+            "description": "id del producto",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto eliminado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al eliminar el producto",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Recoge todos los usuarios",
+        "description": "Envia al cliente todos los usuarios",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Usuarios recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar todos los usuarios",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/email/:email": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Recoge al usuario por email",
+        "description": "Envia al cliente al usuario por email",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "email",
+            "description": "email del usuario",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el usuarios",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/:id_usuario": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Recoge al usuario por id",
+        "description": "Envia al cliente al usuario por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_usuario",
+            "description": "id del usuario",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el usuario",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/:id_usuario": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Actualiza a un usuario",
+        "description": "Actualiza a un usuario",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_usuario",
+            "description": "id del usuario",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "id_cliente",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "name",
+            "description": "nombre del usuario",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "email",
+            "description": "email del usuario",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "description": "password del usuario",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "role",
+            "description": "role del usuario",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario actualizado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al actualizar el usuarios",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/:id_usuario": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Eliminar a un usuario",
+        "description": "Eliminar a un usuario",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_usuario",
+            "description": "id del usuario",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al eliminar el usuarios",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/routes/": {
+      "get": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Recoge todas las rutas",
+        "description": "Envia al cliente todas las rutas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Rutas recibidas",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar todas las rutas",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/routes/:id": {
+      "get": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Recoge una rutas por id",
+        "description": "Envia al cliente todas las rutas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la ruta",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ruta recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la ruta",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/routes/": {
+      "post": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Crea una ruta",
+        "description": "crea una ruta",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tecnico_responsable",
+            "description": "tecnico responsable de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tecnico",
+            "description": "tecnico de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tecnico_asistente",
+            "description": "tecnico asistente de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "fecha",
+            "description": "fecha de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ruta creada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al crear la ruta",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/routes/:id": {
+      "put": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Actualiza una ruta",
+        "description": "Actualiza una ruta",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la ruta",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tecnico_responsable",
+            "description": "tecnico responsable de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tecnico",
+            "description": "tecnico de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "tecnico_asistente",
+            "description": "tecnico asistente de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          },
+          {
+            "in": "body",
+            "name": "fecha",
+            "description": "fecha de la ruta",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ruta actualizada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al actualizar la ruta",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/routes/:id": {
+      "delete": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Elimina una ruta",
+        "description": "Elimina una ruta",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la ruta",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ruta eliminada",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al eliminar la ruta",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "todosResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "task": {
+          "type": "string"
+        },
+        "assignee": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "type": "string"
+        },
+        "assignee": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "InvalidResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

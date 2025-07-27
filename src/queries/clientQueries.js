@@ -1,3 +1,6 @@
+/**
+ * Queries de clientes
+ */
 const clientQueries = {
     getAllClients: `SELECT * FROM clientes`,
     getClientById: `SELECT * FROM clientes WHERE id_cliente = $1`,

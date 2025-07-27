@@ -1,17 +1,20 @@
+/**
+ * Queries de capturas
+ */
 const captureQueries = {
-    getAllCaptures: `
+  getAllCaptures: `
     SELECT * FROM capturas
   `,
-    getCaptureById: `
+  getCaptureById: `
     SELECT * FROM capturas WHERE id_captura = $1
   `,
-    getCapturesByPointId: `
+  getCapturesByPointId: `
     SELECT * FROM capturas WHERE id_punto_control = $1
   `,
-    getCapturesByExecutionId: `
+  getCapturesByExecutionId: `
     SELECT * FROM capturas WHERE id_ejecucion_servicio = $1
   `,
-    createCapture: `
+  createCapture: `
     INSERT INTO capturas (
       id_punto_control,
       id_plaga,
@@ -22,7 +25,7 @@ const captureQueries = {
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *
   `,
-    updateCapture: `
+  updateCapture: `
     UPDATE capturas
     SET
       id_punto_control = $1,
@@ -33,7 +36,7 @@ const captureQueries = {
     WHERE id_captura = $6
     RETURNING *
   `,
-    deleteCapture: `
+  deleteCapture: `
     DELETE FROM capturas
     WHERE id_captura = $1
     RETURNING *

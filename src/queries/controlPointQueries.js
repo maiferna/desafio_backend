@@ -1,3 +1,6 @@
+/**
+ * Queries de puntos de control
+ */
 const controlPointQueries = {
     getAllControlPoints: `SELECT * FROM puntos_de_control`,
     getControlPointById: `SELECT * FROM puntos_de_control WHERE id_punto_control = $1`,
