@@ -6,7 +6,8 @@ const {
     getControlPointStateHistoryByControlPointIdController,
     createControlPointStateHistoryController,
     updateControlPointStateHistoryController,
-    deleteControlPointStateHistoryController
+    deleteControlPointStateHistoryController,
+    getControlPointStateHistoryByVisitIdController
 } = require('../controllers/controlPointStateHistoryController');
 
 // GET /api/v1/control-point-state-history
@@ -17,6 +18,9 @@ router.get('/:id', getControlPointStateHistoryByIdController);
 
 // GET /api/v1/control-point-state-history/control-point/:controlPointId
 router.get('/control-point/:controlPointId', getControlPointStateHistoryByControlPointIdController);
+
+// GET /api/v1/control-point-state-history/visit/:visitId
+router.get('/visit/:visitId', getControlPointStateHistoryByVisitIdController);
 
 // POST /api/v1/control-point-state-history
 router.post('/', createControlPointStateHistoryController);

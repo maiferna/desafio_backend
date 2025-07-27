@@ -27,6 +27,7 @@ const visitQueries = {
     WHERE id_visita = $2
     RETURNING *`,
     getVisitDetailsById: `SELECT
+        v.id_visita as id_visita,
         s.nombre AS servicio,
         s.id_servicio AS id_servicio,
         i.direccion AS direccion_instalacion,

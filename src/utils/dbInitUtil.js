@@ -50,27 +50,27 @@ const createRuta = async () => {
     'Inspección Roedores',
     'Control y monitoreo de roedores',
     '{
-      "tipo_cebadero": null,
-      "numero_cebaderos": null,
-      "actividad_detectada": null
+      "tipo_cebadero": "bool",
+      "numero_cebaderos": "bool",
+      "actividad_detectada": "bool"
     }'::jsonb
   ),
   (
     'Inspección Insectos',
     'Control y monitoreo de insectos',
     '{
-      "tipo_trampa": null,
-      "numero_trampas": null,
-      "zonas_afectadas": null
+      "tipo_trampa": "bool",
+      "numero_trampas": "bool",
+      "zonas_afectadas": "bool"
     }'::jsonb
   ),
   (
     'Control Legionela',
     'Análisis y control de legionela',
     '{
-      "temperatura_agua": null,
-      "cloro_libre": null,
-      "biofilm": null
+      "temperatura_agua": "bool",
+      "cloro_libre": "bool",
+      "biofilm": "bool"
     }'::jsonb
   );
 `);
@@ -484,19 +484,19 @@ const dbInit = async () => {
     const grupos = [
       {
         nombre: 'Control de Roedores',
-        figura: 'icons/rat.svg',
+        figura: 'uploads/icons/rat.svg',
       },
       {
         nombre: 'Control de Insectos',
-        figura: 'icons/insect.svg',
+        figura: 'uploads/icons/insect.svg',
       },
       {
         nombre: 'Control de Palomas',
-        figura: 'pidgeon.svg',
+        figura: 'uploads/icons/pidgeon.svg',
       },
       {
         nombre: 'Control de Legionela',
-        figura: 'water.svg',
+        figura: 'uploads/icons/water.svg',
       },
       {
         nombre: 'Control de Termitas',
