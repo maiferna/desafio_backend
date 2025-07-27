@@ -13,7 +13,13 @@ const getControlPointStateHistoryByControlPointId = async (controlPointId) => {
     );
     return res.rows;
 };
-
+const getControlPointStateHistoryByVisitId = async (visitId) => {
+    const res = await dbQuery(
+        controlPointStateHistoryQueries.getControlPointStateHistoryByVisitId,
+        [visitId]
+    );
+    return res.rows;
+}
 const getControlPointStateHistoryById = async (id) => {
     const res = await dbQuery(
         controlPointStateHistoryQueries.getControlPointStateHistoryById,
@@ -74,4 +80,5 @@ module.exports = {
     createControlPointStateHistory,
     updateControlPointStateHistory,
     deleteControlPointStateHistory,
+    getControlPointStateHistoryByVisitId
 };

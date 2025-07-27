@@ -19,8 +19,17 @@ const getControlPointByIdController = async (req, res) => {
 };
 
 const getControlPointsByInstallationIdController = async (req, res) => {
-    const result = await getControlPointsByInstallationId(req.params.installationId);
-    res.json(result);
+    try {
+        const result = await getControlPointsByInstallationId(req.params.installationId);
+
+        res.status(200).json({
+            ok: true,
+            data: result
+        });
+    } catch (error) {
+
+    }
+
 };
 
 const createControlPointController = async (req, res) => {

@@ -4,7 +4,8 @@ const {
     getControlPointStateHistoryByControlPointId,
     createControlPointStateHistory,
     updateControlPointStateHistory,
-    deleteControlPointStateHistory
+    deleteControlPointStateHistory,
+    getControlPointStateHistoryByVisitId
 } = require('../models/controlPointStateHistoryModel');
 
 const getAllControlPointStateHistoryController = async (req, res) => {
@@ -20,6 +21,12 @@ const getControlPointStateHistoryByIdController = async (req, res) => {
 
 const getControlPointStateHistoryByControlPointIdController = async (req, res) => {
     const result = await getControlPointStateHistoryByControlPointId(req.params.controlPointId);
+    res.json(result);
+};
+
+const getControlPointStateHistoryByVisitIdController = async (req, res) => {
+    const result = await getControlPointStateHistoryByVisitId(req.params.visitId);
+    console.log(result)
     res.json(result);
 };
 
@@ -46,5 +53,6 @@ module.exports = {
     getControlPointStateHistoryByControlPointIdController,
     createControlPointStateHistoryController,
     updateControlPointStateHistoryController,
-    deleteControlPointStateHistoryController
+    deleteControlPointStateHistoryController,
+    getControlPointStateHistoryByVisitIdController
 };
