@@ -1,3 +1,5 @@
+const validateJwt = require('../middlewares/validateJwt');
+
 const express = require('express');
 const router = express.Router();
 const {
@@ -11,20 +13,30 @@ const {
     setVisitRouteController,
     getVisitDetailsByIdController,
     getVisitServiceExecutionByIdController,
-    editVisitByIdController
+    editVisitByIdController,
+    getMyVisitsController
 } = require('../controllers/visitController');
 
 // GET /api/v1/visits
 router.get('/', getAllVisitsController);
 
-// GET /api/v1/visits/:id
-router.get('/:id', getVisitByIdController);
+// GET /api/v1/visits/my-visits
+router.get('/my-visits', validateJwt, getMyVisitsController);
 
 // GET /api/v1/visits/installation/:installationId
 router.get('/installation/:installationId', getVisitsByInstallationIdController);
 
 // GET /api/v1/visits/route/:routeId
 router.get('/route/:routeId', getVisitsByRouteIdController);
+
+//GET /api/v1/visits/details:id
+router.get('/details/:id', getVisitDetailsByIdController);
+
+//GET /api/v1/visits/service-executions/:id
+router.get('/service-executions/:id', getVisitServiceExecutionByIdController);
+
+// GET /api/v1/visits/:id
+router.get('/:id', getVisitByIdController);
 
 // POST /api/v1/visits
 router.post('/', createVisitController);
@@ -40,11 +52,5 @@ router.put('/:id', editVisitByIdController);
 
 // DELETE /api/v1/visits/:id
 router.delete('/:id', deleteVisitController);
-
-//GET /api/v1/visits/details:id
-router.get('/details/:id', getVisitDetailsByIdController);
-
-//GET /api/v1/visits/service-executions/:id
-router.get('/service-executions/:id', getVisitServiceExecutionByIdController);
 
 module.exports = router;
