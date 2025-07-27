@@ -229,6 +229,7 @@ const dbInit = async () => {
         direccion VARCHAR(255) NOT NULL,
         latitud VARCHAR(20) NOT NULL,
         longitud VARCHAR(20) NOT NULL,
+        localidad VARCHAR(50),
         puntos_control VARCHAR(100) NOT NULL,
         image VARCHAR(255)
       );
@@ -375,7 +376,7 @@ const dbInit = async () => {
       );
     }
 
-    const direcciones = [
+    /* const direcciones = [
       // La Rioja
       { direccion: 'Calle Laurel 12, Logroño', provincia: 'La Rioja', latitud: '42.4667', longitud: '-2.45' },
       { direccion: 'Avenida de la Paz 45, Calahorra', provincia: 'La Rioja', latitud: '42.3050', longitud: '-1.9650' },
@@ -394,7 +395,30 @@ const dbInit = async () => {
       { direccion: 'Paseo de la Zurriola 22, San Sebastián', provincia: 'País Vasco', latitud: '43.3261', longitud: '-1.9787' },
       { direccion: 'Polígono Ugaldeguren III, Zamudio', provincia: 'País Vasco', latitud: '43.3050', longitud: '-2.8800' },
       { direccion: 'Av. Navarra 30, Irun', provincia: 'País Vasco', latitud: '43.3396', longitud: '-1.7899' }
-    ];
+    ]; */
+
+    const direcciones = [
+  // La Rioja
+  { direccion: 'Calle Laurel 12, Logroño', localidad: 'Logroño', latitud: '42.4667', longitud: '-2.45' },
+  { direccion: 'Avenida de la Paz 45, Calahorra', localidad: 'Calahorra', latitud: '42.3050', longitud: '-1.9650' },
+  { direccion: 'Plaza del Ayuntamiento 3, Haro', localidad: 'Haro', latitud: '42.5750', longitud: '-2.8469' },
+  { direccion: 'Calle Mayor 18, Alfaro', localidad: 'Alfaro', latitud: '42.1800', longitud: '-1.7500' },
+  { direccion: 'Camino de los Picos 22, Nájera', localidad: 'Nájera', latitud: '42.4172', longitud: '-2.7333' },
+
+  // País Vasco
+  { direccion: 'Gran Vía 50, Bilbao', localidad: 'Bilbao', latitud: '43.2630', longitud: '-2.9350' },
+  { direccion: 'Calle Dato 11, Vitoria-Gasteiz', localidad: 'Vitoria-Gasteiz', latitud: '42.8467', longitud: '-2.6728' },
+  { direccion: 'Paseo de la Zurriola 22, San Sebastián', localidad: 'San Sebastián', latitud: '43.3261', longitud: '-1.9787' },
+  { direccion: 'Polígono Ugaldeguren III, Zamudio', localidad: 'Zamudio', latitud: '43.3050', longitud: '-2.8800' },
+  { direccion: 'Av. Navarra 30, Irun', localidad: 'Irun', latitud: '43.3396', longitud: '-1.7899' },
+
+  // Cantabria
+  { direccion: 'Calle Burgos 20, Santander', localidad: 'Santander', latitud: '43.4623', longitud: '-3.8099' },
+  { direccion: 'Av. Cantabria 4, Torrelavega', localidad: 'Torrelavega', latitud: '43.3486', longitud: '-4.0471' },
+  { direccion: 'Calle Real 15, Castro Urdiales', localidad: 'Castro Urdiales', latitud: '43.3829', longitud: '-3.2173' },
+  { direccion: 'Plaza de la Constitución, Laredo', localidad: 'Laredo', latitud: '43.4097', longitud: '-3.4165' },
+  { direccion: 'Calle Alta 101, Santoña', localidad: 'Santoña', latitud: '43.4435', longitud: '-3.4558' }
+];
 
     const puntosPosibles = ['Control A', 'Control B', 'Control C', 'Control D', 'Control E'];
     let instalationIndex = 0;
@@ -403,21 +427,22 @@ const dbInit = async () => {
       const numInstalaciones = Math.floor(Math.random() * 5) + 1;
 
       for (let i = 0; i < numInstalaciones; i++) {
-        const { direccion, latitud, longitud } = direcciones[instalationIndex % direcciones.length];
+        const { direccion, latitud, longitud, localidad } = direcciones[instalationIndex % direcciones.length];
 
         const nombre = `Instalación ${id_cliente}-${i + 1}`;
         const puntos_control = puntosPosibles[Math.floor(Math.random() * puntosPosibles.length)];
         const image = null; // Puedes poner una URL de prueba si lo deseas
 
         await dbQuery(`
-      INSERT INTO instalaciones (id_cliente, nombre, direccion, latitud, longitud, puntos_control, image)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO instalaciones (id_cliente, nombre, direccion, latitud, longitud, puntos_control, image, localidad)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     `, [
           id_cliente,
           nombre,
           direccion,
           latitud,
           longitud,
+          localidad,
           puntos_control,
           image
         ]);

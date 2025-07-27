@@ -1,5 +1,6 @@
 const { dbQuery } = require('../utils/dbQueryUtil');
 const { routeQueries } = require('../queries/routeQueries');
+const { visitQueries } = require('../queries/visitQueries');
 
 const getAllRoutes = async () => {
     const res = await dbQuery(routeQueries.getAllRoutes);
@@ -50,10 +51,16 @@ const deleteRoute = async (id) => {
     return res.rows[0];
 };
 
+const unassignVisitsFromRoute = async (routeId) => {
+    const res = await dbQuery(visitQueries.unassignVisitsFromRoute, [routeId]);
+    return res.rowCount;
+};
+
 module.exports = {
     getAllRoutes,
     getRouteById,
     createRoute,
     updateRoute,
-    deleteRoute
+    deleteRoute,
+    unassignVisitsFromRoute
 };

@@ -29,7 +29,7 @@ router.get("/email/:email", [
 
 // GET /api/v1/users/:id_usuario → obtener usuario por ID
 router.get("/:id_usuario", [
-    ...adminAccess,
+    /* ...adminAccess, */
     check("id_usuario", "ID inválido").isInt({ min: 1 }),
     validateInput
 ], getUserByIdController);
