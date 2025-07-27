@@ -54,6 +54,9 @@ SELECT
   v.id_visita,
   v.estado,
   v.id_ruta,
+  v.id_instalacion,
+  i.latitud,
+  i.longitud,
   i.direccion,
   c.nombre AS cliente
 FROM visitas v

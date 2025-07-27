@@ -3,8 +3,8 @@ const installationQueries = {
     getInstallationById: `SELECT * FROM instalaciones WHERE id_instalacion = $1`,
     getInstallationsByClientId: `SELECT * FROM instalaciones WHERE id_cliente = $1`,
     createInstallation: `
-        INSERT INTO instalaciones (id_cliente, direccion, nombre, latitud, longitud, puntos_control, image)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO instalaciones (id_cliente, direccion, nombre, latitud, longitud, puntos_control, image, localidad)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING *`,
     updateInstallation: `
         UPDATE instalaciones
