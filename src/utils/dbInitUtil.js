@@ -147,7 +147,7 @@ const createRuta = async () => {
       }
 
       // Añadir entre 1 y 3 puntos de control nuevos en la instalación de la visita
-      const numPuntos = Math.floor(Math.random() * 3) + 1;
+      const numPuntos = 1;//Math.floor(Math.random() * 3) + 1;
 
       for (let i = 0; i < numPuntos; i++) {
         // Para crear un punto de control necesitamos id_producto y grupo. Tomamos aleatoriamente grupo y producto
@@ -156,7 +156,7 @@ const createRuta = async () => {
         await dbQuery(`
         INSERT INTO puntos_de_control (id_producto, id_instalacion, id_grupo_punto_control, localizacion, coordenadas)
         VALUES ($1, $2, $3, $4, $5);
-      `, [productoPunto.rows[0].id_producto, visita.id_instalacion, grupo.rows[0].id_grupo_punto_control, `Zona ${i + 1}`, '43.3,-2.7']);
+      `, [productoPunto.rows[0].id_producto, visita.id_instalacion, grupo.rows[0].id_grupo_punto_control, `Zona ${i + 1}`, "{\"x\":123,\"y\":456}"]);
       }
     }
   }
@@ -398,27 +398,27 @@ const dbInit = async () => {
     ]; */
 
     const direcciones = [
-  // La Rioja
-  { direccion: 'Calle Laurel 12, Logroño', localidad: 'Logroño', latitud: '42.4667', longitud: '-2.45' },
-  { direccion: 'Avenida de la Paz 45, Calahorra', localidad: 'Calahorra', latitud: '42.3050', longitud: '-1.9650' },
-  { direccion: 'Plaza del Ayuntamiento 3, Haro', localidad: 'Haro', latitud: '42.5750', longitud: '-2.8469' },
-  { direccion: 'Calle Mayor 18, Alfaro', localidad: 'Alfaro', latitud: '42.1800', longitud: '-1.7500' },
-  { direccion: 'Camino de los Picos 22, Nájera', localidad: 'Nájera', latitud: '42.4172', longitud: '-2.7333' },
+      // La Rioja
+      { direccion: 'Calle Laurel 12, Logroño', localidad: 'Logroño', latitud: '42.4667', longitud: '-2.45' },
+      { direccion: 'Avenida de la Paz 45, Calahorra', localidad: 'Calahorra', latitud: '42.3050', longitud: '-1.9650' },
+      { direccion: 'Plaza del Ayuntamiento 3, Haro', localidad: 'Haro', latitud: '42.5750', longitud: '-2.8469' },
+      { direccion: 'Calle Mayor 18, Alfaro', localidad: 'Alfaro', latitud: '42.1800', longitud: '-1.7500' },
+      { direccion: 'Camino de los Picos 22, Nájera', localidad: 'Nájera', latitud: '42.4172', longitud: '-2.7333' },
 
-  // País Vasco
-  { direccion: 'Gran Vía 50, Bilbao', localidad: 'Bilbao', latitud: '43.2630', longitud: '-2.9350' },
-  { direccion: 'Calle Dato 11, Vitoria-Gasteiz', localidad: 'Vitoria-Gasteiz', latitud: '42.8467', longitud: '-2.6728' },
-  { direccion: 'Paseo de la Zurriola 22, San Sebastián', localidad: 'San Sebastián', latitud: '43.3261', longitud: '-1.9787' },
-  { direccion: 'Polígono Ugaldeguren III, Zamudio', localidad: 'Zamudio', latitud: '43.3050', longitud: '-2.8800' },
-  { direccion: 'Av. Navarra 30, Irun', localidad: 'Irun', latitud: '43.3396', longitud: '-1.7899' },
+      // País Vasco
+      { direccion: 'Gran Vía 50, Bilbao', localidad: 'Bilbao', latitud: '43.2630', longitud: '-2.9350' },
+      { direccion: 'Calle Dato 11, Vitoria-Gasteiz', localidad: 'Vitoria-Gasteiz', latitud: '42.8467', longitud: '-2.6728' },
+      { direccion: 'Paseo de la Zurriola 22, San Sebastián', localidad: 'San Sebastián', latitud: '43.3261', longitud: '-1.9787' },
+      { direccion: 'Polígono Ugaldeguren III, Zamudio', localidad: 'Zamudio', latitud: '43.3050', longitud: '-2.8800' },
+      { direccion: 'Av. Navarra 30, Irun', localidad: 'Irun', latitud: '43.3396', longitud: '-1.7899' },
 
-  // Cantabria
-  { direccion: 'Calle Burgos 20, Santander', localidad: 'Santander', latitud: '43.4623', longitud: '-3.8099' },
-  { direccion: 'Av. Cantabria 4, Torrelavega', localidad: 'Torrelavega', latitud: '43.3486', longitud: '-4.0471' },
-  { direccion: 'Calle Real 15, Castro Urdiales', localidad: 'Castro Urdiales', latitud: '43.3829', longitud: '-3.2173' },
-  { direccion: 'Plaza de la Constitución, Laredo', localidad: 'Laredo', latitud: '43.4097', longitud: '-3.4165' },
-  { direccion: 'Calle Alta 101, Santoña', localidad: 'Santoña', latitud: '43.4435', longitud: '-3.4558' }
-];
+      // Cantabria
+      { direccion: 'Calle Burgos 20, Santander', localidad: 'Santander', latitud: '43.4623', longitud: '-3.8099' },
+      { direccion: 'Av. Cantabria 4, Torrelavega', localidad: 'Torrelavega', latitud: '43.3486', longitud: '-4.0471' },
+      { direccion: 'Calle Real 15, Castro Urdiales', localidad: 'Castro Urdiales', latitud: '43.3829', longitud: '-3.2173' },
+      { direccion: 'Plaza de la Constitución, Laredo', localidad: 'Laredo', latitud: '43.4097', longitud: '-3.4165' },
+      { direccion: 'Calle Alta 101, Santoña', localidad: 'Santoña', latitud: '43.4435', longitud: '-3.4558' }
+    ];
 
     const puntosPosibles = ['Control A', 'Control B', 'Control C', 'Control D', 'Control E'];
     let instalationIndex = 0;
@@ -431,7 +431,7 @@ const dbInit = async () => {
 
         const nombre = `Instalación ${id_cliente}-${i + 1}`;
         const puntos_control = puntosPosibles[Math.floor(Math.random() * puntosPosibles.length)];
-        const image = null; // Puedes poner una URL de prueba si lo deseas
+        const image = "uploads/logic.jpg"; // Puedes poner una URL de prueba si lo deseas
 
         await dbQuery(`
       INSERT INTO instalaciones (id_cliente, nombre, direccion, latitud, longitud, puntos_control, image, localidad)
@@ -442,9 +442,9 @@ const dbInit = async () => {
           direccion,
           latitud,
           longitud,
-          localidad,
           puntos_control,
-          image
+          image,
+          localidad
         ]);
 
         instalationIndex++;
@@ -522,14 +522,6 @@ const dbInit = async () => {
       {
         nombre: 'Control de Legionela',
         figura: 'uploads/icons/water.svg',
-      },
-      {
-        nombre: 'Control de Termitas',
-        figura: 'https://example.com/img/grupos/termitas.png',
-      },
-      {
-        nombre: 'Control de Chinches',
-        figura: 'https://example.com/img/grupos/chinches.png',
       }
     ];
 
