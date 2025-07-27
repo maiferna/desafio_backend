@@ -72,10 +72,39 @@ const deleteRouteController = async (req, res) => {
     }
 };
 
+const routesPlanification = async (req, res) => {
+    try {
+        const planningData = req.body;
+
+        const response = await fetch("http://localhost:5445/api/elementos", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(planningData)
+        });
+        if (!response.ok) {
+            throw new Error(`Microservice responded with status ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result)
+        res.status(200).json(
+            {
+                message: 'Route deleted and visits unassigned',
+                result
+            });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error planification route', error });
+    }
+}
+
 module.exports = {
     getAllRoutesController,
     getRouteByIdController,
     createRouteController,
     updateRouteController,
     deleteRouteController,
+    routesPlanification
 };
