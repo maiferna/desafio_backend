@@ -50,6 +50,25 @@ const visitQueries = {
   UPDATE visitas
   SET id_ruta = NULL
   WHERE id_ruta = $1
+`,
+
+    getVisitsByWorkerId: `
+SELECT
+  v.id_visita,
+  v.estado,
+  v.id_ruta,
+  v.id_instalacion,
+  i.latitud,
+  i.longitud,
+  i.direccion,
+  c.nombre AS cliente
+FROM visitas v
+JOIN rutas r ON v.id_ruta = r.id_ruta
+JOIN instalaciones i ON v.id_instalacion = i.id_instalacion
+JOIN clientes c ON i.id_cliente = c.id_cliente
+WHERE r.tecnico_responsable = $1
+   OR r.tecnico = $1
+   OR r.tecnico_asistente = $1;
 `
 };
 
