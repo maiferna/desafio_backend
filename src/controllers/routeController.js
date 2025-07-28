@@ -73,10 +73,11 @@ const deleteRouteController = async (req, res) => {
 };
 
 const routesPlanification = async (req, res) => {
+    console.log("aquiii")
     try {
         const planningData = req.body;
-
-        const response = await fetch("http://localhost:5445/api/elementos", {
+        console.log(JSON.stringify(planningData))
+        const response = await fetch("http://localhost:5656/api/elementos", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,10 +90,12 @@ const routesPlanification = async (req, res) => {
 
         const result = await response.json();
         console.log(result)
+        console.log("result: ", result)
+        console.log("resultado: ", result.resultado)
+        console.log("rutas: ")
         res.status(200).json(
             {
-                message: 'Route deleted and visits unassigned',
-                result
+                "rutas": result.resultado.rutas
             });
     } catch (error) {
         console.log(error)
