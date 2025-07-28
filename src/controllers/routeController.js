@@ -112,7 +112,7 @@ const routesPlanification = async (req, res) => {
     try {
         const planningData = req.body;
         console.log(JSON.stringify(planningData))
-        const response = await fetch("http://localhost:5656/api/elementos", {
+        const response = await fetch(`${process.env.ROUTES_ENV}/api/elementos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
