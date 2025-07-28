@@ -7,6 +7,13 @@ const {
     getClientInstallations,
 } = require("../models/clientModel");
 
+/**
+ * Recive todos los clientes
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllClientsHandler = async (req, res) => {
     try {
         const clients = await getAllClients();
@@ -16,6 +23,13 @@ const getAllClientsHandler = async (req, res) => {
     }
 };
 
+/**
+ * Recive el cliente por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getClientByIdHandler = async (req, res) => {
     try {
         const client = await getClientById(req.params.id);
@@ -26,6 +40,13 @@ const getClientByIdHandler = async (req, res) => {
     }
 };
 
+/**
+ * Crear un nuevo cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createClientHandler = async (req, res) => {
     const { name, email, tel, adress, workType } = req.body;
     try {
@@ -42,6 +63,13 @@ const createClientHandler = async (req, res) => {
     }
 };
 
+/**
+ * Actualiza a un cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateClientHandler = async (req, res) => {
     const { name, email, tel, adress, workType } = req.body;
     const id = req.params.id;
@@ -61,6 +89,13 @@ const updateClientHandler = async (req, res) => {
     }
 };
 
+/**
+ * Elimina a un cliente
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteClientHandler = async (req, res) => {
     try {
         const deleted = await deleteClient(req.params.id);
@@ -71,6 +106,13 @@ const deleteClientHandler = async (req, res) => {
     }
 };
 
+/**
+ * Recive las instalaciones de un usuario
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getClientInstallationsHandler = async (req, res) => {
     try {
         const installations = await getClientInstallations(req.params.id);

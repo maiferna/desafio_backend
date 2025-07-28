@@ -6,6 +6,13 @@ const {
     deleteServiceById,
 } = require('../models/serviceModel');
 
+/**
+ * Recive todos los servicios
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllServicesController = async (req, res) => {
     try {
         const services = await getAllServices();
@@ -15,6 +22,13 @@ const getAllServicesController = async (req, res) => {
     }
 };
 
+/**
+ * Recive una ruta por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getServiceByIdController = async (req, res) => {
     try {
         const service = await getServiceById(req.params.id);
@@ -25,6 +39,13 @@ const getServiceByIdController = async (req, res) => {
     }
 };
 
+/**
+ * Crea una nueva ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createServiceController = async (req, res) => {
     try {
         console.log(req.body)
@@ -37,6 +58,13 @@ const createServiceController = async (req, res) => {
     }
 };
 
+/**
+ * Actualiza una ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateServiceController = async (req, res) => {
     try {
         const { nombre, descripcion, datos } = req.body;
@@ -49,6 +77,13 @@ const updateServiceController = async (req, res) => {
     }
 };
 
+/**
+ * Elimina una ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteServiceController = async (req, res) => {
     try {
         const id = req.params.id;

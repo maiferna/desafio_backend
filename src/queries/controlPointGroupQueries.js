@@ -1,22 +1,25 @@
+/**
+ * Queries de grupos de punto de control
+ */
 const controlPointGroupQueries = {
-    getAllControlPointGroups: `
+  getAllControlPointGroups: `
     SELECT * FROM grupos_punto_control
   `,
-    getControlPointGroupById: `
+  getControlPointGroupById: `
     SELECT * FROM grupos_punto_control WHERE id_grupo_punto_control = $1
   `,
-    createControlPointGroup: `
+  createControlPointGroup: `
     INSERT INTO grupos_punto_control (nombre, figura)
     VALUES ($1, $2)
     RETURNING *
   `,
-    updateControlPointGroup: `
+  updateControlPointGroup: `
     UPDATE grupos_punto_control
     SET nombre = $1, figura = $2
     WHERE id_grupo_punto_control = $3
     RETURNING *
   `,
-    deleteControlPointGroup: `
+  deleteControlPointGroup: `
     DELETE FROM grupos_punto_control
     WHERE id_grupo_punto_control = $1
     RETURNING *

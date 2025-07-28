@@ -1,4 +1,6 @@
-// QUERIES: usuarios
+/**
+ * Queries de usuario
+ */
 const userQueries = {
 
   // QUERIE: 1. Crear usuario

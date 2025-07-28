@@ -1,3 +1,6 @@
+/**
+ * Queries de plagas
+ */
 const plagueQueries = {
   getAllPlagues: `
         SELECT * FROM plagas

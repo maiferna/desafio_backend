@@ -24,6 +24,8 @@ const {
 } = require('./routes/index.js');
 
 const cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const app = express() //Instancia de express
 const cors = require('cors'); //CORS (mw)
 
@@ -53,6 +55,7 @@ app.use((req, res, next) => {
 });
 
 // RUTAS ------------------------------------------ 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/captures', captureRoutes);
 app.use('/api/v1/clients', clientRoutes);

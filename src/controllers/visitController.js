@@ -13,6 +13,13 @@ const {
     getVisitsByWorkerId
 } = require('../models/visitModel');
 
+/**
+ * Recibir todas las visitas
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllVisitsController = async (req, res) => {
     try {
         const visits = await getAllVisits();
@@ -22,6 +29,13 @@ const getAllVisitsController = async (req, res) => {
     }
 };
 
+/**
+ * Recibir una visita por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getVisitByIdController = async (req, res) => {
     try {
         const visit = await getVisitById(req.params.id);
@@ -32,6 +46,13 @@ const getVisitByIdController = async (req, res) => {
     }
 };
 
+/**
+ * Recibir una visita por id de instalación
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getVisitsByInstallationIdController = async (req, res) => {
     try {
         const visits = await getVisitsByInstallationId(req.params.installationId);
@@ -41,6 +62,13 @@ const getVisitsByInstallationIdController = async (req, res) => {
     }
 };
 
+/**
+ * Recibir una visita por id de ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getVisitsByRouteIdController = async (req, res) => {
     try {
         const visits = await getVisitsByRouteId(req.params.routeId);
@@ -50,6 +78,13 @@ const getVisitsByRouteIdController = async (req, res) => {
     }
 };
 
+/**
+ * Actualizar una visita por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const editVisitByIdController = async (req, res) => {
     try {
         const { id_instalacion, id_ruta, estado } = req.body;
@@ -62,6 +97,13 @@ const editVisitByIdController = async (req, res) => {
     }
 };
 
+/**
+ * Crear una nueva visita
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createVisitController = async (req, res) => {
     console.log({ req })
     try {
@@ -73,7 +115,13 @@ const createVisitController = async (req, res) => {
         res.status(500).json({ message: 'Error creating visit', error });
     }
 };
-
+/**
+ * Actualiza el estado de una visitas
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateVisitStatusController = async (req, res) => {
     try {
         const { estado } = req.body;
@@ -85,6 +133,13 @@ const updateVisitStatusController = async (req, res) => {
     }
 };
 
+/**
+ * Actualiza la ruta de una visita
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const setVisitRouteController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -97,6 +152,13 @@ const setVisitRouteController = async (req, res) => {
     }
 };
 
+/**
+ * Elimina una visita
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteVisitController = async (req, res) => {
     try {
         const deletedVisit = await deleteVisit(req.params.id);
@@ -107,6 +169,13 @@ const deleteVisitController = async (req, res) => {
     }
 };
 
+/**
+ * Recibir los detales de una visitas por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getVisitDetailsByIdController = async (req, res) => {
     try {
         const visit = await getVisitDetailsById(req.params.id);
@@ -122,7 +191,13 @@ const getVisitDetailsByIdController = async (req, res) => {
     }
 }
 
-
+/**
+ * Recibir visita de servicio de execucion por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getVisitServiceExecutionByIdController = async (req, res) => {
     try {
         const visit = await getVisitServiceExecutionsById(req.params.id);

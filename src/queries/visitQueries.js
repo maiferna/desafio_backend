@@ -1,3 +1,6 @@
+/**
+ * Queries de visitas
+ */
 const visitQueries = {
     getAllVisits: `SELECT * FROM visitas`,
     getVisitById: `SELECT * FROM visitas WHERE id_visita = $1`,
