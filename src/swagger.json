@@ -358,55 +358,7 @@
             }
           }
         }
-      }
-    },
-    "/clients/:id": {
-      "get": {
-        "tags": [
-          "client"
-        ],
-        "summary": "Mostrar todos los detalles de un cliente",
-        "description": "Mediante el id del cliente se muestran todos los datos",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "id del cliente",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Cliente recivido",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "No se han encontrado clientes",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/clients/": {
+      },
       "post": {
         "tags": [
           "client"
@@ -513,6 +465,50 @@
       }
     },
     "/clients/:id": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Mostrar todos los detalles de un cliente",
+        "description": "Mediante el id del cliente se muestran todos los datos",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente recivido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "No se han encontrado clientes",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "client"
@@ -559,9 +555,7 @@
             }
           }
         }
-      }
-    },
-    "/clients/:id": {
+      },
       "delete": {
         "tags": [
           "client"
@@ -687,55 +681,7 @@
             }
           }
         }
-      }
-    },
-    "/plagues/:id": {
-      "get": {
-        "tags": [
-          "plague"
-        ],
-        "summary": "Recoge la plaga del id",
-        "description": "Envia al cliente la plaga que tenga el id pasado por los parametros",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "id de la plaga",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plaga recibida",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar la plaga",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/plagues/": {
+      },
       "post": {
         "tags": [
           "plague"
@@ -785,6 +731,50 @@
       }
     },
     "/plagues/:id": {
+      "get": {
+        "tags": [
+          "plague"
+        ],
+        "summary": "Recoge la plaga del id",
+        "description": "Envia al cliente la plaga que tenga el id pasado por los parametros",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id de la plaga",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plaga recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la plaga",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "plague"
@@ -846,9 +836,7 @@
             }
           }
         }
-      }
-    },
-    "/plagues/:id": {
+      },
       "delete": {
         "tags": [
           "plague"
@@ -925,101 +913,7 @@
             }
           }
         }
-      }
-    },
-    "/control-points/:id": {
-      "get": {
-        "tags": [
-          "controlPoint"
-        ],
-        "summary": "Recoge el punto de control del id",
-        "description": "Envia al cliente el punto de control que tenga el id pasado por los parametros",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "id del punto de control",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Puntos de control recibido",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar el punto de control",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/control-points/installation/:installationId": {
-      "get": {
-        "tags": [
-          "controlPoint"
-        ],
-        "summary": "Recive un puntos de control por id de instalación",
-        "description": "Envia al cliente el punto de control por id de instalación por los parametros",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "params",
-            "name": "installacionId",
-            "description": "id de instalacion",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Puntos de control por instalacion recibido",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar el punto de control por instalacion",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/control-points/": {
+      },
       "post": {
         "tags": [
           "controlPoint"
@@ -1126,6 +1020,50 @@
       }
     },
     "/control-points/:id": {
+      "get": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Recoge el punto de control del id",
+        "description": "Envia al cliente el punto de control que tenga el id pasado por los parametros",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "description": "id del punto de control",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control recibido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el punto de control",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "controlPoint"
@@ -1244,9 +1182,7 @@
             }
           }
         }
-      }
-    },
-    "/control-points/:id": {
+      },
       "delete": {
         "tags": [
           "controlPoint"
@@ -1292,6 +1228,52 @@
         }
       }
     },
+    "/control-points/installation/:installationId": {
+      "get": {
+        "tags": [
+          "controlPoint"
+        ],
+        "summary": "Recive un puntos de control por id de instalación",
+        "description": "Envia al cliente el punto de control por id de instalación por los parametros",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "installacionId",
+            "description": "id de instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Puntos de control por instalacion recibido",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el punto de control por instalacion",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
     "/installations/": {
       "get": {
         "tags": [
@@ -1320,101 +1302,7 @@
             }
           }
         }
-      }
-    },
-    "/installations/:id": {
-      "get": {
-        "tags": [
-          "instalation"
-        ],
-        "summary": "Recoge una instalacion",
-        "description": "Envia al cliente una instalacion por id",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "params",
-            "name": "id",
-            "description": "id de la instalacion",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Instalacion recibida",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar la instalacion",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/installations/client/:clientId": {
-      "get": {
-        "tags": [
-          "instalation"
-        ],
-        "summary": "Recoge instalaciones por cliente",
-        "description": "Envia al cliente unas instalaciones por el id del cliente",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "params",
-            "name": "clientId",
-            "description": "id del cliente",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Instalaciones del cliente recibida",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar la instalaciones del cliente",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/installations/": {
+      },
       "post": {
         "tags": [
           "instalation"
@@ -1536,6 +1424,50 @@
       }
     },
     "/installations/:id": {
+      "get": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Recoge una instalacion",
+        "description": "Envia al cliente una instalacion por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la instalacion",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalacion recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la instalacion",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "instalation"
@@ -1669,9 +1601,7 @@
             }
           }
         }
-      }
-    },
-    "/installations/:id": {
+      },
       "delete": {
         "tags": [
           "instalation"
@@ -1717,6 +1647,52 @@
         }
       }
     },
+    "/installations/client/:clientId": {
+      "get": {
+        "tags": [
+          "instalation"
+        ],
+        "summary": "Recoge instalaciones por cliente",
+        "description": "Envia al cliente unas instalaciones por el id del cliente",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "clientId",
+            "description": "id del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instalaciones del cliente recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la instalaciones del cliente",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
     "/products/": {
       "get": {
         "tags": [
@@ -1745,101 +1721,7 @@
             }
           }
         }
-      }
-    },
-    "/products/:id_producto": {
-      "get": {
-        "tags": [
-          "products"
-        ],
-        "summary": "Recoge el producto por id",
-        "description": "Envia al cliente un producto por id",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "params",
-            "name": "id_producto",
-            "description": "id del producto",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Producto recibidos",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar el producto",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/products/producto/:tipo": {
-      "get": {
-        "tags": [
-          "products"
-        ],
-        "summary": "Recoge los producto por tipo de producto",
-        "description": "Envia al cliente un producto por id de producto",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "params",
-            "name": "tipo",
-            "description": "tipo de producto",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Productos por tipo recibidos",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar los productos por tipo",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/products/": {
+      },
       "post": {
         "tags": [
           "products"
@@ -1931,6 +1813,50 @@
       }
     },
     "/products/:id_producto": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Recoge el producto por id",
+        "description": "Envia al cliente un producto por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id_producto",
+            "description": "id del producto",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar el producto",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "products"
@@ -2034,9 +1960,7 @@
             }
           }
         }
-      }
-    },
-    "/products/:id_producto": {
+      },
       "delete": {
         "tags": [
           "products"
@@ -2075,6 +1999,52 @@
           },
           "400": {
             "description": "Error al eliminar el producto",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/products/producto/:tipo": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Recoge los producto por tipo de producto",
+        "description": "Envia al cliente un producto por id de producto",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "tipo",
+            "description": "tipo de producto",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Productos por tipo recibidos",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar los productos por tipo",
             "schema": {
               "$ref": "#/definitions/InvalidResponse"
             }
@@ -2202,9 +2172,7 @@
             }
           }
         }
-      }
-    },
-    "/users/:id_usuario": {
+      },
       "put": {
         "tags": [
           "user"
@@ -2323,9 +2291,7 @@
             }
           }
         }
-      }
-    },
-    "/users/:id_usuario": {
+      },
       "delete": {
         "tags": [
           "user"
@@ -2399,55 +2365,7 @@
             }
           }
         }
-      }
-    },
-    "/routes/:id": {
-      "get": {
-        "tags": [
-          "route"
-        ],
-        "summary": "Recoge una rutas por id",
-        "description": "Envia al cliente todas las rutas",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "params",
-            "name": "id",
-            "description": "id de la ruta",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "properties": {
-                "task": {
-                  "type": "object",
-                  "$ref": "#/definitions/Task"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ruta recibida",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/todosResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Error al mostrar la ruta",
-            "schema": {
-              "$ref": "#/definitions/InvalidResponse"
-            }
-          }
-        }
-      }
-    },
-    "/routes/": {
+      },
       "post": {
         "tags": [
           "route"
@@ -2539,6 +2457,50 @@
       }
     },
     "/routes/:id": {
+      "get": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Recoge una rutas por id",
+        "description": "Envia al cliente todas las rutas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "params",
+            "name": "id",
+            "description": "id de la ruta",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ruta recibida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Error al mostrar la ruta",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "route"
@@ -2642,9 +2604,7 @@
             }
           }
         }
-      }
-    },
-    "/routes/:id": {
+      },
       "delete": {
         "tags": [
           "route"
