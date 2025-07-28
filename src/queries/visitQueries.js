@@ -2,7 +2,13 @@
  * Queries de visitas
  */
 const visitQueries = {
-    getAllVisits: `SELECT * FROM visitas`,
+    getAllVisits: `SELECT 
+        v.*, 
+        i.localidad, 
+        i.latitud AS lat, 
+        i.longitud AS lon
+        FROM visitas v
+        JOIN instalaciones i ON v.id_instalacion = i.id_instalacion;`,
     getVisitById: `SELECT * FROM visitas WHERE id_visita = $1`,
     getVisitsByInstallationId: `SELECT * FROM visitas WHERE id_instalacion = $1`,
     getVisitsByRouteId: `SELECT * FROM visitas WHERE id_ruta = $1`,

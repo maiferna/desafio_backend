@@ -7,6 +7,7 @@ const {
     createRouteController,
     updateRouteController,
     deleteRouteController,
+    routesPlanification
 } = require('../controllers/routeController');
 
 // GET /api/v1/routes
@@ -23,5 +24,8 @@ router.put('/:id', updateRouteController);
 
 // DELETE /api/v1/routes/:id
 router.delete('/:id', deleteRouteController);
+
+//POST /api/v1/routes/planification
+router.post('/planification', routesPlanification);
 
 module.exports = router;
