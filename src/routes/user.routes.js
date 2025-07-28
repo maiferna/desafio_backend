@@ -5,7 +5,8 @@ const {
     getUserByIdController,
     getUserByEmailController,
     putUserByIdController,
-    deleteUserByIdController
+    deleteUserByIdController,
+    getUsersByRoleController
 } = require("../controllers/userController.js");
 
 const { check } = require("express-validator");
@@ -26,6 +27,11 @@ router.get("/email/:email", [
     validateInput
 ], getUserByEmailController);
 
+// GET /api/v1/users/role/:role  obtener usuarios por rol
+router.get("/role/:role", [
+    ...adminAccess,
+    validateInput
+], getUsersByRoleController);
 
 // GET /api/v1/users/:id_usuario → obtener usuario por ID
 router.get("/:id_usuario", [

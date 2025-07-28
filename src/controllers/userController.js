@@ -5,7 +5,8 @@ const {
     getUserById,
     updateUserById,
     deleteUserById,
-    getUserByEmail
+    getUserByEmail,
+    getUsersByRole
 } = require("../models/userModel");
 
 // 1. Ver todos los usuarios
@@ -153,11 +154,30 @@ const getUserByEmailController = async (req, res) => {
     }
 };
 
+
+const getUsersByRoleController = async (req, res) => {
+    try {
+        const { role } = req.params;
+        const user = await getUsersByRole(role);
+
+        if (!user) {
+            return res.status(404).json({ error: "Usuarios no encontrado" });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error al obtener usuario por rol:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+
 // EXPORTS
 module.exports = {
     getUsersController,
     getUserByIdController,
     putUserByIdController,
     deleteUserByIdController,
-    getUserByEmailController
+    getUserByEmailController,
+    getUsersByRoleController
 };

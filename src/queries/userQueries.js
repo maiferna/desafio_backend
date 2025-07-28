@@ -50,6 +50,12 @@ const userQueries = {
     FROM usuarios
     WHERE email = $1;
   `,
+  // QUERIE: 6. Obtener usuario por rol
+  getUsersByRole: `
+    SELECT id_usuario, id_cliente, nombre, email, role, password_hash
+    FROM usuarios
+    WHERE role = $1;
+  `,
 };
 
 module.exports = {

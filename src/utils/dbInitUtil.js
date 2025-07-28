@@ -431,7 +431,7 @@ const dbInit = async () => {
 
         const nombre = `Instalación ${id_cliente}-${i + 1}`;
         const puntos_control = puntosPosibles[Math.floor(Math.random() * puntosPosibles.length)];
-        const image = "uploads/logic.jpg"; // Puedes poner una URL de prueba si lo deseas
+        const image = "uploads/planos.png";
 
         await dbQuery(`
       INSERT INTO instalaciones (id_cliente, nombre, direccion, latitud, longitud, puntos_control, image, localidad)

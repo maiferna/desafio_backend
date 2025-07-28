@@ -73,6 +73,11 @@ const getUserByEmail = async (email) => {
   return rows[0];
 };
 
+
+const getUsersByRole = async (role) => {
+  const { rows } = await dbQuery(userQueries.getUsersByRole, [role]);
+  return rows;
+};
 // EXPORTS
 module.exports = {
   createUser,
@@ -80,5 +85,6 @@ module.exports = {
   getAllUsers,
   updateUserById,
   deleteUserById,
-  getUserByEmail
+  getUserByEmail,
+  getUsersByRole
 }
