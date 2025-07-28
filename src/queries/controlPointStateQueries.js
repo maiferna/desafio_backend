@@ -1,22 +1,25 @@
+/**
+ * Queries de estados de punto de control
+ */
 const controlPointStateQueries = {
-    getAllControlPointStates: `
+  getAllControlPointStates: `
     SELECT * FROM estados_punto_control
   `,
-    getControlPointStateById: `
+  getControlPointStateById: `
     SELECT * FROM estados_punto_control WHERE id_estado_punto_control = $1
   `,
-    createControlPointState: `
+  createControlPointState: `
     INSERT INTO estados_punto_control (nombre, color)
     VALUES ($1, $2)
     RETURNING *
   `,
-    updateControlPointState: `
+  updateControlPointState: `
     UPDATE estados_punto_control
     SET nombre = $1, color = $2
     WHERE id_estado_punto_control = $3
     RETURNING *
   `,
-    deleteControlPointState: `
+  deleteControlPointState: `
     DELETE FROM estados_punto_control
     WHERE id_estado_punto_control = $1
     RETURNING *

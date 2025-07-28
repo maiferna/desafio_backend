@@ -1,3 +1,6 @@
+/**
+ * Queries de historial de estados de puntos de control
+ */
 const controlPointStateHistoryQueries = {
     getAllControlPointStates: `SELECT * FROM historial_estado_punto_control`,
     getControlPointStatesByControlPointId: `SELECT * FROM historial_estado_punto_control WHERE id_punto_control = $1`,

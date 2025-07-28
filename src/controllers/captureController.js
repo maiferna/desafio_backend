@@ -6,6 +6,13 @@ const {
     deleteCapture
 } = require('../models/captureModel');
 
+/**
+ * Recive todas las capturas
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllCapturesController = async (req, res) => {
     try {
         const captures = await getAllCaptures();
@@ -15,6 +22,13 @@ const getAllCapturesController = async (req, res) => {
     }
 };
 
+/**
+ * Recive la captura por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getCaptureByIdController = async (req, res) => {
     try {
         const capture = await getCaptureById(req.params.id);
@@ -25,6 +39,13 @@ const getCaptureByIdController = async (req, res) => {
     }
 };
 
+/**
+ * Crear una captura
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createCaptureController = async (req, res) => {
     try {
         const newCapture = await createCapture(req.body);
@@ -34,6 +55,13 @@ const createCaptureController = async (req, res) => {
     }
 };
 
+/**
+ * Actualizar una captura
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateCaptureController = async (req, res) => {
     try {
         const updatedCapture = await updateCapture(req.params.id, req.body);
@@ -44,6 +72,13 @@ const updateCaptureController = async (req, res) => {
     }
 };
 
+/**
+ * Elimina una captura
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteCaptureController = async (req, res) => {
     try {
         const deletedCapture = await deleteCapture(req.params.id);

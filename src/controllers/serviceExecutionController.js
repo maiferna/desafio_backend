@@ -8,6 +8,13 @@ const {
 } = require('../models/serviceExecutionModel');
 
 // GET /api/v1/service-executions
+/**
+ * Recive todos los servicios de execucion
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllServiceExecutionsController = async (req, res) => {
     try {
         const executions = await getAllServiceExecutions();
@@ -18,6 +25,13 @@ const getAllServiceExecutionsController = async (req, res) => {
 };
 
 // GET /api/v1/service-executions/:id
+/**
+ * Recive un servicios de execucion por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getServiceExecutionByIdController = async (req, res) => {
     try {
         const execution = await getServiceExecutionById(req.params.id);
@@ -30,6 +44,13 @@ const getServiceExecutionByIdController = async (req, res) => {
 };
 
 // GET /api/v1/service-executions/visit/:visitId
+/**
+ * Recive un servicio de execucion por id de visita
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getServiceExecutionsByVisitIdController = async (req, res) => {
     try {
         const executions = await getServiceExecutionsByVisitId(req.params.visitId);
@@ -40,6 +61,13 @@ const getServiceExecutionsByVisitIdController = async (req, res) => {
 };
 
 // POST /api/v1/service-executions
+/**
+ * Crea un nuevo servicio de execucion
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createServiceExecutionController = async (req, res) => {
     try {
         const { id_visita, id_servicio, observaciones, datos } = req.body;
@@ -52,6 +80,13 @@ const createServiceExecutionController = async (req, res) => {
 };
 
 // PUT /api/v1/service-executions/:id
+/**
+ * Actualiza un servicio de execucion
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateServiceExecutionController = async (req, res) => {
     try {
         const id = req.params.id;
@@ -66,6 +101,13 @@ const updateServiceExecutionController = async (req, res) => {
 };
 
 // DELETE /api/v1/service-executions/:id
+/**
+ * Elimina un servicio de execucion
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteServiceExecutionController = async (req, res) => {
     try {
         const id = req.params.id;

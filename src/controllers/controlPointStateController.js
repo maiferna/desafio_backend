@@ -6,6 +6,13 @@ const {
     deleteControlPointState,
 } = require('../models/controlPointStateModel');
 
+/**
+ * Recive todos los estados de un puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllControlPointStatesController = async (req, res) => {
     try {
         const states = await getAllControlPointStates();
@@ -15,6 +22,13 @@ const getAllControlPointStatesController = async (req, res) => {
     }
 };
 
+/**
+ * Recive un estado de un puntos de control por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getControlPointStateByIdController = async (req, res) => {
     try {
         const state = await getControlPointStateById(req.params.id);
@@ -25,6 +39,13 @@ const getControlPointStateByIdController = async (req, res) => {
     }
 };
 
+/**
+ * Crea un nuevo estado de un puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createControlPointStateController = async (req, res) => {
     try {
         const newState = await createControlPointState(req.body);
@@ -34,6 +55,13 @@ const createControlPointStateController = async (req, res) => {
     }
 };
 
+/**
+ * Actualiza un estado de un puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateControlPointStateController = async (req, res) => {
     try {
         const updatedState = await updateControlPointState(req.params.id, req.body);
@@ -44,6 +72,13 @@ const updateControlPointStateController = async (req, res) => {
     }
 };
 
+/**
+ * Elimina un estado de un puntos de control
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteControlPointStateController = async (req, res) => {
     try {
         const deletedState = await deleteControlPointState(req.params.id);

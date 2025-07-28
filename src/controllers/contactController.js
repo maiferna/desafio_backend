@@ -1,5 +1,12 @@
 const sendEmail = require("../utils/sendEmail");
 
+/**
+ * Envia un email con datos del contacto
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const handleContactForm = async (req, res) => {
     const { name, email, message } = req.body;
 

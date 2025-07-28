@@ -8,6 +8,13 @@ const {
 } = require('../models/routeModel');
 
 // GET /api/v1/routes
+/**
+ * Recive todas las rutas
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getAllRoutesController = async (req, res) => {
     try {
         const routes = await getAllRoutes();
@@ -18,6 +25,13 @@ const getAllRoutesController = async (req, res) => {
 };
 
 // GET /api/v1/routes/:id
+/**
+ * Recive una ruta por id
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const getRouteByIdController = async (req, res) => {
     try {
         const route = await getRouteById(req.params.id);
@@ -29,6 +43,13 @@ const getRouteByIdController = async (req, res) => {
 };
 
 // POST /api/v1/routes
+/**
+ * Crea una nueva ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const createRouteController = async (req, res) => {
     try {
         const { tecnico_responsable, tecnico, tecnico_asistente, fecha } = req.body;
@@ -41,6 +62,13 @@ const createRouteController = async (req, res) => {
 };
 
 // PUT /api/v1/routes/:id
+/**
+ * Actualiza una ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const updateRouteController = async (req, res) => {
     try {
         const id = req.params.id;
@@ -55,6 +83,13 @@ const updateRouteController = async (req, res) => {
 };
 
 // DELETE /api/v1/routes/:id
+/**
+ * Eliminar una ruta
+ * @param {object} req Objeto con los datos entrantes
+ * @param {object} res Objeto con los datos salientes
+ * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
+ * Si sale mal, un ok: false y un mensaje
+ */
 const deleteRouteController = async (req, res) => {
     try {
         const id = req.params.id;

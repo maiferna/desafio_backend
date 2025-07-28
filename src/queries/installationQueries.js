@@ -1,3 +1,6 @@
+/**
+ * Quieries de instalacion
+ */
 const installationQueries = {
     getAllInstallations: `SELECT * FROM instalaciones`,
     getInstallationById: `SELECT * FROM instalaciones WHERE id_instalacion = $1`,

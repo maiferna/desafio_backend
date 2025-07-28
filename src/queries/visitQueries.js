@@ -1,3 +1,6 @@
+/**
+ * Queries de visitas
+ */
 const visitQueries = {
     getAllVisits: `SELECT 
         v.*, 
