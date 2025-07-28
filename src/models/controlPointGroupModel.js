@@ -25,19 +25,18 @@ const getControlPointGroupById = async (id) => {
  * @param {*} param0 campos de grupo de puntos de control
  * @returns el grupos de puntos de control creado
  */
-const createControlPointGroup = async ({ nombre, descripcion }) => {
-    const res = await dbQuery(controlPointGroupQueries.createControlPointGroup, [nombre, descripcion]);
+const createControlPointGroup = async ({ nombre, figura }) => {
+    const res = await dbQuery(controlPointGroupQueries.createControlPointGroup, [nombre, figura]);
     return res.rows[0];
 };
-
 /**
  * Actualiza un grupo de puntos de control
  * @param {Number} id id del grupo de puntos de control
  * @param {*} param1 campos de grupo de puntos de control
  * @returns el grupo de puntos de control actualizado
  */
-const updateControlPointGroup = async (id, { nombre, descripcion }) => {
-    const res = await dbQuery(controlPointGroupQueries.updateControlPointGroup, [nombre, descripcion, id]);
+const updateControlPointGroup = async (id, { nombre, figura }) => {
+    const res = await dbQuery(controlPointGroupQueries.updateControlPointGroup, [nombre, figura, id]);
     return res.rows[0];
 };
 

@@ -23,11 +23,20 @@ const getControlPointStateHistoryByControlPointId = async (controlPointId) => {
     return res.rows;
 };
 
+
 /**
  * Recive el historiales de puntos de control por id
  * @param {Number} id id del historiales de puntos de control
  * @returns el historiales de puntos de control por id
  */
+const getControlPointStateHistoryByVisitId = async (visitId) => {
+    const res = await dbQuery(
+        controlPointStateHistoryQueries.getControlPointStateHistoryByVisitId,
+        [visitId]
+    );
+    return res.rows;
+}
+
 const getControlPointStateHistoryById = async (id) => {
     const res = await dbQuery(
         controlPointStateHistoryQueries.getControlPointStateHistoryById,
@@ -104,4 +113,5 @@ module.exports = {
     createControlPointStateHistory,
     updateControlPointStateHistory,
     deleteControlPointStateHistory,
+    getControlPointStateHistoryByVisitId
 };

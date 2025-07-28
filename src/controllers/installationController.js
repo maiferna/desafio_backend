@@ -27,9 +27,22 @@ const getAllInstallationsController = async (req, res) => {
  * Si sale mal, un ok: false y un mensaje
  */
 const getInstallationByIdController = async (req, res) => {
-    const data = await getInstallationById(req.params.id);
-    if (!data) return res.status(404).json({ message: 'Installation not found' });
-    res.json(data);
+    try {
+        const data = await getInstallationById(req.params.id);
+        if (!data) return res.status(404).json({ message: 'Installation not found' });
+        console.log(data)
+        res.status(200).json({
+            ok: true,
+            data
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msg: "Contacte con el administrador"
+        });
+    }
+
 };
 
 /**
@@ -52,6 +65,7 @@ const getInstallationsByClientController = async (req, res) => {
  * Si sale mal, un ok: false y un mensaje
  */
 const createInstallationController = async (req, res) => {
+
     const { id, adress, name, latitude, longitude, checkpoints, locality } = req.body;
     const image = req.file.filename;
 

@@ -40,8 +40,17 @@ const getControlPointByIdController = async (req, res) => {
  * Si sale mal, un ok: false y un mensaje
  */
 const getControlPointsByInstallationIdController = async (req, res) => {
-    const result = await getControlPointsByInstallationId(req.params.installationId);
-    res.json(result);
+    try {
+        const result = await getControlPointsByInstallationId(req.params.installationId);
+
+        res.status(200).json({
+            ok: true,
+            data: result
+        });
+    } catch (error) {
+
+    }
+
 };
 
 /**

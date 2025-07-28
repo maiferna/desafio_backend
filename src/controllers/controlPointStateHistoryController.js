@@ -4,7 +4,8 @@ const {
     getControlPointStateHistoryByControlPointId,
     createControlPointStateHistory,
     updateControlPointStateHistory,
-    deleteControlPointStateHistory
+    deleteControlPointStateHistory,
+    getControlPointStateHistoryByVisitId
 } = require('../models/controlPointStateHistoryModel');
 
 /**
@@ -51,6 +52,12 @@ const getControlPointStateHistoryByControlPointIdController = async (req, res) =
  * @returns Devueve un objeto: Si sale bien, un ok: true, mensaje, datos devueltos pos la base de datos.
  * Si sale mal, un ok: false y un mensaje
  */
+const getControlPointStateHistoryByVisitIdController = async (req, res) => {
+    const result = await getControlPointStateHistoryByVisitId(req.params.visitId);
+    console.log(result)
+    res.json(result);
+};
+
 const createControlPointStateHistoryController = async (req, res) => {
     const result = await createControlPointStateHistory(req.body);
     res.status(201).json(result);
@@ -88,5 +95,6 @@ module.exports = {
     getControlPointStateHistoryByControlPointIdController,
     createControlPointStateHistoryController,
     updateControlPointStateHistoryController,
-    deleteControlPointStateHistoryController
+    deleteControlPointStateHistoryController,
+    getControlPointStateHistoryByVisitIdController
 };
